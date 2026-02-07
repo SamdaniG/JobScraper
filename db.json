@@ -137,7 +137,7 @@
     "3155e4bf5e": {
         "job_name": "Senior Manager, Workplace Portfolio",
         "work_policy": "HYBRID",
-        "location": "unknown",
+        "location": "meh",
         "commitment": "FULL-TIME",
         "posted_date": "Sat 07-Feb-2026",
         "filled_date": "",
@@ -156,7 +156,7 @@
         "job_name": "PnP Optimization Engineer",
         "work_policy": "HYBRID",
         "location": "REMOTE US & CANADA / DALLAS, TX / PHOENIX, AZ / PITTSBURGH, PA / SAN FRANCISCO, CA / TORONTO, ON",
-        "commitment": "unknown",
+        "commitment": "meh",
         "posted_date": "Sat 07-Feb-2026",
         "filled_date": "",
         "url": "https://jobs.lever.co/waabi/c846ad95-f241-4506-ac85-a8faee9a9624"
@@ -431,15 +431,6 @@
         "filled_date": "",
         "url": "https://jobs.lever.co/waabi/e5808322-48cf-45f8-856b-2e260968d8b0"
     },
-    "18fd0284f7": {
-        "job_name": "Systems Test Engineer - Platform Verification - Phoenix, Arizona",
-        "work_policy": "ON-SITE",
-        "location": "PHOENIX, AZ",
-        "commitment": "FULL-TIME",
-        "posted_date": "Sat 07-Feb-2026",
-        "filled_date": "",
-        "url": "https://jobs.lever.co/waabi/c45156f5-792e-459e-a312-435e66728733"
-    },
     "a97439c9c5": {
         "job_name": "Systems Engineer, Platform Requirements and Verification",
         "work_policy": "REMOTE",
@@ -449,13 +440,13 @@
         "filled_date": "",
         "url": "https://jobs.lever.co/waabi/bfe20894-5899-41b5-8cf7-c9f1469d18b7"
     },
-    "a97439cdf9c5": {
-        "job_name": "Systems Engineer, Platform Requirements and Verification",
-        "work_policy": "REMOTE",
-        "location": "REMOTE US / REMOTE CANADA / TORONTO, ON / SAN FRANCISCO, CA / PITTSBURGH, PA / PHOENIX, AZ / DALLAS, TX",
+    "18fd0284f7": {
+        "job_name": "Systems Test Engineer - Platform Verification - Phoenix, Arizona",
+        "work_policy": "ON-SITE",
+        "location": "PHOENIX, AZ",
         "commitment": "FULL-TIME",
         "posted_date": "Sat 07-Feb-2026",
-        "filled_date": "Fri 06-Feb-2026",
-        "url": "https://jobs.lever.co/waabi/bfe20894-5899-41b5-8cf7-c9f1469d18b7"
+        "filled_date": "",
+        "url": "https://jobs.lever.co/waabi/c45156f5-792e-459e-a312-435e66728733"
     }
 }
