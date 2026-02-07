@@ -5,5 +5,5 @@ __pycache__/
 
 email_info.py
 
-logs/*.log
-logs/*.log*
+logs/*
+!logs/.gitkeep
