@@ -21,17 +21,17 @@ def scrape_jobs(driver):
 
     for job_title in job_titles:
         url = job_title.get_attribute("href")
-        job_id = sha256_hex(url)
-        current_jobs_id.append(job_id)
+        hash_id = sha256_hex(url)
+        current_jobs_id.append(hash_id)
 
-        job_data[job_id] = {
+        job_data[hash_id] = {
             "job_name": get_text_or_none(job_title, By.CSS_SELECTOR, "h5"),
             "work_policy": get_text_or_none(job_title, By.CSS_SELECTOR, ".workplaceTypes")[:-2],
             "location": get_text_or_none(job_title, By.CSS_SELECTOR, ".location"),
             "commitment": get_text_or_none(job_title, By.CSS_SELECTOR, ".commitment"),
             "posted_date": date.today().strftime(DATE_FMT),
             "filled_date": "",
-            "url": url,
+            "url": url
         }
 
     return current_jobs_id, job_data

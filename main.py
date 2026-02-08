@@ -11,7 +11,7 @@ from log_starter import set_logger
 
 logger=set_logger()
 
-EMAIL_ACTIVE = True
+EMAIL_ACTIVE = False
 EMAIL_DELAY_SECONDS=5
 URL = "https://jobs.lever.co/waabi"
 
