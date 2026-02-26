@@ -1,5 +1,8 @@
 # utils.py
 import hashlib
+from datetime import timedelta, date
+
+DATE_FMT = "%a %d-%b-%Y"
 
 def sha256_hex(s: str, length: int = 10) -> str:
     return hashlib.sha256(s.encode("utf-8")).hexdigest()[:length]
@@ -7,3 +10,48 @@ def sha256_hex(s: str, length: int = 10) -> str:
 def get_text_or_none(parent, by, value, default="meh"):
     elems = parent.find_elements(by, value)
     return elems[0].text.strip() if elems else default
+
+def get_exact_posting_date(parent, by, value, default_date="Thu 01-Jan-2026"):
+    elems = parent.find_elements(by, value)
+    if not elems:
+        return default_date
+
+    text = elems[0].text.strip().lower()
+    today = date.today()
+
+    # Explicit 30+ days case
+    if "30+" in text:
+        return default_date
+
+    if "yesterday" in text:
+        return (today - timedelta(days=1)).strftime(DATE_FMT)
+
+    if "today" in text:
+        return today.strftime(DATE_FMT)
+
+    # Handle "X days ago"
+    for part in text.split():
+        if part.isdigit():
+            return (today - timedelta(days=int(part))).strftime(DATE_FMT)
+
+    return default_date
+
+def api_get_exact_posting_date(text, default_date="Thu 01-Jan-2026"):
+    today = date.today()
+    text=text.lower()
+    # Explicit 30+ days case
+    if "30+" in text:
+        return default_date
+
+    if "yesterday" in text:
+        return (today - timedelta(days=1)).strftime(DATE_FMT)
+
+    if "today" in text:
+        return today.strftime(DATE_FMT)
+
+    # Handle "X days ago"
+    for part in text.split():
+        if part.isdigit():
+            return (today - timedelta(days=int(part))).strftime(DATE_FMT)
+
+    return default_date

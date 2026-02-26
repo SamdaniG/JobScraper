@@ -1,0 +1,18 @@
+[run]
+branch = True
+source = .
+omit =
+    tests/*
+    */__init__.py
+    main.py
+    log_starter.py
+
+[report]
+show_missing = True
+#skip_covered = True
+
+[html]
+directory = reports/coverage/html
+
+[xml]
+output = reports/coverage/coverage.xml

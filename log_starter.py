@@ -2,7 +2,7 @@ from pathlib import Path
 import  logging.config
 import json
 
-def set_logger():
+def set_logger(args):
     """This sets up the logging module!"""
     parent_dir=Path(__file__).resolve().parent
     logs_dir = parent_dir / "logs"
@@ -16,5 +16,10 @@ def set_logger():
 
     logging_config["handlers"]["file"]["filename"] = log_file
     logging.config.dictConfig(config=logging_config)
-    logger = logging.getLogger("scraper")
+    #logger = logging.getLogger("scraper")
+    logger = logging.LoggerAdapter(
+        logging.getLogger("scraper"),
+        {"executor": args.source}
+    )
+    #logger.info("Script started")
     return logger
