@@ -40,8 +40,8 @@ db = load_db()
 all_current_job_ids = []
 all_scraped_jobs = {}
 
-scrapers = [RivianScraper() ,GMScraper(), WaabiScraper(),FordScraper()]
-scrapers = [LumentumScraper()]
+scrapers = [RivianScraper(), GMScraper(), WaabiScraper(), FordScraper(), LumentumScraper()]
+# scrapers = [LumentumScraper()]
 logger.info(f"Scraping the jobs from the site")
 
 for scraper in scrapers:

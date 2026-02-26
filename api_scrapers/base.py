@@ -9,11 +9,11 @@ class ApiJobBoardScraper(ABC):
     base_domain=''
 
     @abstractmethod
-    def scrape_jobs(self, driver):
+    def scrape_jobs(self, driver=None):
         raise NotImplementedError
 
     @abstractmethod
-    def scrape_jd(self,driver=None, source= dict):
+    def scrape_jd(self,driver=None, source: dict=None):
         raise NotImplementedError
 
     def clean_html(self, raw_html: str) -> str:
