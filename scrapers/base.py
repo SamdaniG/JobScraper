@@ -11,7 +11,7 @@ class JobBoardScraper(ABC):
     jd_locator=""
 
     @abstractmethod
-    def scrape_jobs(self, driver):
+    def scrape_jobs(self, driver:WebDriver):
         raise NotImplementedError
 
 

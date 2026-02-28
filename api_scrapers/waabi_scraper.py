@@ -27,16 +27,17 @@ class WaabiScraper(ApiJobBoardScraper):
         for job in job_list:
             job_id=job['id']
             job_title=job['text']
-            hash_id=sha256_hex(job_id+job_title)
+            url = job['hostedUrl']
+            hash_id=sha256_hex(url)
             current_jobs_id.append(hash_id)
 
             job_deets=Job(
                 job_id=     job_id,
                 job_name=   job_title,
                 source=     self.name,
-                location=job["categories"].get('location',''),
+                location=job["categories"].get('allLocations',''),
                 posted_date=(datetime.fromtimestamp(job['createdAt'] / 1000)).strftime(DATE_FMT),
-                url=        job['hostedUrl'],
+                url=        url,
                 work_policy=job["workplaceType"]
             )
             job_data[hash_id]=job_deets.to_dict()
@@ -84,9 +85,9 @@ if __name__=='__main__':
     yo,yol = test.scrape_jobs()
     # print(yo)
     # print(yol)
-    print(json.dumps(yol['73947334db'],indent=4))
+    print(json.dumps(yol['236263088d'],indent=4))
 
-    jd_test=test.scrape_jd(source=yol['73947334db'])
+    jd_test=test.scrape_jd(source=yol['236263088d'])
     # print(jd_test)
 
 

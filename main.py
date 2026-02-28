@@ -7,10 +7,10 @@ from scrapers.rivian_scraper import RivianScraper
 from storage import load_db, save_db
 from log_starter import set_logger
 from scrapers.gm_scraper import GMScraper
-from scrapers.waabi_scraper import WaabiScraper
 from api_scrapers.ford_scraper import FordScraper
 from api_scrapers.lumentum_scraper import LumentumScraper
 from api_scrapers.kepler_scraper import KeplerScraper
+from api_scrapers.waabi_scraper import WaabiScraper
 
 import argparse
 parser = argparse.ArgumentParser()
@@ -23,7 +23,7 @@ parser.add_argument(
 args = parser.parse_args()
 logger=set_logger(args)
 
-EMAIL_ACTIVE = True
+EMAIL_ACTIVE = False
 EMAIL_DELAY_SECONDS=5
 
 #Adding headless options to chrome

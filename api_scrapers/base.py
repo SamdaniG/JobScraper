@@ -11,7 +11,7 @@ class ApiJobBoardScraper(ABC):
     base_domain=''
 
     @abstractmethod
-    def scrape_jobs(self, driver=None):
+    def scrape_jobs(self, **kwargs):
         raise NotImplementedError
 
     @abstractmethod
@@ -53,6 +53,6 @@ class Job(BaseModel):
     work_policy: Optional[str] = None
     location: str
     posted_date: str
-    filled_date: Optional[str] = None
+    filled_date: Optional[str] = ''
     url: str
 
