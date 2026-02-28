@@ -1,6 +1,8 @@
 from abc import ABC, abstractmethod
 from bs4 import BeautifulSoup
 import re
+from dataclasses import dataclass, asdict
+from typing import Optional
 
 class ApiJobBoardScraper(ABC):
     name="base"
@@ -34,3 +36,23 @@ class ApiJobBoardScraper(ABC):
         text = re.sub(r"\n{2,}", "\n\n", text)
 
         return text.strip()
+
+class BaseModel:
+    def to_dict(self):
+        return {
+            k: v
+            for k, v in asdict(self).items()
+            if v is not None
+        }
+
+@dataclass(kw_only=True)
+class Job(BaseModel):
+    job_id: str
+    job_name: str
+    source: str
+    work_policy: Optional[str] = None
+    location: str
+    posted_date: str
+    filled_date: Optional[str] = None
+    url: str
+

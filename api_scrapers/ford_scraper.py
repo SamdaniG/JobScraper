@@ -1,7 +1,13 @@
-from api_scrapers.base import ApiJobBoardScraper
+import json
+
+from api_scrapers.base import ApiJobBoardScraper, Job
 import requests as rq
 from utils import sha256_hex
 import re
+from datetime import datetime
+
+FMT='%Y-%m-%d'
+DATE_FMT = "%a %d-%b-%Y"
 
 class FordScraper(ApiJobBoardScraper):
     name="ford"
@@ -45,30 +51,27 @@ class FordScraper(ApiJobBoardScraper):
 
         dat = resp.json()
         job_list=dat['items'][0]['requisitionList']
+        # print(json.dumps(job_list[0],indent=4))
 
         for job in job_list:
             # print(json.dumps(job,indent=4))
             hash_id = sha256_hex(job["Id"] + job["Title"] + job["PostedDate"])
             # print(hash_id)
             current_jobs_id.append(hash_id)
-            #
-            # apply_url = (
-            #     f"{self.base_domain}/hcmUI/CandidateExperience/"
-            #     f"en/sites/CX_1/job/{job_id}"
-            # )
+            job_deets=Job(
+                job_name=job["Title"],
+                job_id=     job["Id"],
 
-            job_data[hash_id] = {
-                "job_id": job["Id"],
-                "job_name": job["Title"],
-                "source": self.name,
-                "work_policy": job["WorkplaceType"],
-                "location": job['PrimaryLocation'],
-                "posted_date": job['PostedDate'],
-                "filled_date": "",
-                "url": f"{self.base_domain}/hcmUI/CandidateExperience/"
+                source=     self.name,
+                work_policy=job['WorkplaceType'],
+                location=   job['PrimaryLocation'],
+                posted_date=datetime.strptime(job['PostedDate'],FMT).strftime(DATE_FMT),
+                url=        f"{self.base_domain}/hcmUI/CandidateExperience/"
                 f"en/sites/CX_1/job/{job['Id']}"
-            }
+            )
+            job_data[hash_id]=job_deets.to_dict()
             # print(job_data)
+            # print(job_data[hash_id]['posted_date'])
             # print("************")
 
         return current_jobs_id, job_data
@@ -114,3 +117,71 @@ class FordScraper(ApiJobBoardScraper):
 if __name__=='__main__':
     test=FordScraper()
     test.scrape_jobs()
+
+
+
+''' Sample structure
+{
+    "Id": "59456",
+    "Title": "Senior Engineering Specialist",
+    "PostedDate": "2026-02-27",
+    "PostingEndDate": null,
+    "Language": "US",
+    "PrimaryLocationCountry": "CA",
+    "GeographyId": 100000032213871,
+    "HotJobFlag": false,
+    "WorkplaceTypeCode": "ORA_ON_SITE",
+    "JobFamily": null,
+    "JobFunction": null,
+    "WorkerType": null,
+    "ContractType": null,
+    "ManagerLevel": null,
+    "JobSchedule": null,
+    "JobShift": null,
+    "JobType": null,
+    "StudyLevel": null,
+    "DomesticTravelRequired": null,
+    "InternationalTravelRequired": null,
+    "WorkDurationYears": null,
+    "WorkDurationMonths": null,
+    "WorkHours": null,
+    "WorkDays": null,
+    "LegalEmployer": null,
+    "BusinessUnit": null,
+    "Department": null,
+    "Organization": null,
+    "MediaThumbURL": null,
+    "ShortDescriptionStr": "Senior Engineering Specialist",
+    "PrimaryLocation": "Windsor, ON, Canada",
+    "Distance": 1772150400000.0,
+    "TrendingFlag": false,
+    "BeFirstToApplyFlag": false,
+    "Relevancy": 9,
+    "WorkplaceType": "On-site",
+    "ExternalQualificationsStr": null,
+    "ExternalResponsibilitiesStr": null,
+    "secondaryLocations": [],
+    "otherWorkLocations": [],
+    "workLocation": [
+        {
+            "LocationId": 300000005673716,
+            "LocationName": "Windsor Engine Plant #1",
+            "AddressLine1": "100 Henry Ford Centre Drive",
+            "AddressLine2": "PO Box 1634 Stn a",
+            "AddressLine3": null,
+            "AddressLine4": null,
+            "Building": "WEP",
+            "TownOrCity": "Windsor",
+            "PostalCode": "N9A 7E8",
+            "Country": "CA",
+            "Region1": "Ontario",
+            "Region2": "ON",
+            "Region3": null,
+            "Latitude": 42.31785,
+            "Longitude": -83.03387
+        }
+    ],
+    "requisitionFlexFields": []
+}
+
+'''

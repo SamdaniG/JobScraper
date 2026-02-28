@@ -1,4 +1,4 @@
-from api_scrapers.base import ApiJobBoardScraper
+from api_scrapers.base import ApiJobBoardScraper, Job
 import requests as rq
 from utils import sha256_hex
 import json
@@ -37,6 +37,7 @@ class LumentumScraper(ApiJobBoardScraper):
             # print(resp)
             dat=resp.json()
             job_list=dat.get('jobPostings', [])
+            # print(json.dumps(job_list[0],indent=4))
 
             for job in job_list:
                 job_id=job["bulletFields"][0]
@@ -44,16 +45,25 @@ class LumentumScraper(ApiJobBoardScraper):
                 hash_id= sha256_hex(job_id+job_title)
                 current_jobs_id.append(hash_id)
 
-                job_data[hash_id]={
-                    'job_id' : job_id,
-                    'job_name': job_title,
-                    'source' : self.name,
-                    "location": job['locationsText'],
-                    "posted_date": api_get_exact_posting_date(job['postedOn']),#to be worked
-                    "filled_date": "",
-                    "url": f"{self.base_domain}LITE{job['externalPath']}"
-
-                }
+                job_deets=Job(
+                    job_name=   job_title,
+                    job_id=     job_id,
+                    source=     self.name,
+                    location=   job['locationsText'],
+                    posted_date=api_get_exact_posting_date(job['postedOn']),
+                    url=        f"{self.base_domain}LITE{job['externalPath']}"
+                )
+                job_data[hash_id]=job_deets.to_dict()
+                # job_data[hash_id]={
+                #     'job_id' : job_id,
+                #     'job_name': job_title,
+                #     'source' : self.name,
+                #     "location": job['locationsText'],
+                #     "posted_date": api_get_exact_posting_date(job['postedOn']),#to be worked
+                #     "filled_date": "",
+                #     "url": f"{self.base_domain}LITE{job['externalPath']}"
+                #
+                # }
 
             if len(job_list) < self.payload['limit']:
                 break
@@ -88,4 +98,16 @@ if __name__=='__main__':
         "filled_date": "",
         "url": "https://lumentum.wd5.myworkdayjobs.com/LITE/job/Canada---Ottawa-Bill-Leathem/Electrical-Engineer-FPGA-Designer_2024989"
     }
-    print(test.scrape_jd(source=a["0863acf5a9"]))
+    # print(test.scrape_jd(source=a["0863acf5a9"]))
+
+'''sample skeleton
+{
+    "title": "Optical Engineer Co-op/Intern Student",
+    "externalPath": "/job/Canada---Ottawa-Bill-Leathem/Optical-Engineer-Co-op-Intern-Student_20251045",
+    "locationsText": "Canada - Ottawa (Bill Leathem)",
+    "postedOn": "Posted Yesterday",
+    "bulletFields": [
+        "20251045"
+    ]
+}
+'''

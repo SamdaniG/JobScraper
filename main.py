@@ -10,6 +10,7 @@ from scrapers.gm_scraper import GMScraper
 from scrapers.waabi_scraper import WaabiScraper
 from api_scrapers.ford_scraper import FordScraper
 from api_scrapers.lumentum_scraper import LumentumScraper
+from api_scrapers.kepler_scraper import KeplerScraper
 
 import argparse
 parser = argparse.ArgumentParser()
@@ -22,7 +23,7 @@ parser.add_argument(
 args = parser.parse_args()
 logger=set_logger(args)
 
-EMAIL_ACTIVE = False
+EMAIL_ACTIVE = True
 EMAIL_DELAY_SECONDS=5
 
 #Adding headless options to chrome
@@ -40,8 +41,8 @@ db = load_db()
 all_current_job_ids = []
 all_scraped_jobs = {}
 
-scrapers = [RivianScraper(), GMScraper(), WaabiScraper(), FordScraper(), LumentumScraper()]
-# scrapers = [LumentumScraper()]
+scrapers = [RivianScraper(), GMScraper(), WaabiScraper(), FordScraper(), LumentumScraper(),KeplerScraper()]
+# scrapers = []
 logger.info(f"Scraping the jobs from the site")
 
 for scraper in scrapers:
