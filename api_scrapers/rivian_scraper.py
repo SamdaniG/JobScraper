@@ -3,7 +3,10 @@ from api_scrapers.base import ApiJobBoardScraper, Job
 import requests as rq
 from utils import sha256_hex
 import re
+from datetime import datetime
 
+FMT='%Y-%m-%dT%H:%M:%S%z'
+DATE_FMT = "%a %d-%b-%Y"
 class RivianScraper(ApiJobBoardScraper):
     name = 'rivian_api'
     url = 'https://careers.rivianvw.tech/api/jobs'
@@ -17,7 +20,7 @@ class RivianScraper(ApiJobBoardScraper):
     # 'tags2':'Rivian and VW Group Technology'
     # }
 
-    def scrape_jobs(self):
+    def scrape_jobs(self, driver=None):
         current_jobs_id=[]
         job_data={}
 
@@ -38,7 +41,7 @@ class RivianScraper(ApiJobBoardScraper):
                 job_name=           job['title'],
                 source=             self.name,
                 location=           job['location_name'],
-                posted_date=        job['posted_date'],
+                posted_date=        datetime.strptime(job['posted_date'],FMT).strftime(DATE_FMT),
                 url=                url,
                 work_policy=        job['tags1'][0],
             )

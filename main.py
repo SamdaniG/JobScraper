@@ -3,7 +3,7 @@ import time
 from selenium import webdriver
 from datetime import date
 from diff import diff_jobs
-from scrapers.rivian_scraper import RivianScraper
+# from scrapers.rivian_scraper import RivianScraper
 from storage import load_db, save_db
 from log_starter import set_logger
 from scrapers.gm_scraper import GMScraper
@@ -11,6 +11,7 @@ from api_scrapers.ford_scraper import FordScraper
 from api_scrapers.lumentum_scraper import LumentumScraper
 from api_scrapers.kepler_scraper import KeplerScraper
 from api_scrapers.waabi_scraper import WaabiScraper
+from api_scrapers.rivian_scraper import RivianScraper
 
 import argparse
 parser = argparse.ArgumentParser()
