@@ -6,7 +6,7 @@ from utils import api_get_exact_posting_date
 
 
 class GMScraper(ApiJobBoardScraper):
-    name='gm_api'
+    name='gm'
     base_domain= 'https://generalmotors.wd5.myworkdayjobs.com'
     url = base_domain + '/wday/cxs/generalmotors/Careers_GM/jobs'
 

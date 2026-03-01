@@ -8,7 +8,7 @@ from datetime import datetime
 FMT='%Y-%m-%dT%H:%M:%S%z'
 DATE_FMT = "%a %d-%b-%Y"
 class RivianScraper(ApiJobBoardScraper):
-    name = 'rivian_api'
+    name = 'rivian'
     base_domain = 'https://careers.rivianvw.tech/'
     url = base_domain + 'api/jobs'
     params = {
