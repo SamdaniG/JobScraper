@@ -15,7 +15,7 @@ class ApiJobBoardScraper(ABC):
         raise NotImplementedError
 
     @abstractmethod
-    def scrape_jd(self,driver=None, source: dict=None):
+    def scrape_jd(self, source: dict=None):
         raise NotImplementedError
 
     def clean_html(self, raw_html: str) -> str:

@@ -16,7 +16,7 @@ class KeplerScraper(ApiJobBoardScraper):
     }
 
 
-    def scrape_jobs(self, driver=None):
+    def scrape_jobs(self):
         current_jobs_id=[]
         job_data={}
 
@@ -52,7 +52,7 @@ class KeplerScraper(ApiJobBoardScraper):
 
         return current_jobs_id, job_data
 
-    def scrape_jd(self, driver=None, source:dict=None):
+    def scrape_jd(self, source:dict=None):
         job_id = source['job_id']
 
         resp = rq.get(

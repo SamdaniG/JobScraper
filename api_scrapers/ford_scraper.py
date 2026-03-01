@@ -42,7 +42,7 @@ class FordScraper(ApiJobBoardScraper):
     #         return ""
     #     return re.sub(r"<.*?>", "", html_text)
 
-    def scrape_jobs(self, driver = None):
+    def scrape_jobs(self):
         resp=rq.get(url=self.url,params=self.params)
         # print(resp)
         # print(resp.raise_for_status())
@@ -76,7 +76,7 @@ class FordScraper(ApiJobBoardScraper):
 
         return current_jobs_id, job_data
 
-    def scrape_jd(self,driver=None, source= dict):
+    def scrape_jd(self, source= dict):
         job_id=source["job_id"]
         jd_params = {
             "onlyData": "true",

@@ -9,18 +9,20 @@ FMT='%Y-%m-%dT%H:%M:%S%z'
 DATE_FMT = "%a %d-%b-%Y"
 class RivianScraper(ApiJobBoardScraper):
     name = 'rivian_api'
-    url = 'https://careers.rivianvw.tech/api/jobs'
+    base_domain = 'https://careers.rivianvw.tech/'
+    url = base_domain + 'api/jobs'
     params = {
         'locations': 'Toronto,Ontario,Canada|Vancouver,British Columbia,Canada',
         'page': 1,
         'limit': 100,
         'sortBy': 'posted_date',
         'descending': 'true',
-        'internal': 'false'}  # ,
-    # 'tags2':'Rivian and VW Group Technology'
-    # }
+        'internal': 'false'  ,
+        'tags2':'Rivian and VW Group Technology'
+     }
+    click_link = base_domain + 'rivian-vw-group-technology/jobs/'
 
-    def scrape_jobs(self, driver=None):
+    def scrape_jobs(self):
         current_jobs_id=[]
         job_data={}
 
@@ -32,12 +34,13 @@ class RivianScraper(ApiJobBoardScraper):
 
         for job in jobs_list:
             job=job['data']
-            url=job['apply_url']
+            job_id = job['slug']
+            url= self.click_link + job_id
             hash_id=sha256_hex(url)
             current_jobs_id.append(hash_id)
 
             job_deets=Job(
-                job_id=             job['slug'],
+                job_id=             job_id,
                 job_name=           job['title'],
                 source=             self.name,
                 location=           job['location_name'],
@@ -49,7 +52,7 @@ class RivianScraper(ApiJobBoardScraper):
 
         return current_jobs_id,job_data
 
-    def scrape_jd(self,driver=None, source: dict=None):
+    def scrape_jd(self, source: dict=None):
         job_id=source['job_id']
         jd=''
         resp = rq.get(url=self.url, params=self.params)
@@ -73,9 +76,10 @@ class RivianScraper(ApiJobBoardScraper):
 if __name__=='__main__':
     test=RivianScraper()
     yo,yol=test.scrape_jobs()
-    # print(json.dumps(yol['702dcf969d'],indent=4))
+    print(yo[1])
+    # print(json.dumps(yol['283d25d951'],indent=4))
 
-    print(test.scrape_jd(source=yol['702dcf969d']))
+    print(test.scrape_jd(source=yol['283d25d951']))
 
 
 

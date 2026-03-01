@@ -21,7 +21,7 @@ class LumentumScraper(ApiJobBoardScraper):
 
     jd_url = base_domain + 'wday/cxs/lumentum/LITE/job/'
 
-    def scrape_jobs(self, driver= None):
+    def scrape_jobs(self):
         current_jobs_id=[]
         job_data = {}
         offset = 0
@@ -71,7 +71,7 @@ class LumentumScraper(ApiJobBoardScraper):
             offset += self.payload['limit']
         return current_jobs_id, job_data
 
-    def scrape_jd(self,driver=None, source:dict = None):
+    def scrape_jd(self, source:dict = None):
         final=source['url'].split('/LITE/job/')[-1]
         # print(f'{final=}')
         resp=rq.get(self.jd_url + final)

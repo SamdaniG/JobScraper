@@ -1,12 +1,9 @@
-# main.py
 import time
-from selenium import webdriver
 from datetime import date
 from diff import diff_jobs
-# from scrapers.rivian_scraper import RivianScraper
 from storage import load_db, save_db
 from log_starter import set_logger
-from scrapers.gm_scraper import GMScraper
+from api_scrapers.gm_scraper import GMScraper
 from api_scrapers.ford_scraper import FordScraper
 from api_scrapers.lumentum_scraper import LumentumScraper
 from api_scrapers.kepler_scraper import KeplerScraper
@@ -27,29 +24,18 @@ logger=set_logger(args)
 EMAIL_ACTIVE = False
 EMAIL_DELAY_SECONDS=5
 
-#Adding headless options to chrome
-options = webdriver.ChromeOptions()
-options.add_argument("--headless=new")
-options.add_argument("--disable-gpu")
-options.add_argument("--window-size=1920,1080")
-
-#driver = webdriver.Chrome(options=options)
-driver = webdriver.Chrome()
-driver.minimize_window()
-
 db = load_db()
 
 all_current_job_ids = []
 all_scraped_jobs = {}
 
-scrapers = [RivianScraper(), GMScraper(), WaabiScraper(), FordScraper(), LumentumScraper(),KeplerScraper()]
-# scrapers = []
+scrapers = [RivianScraper(), GMScraper(), WaabiScraper(), FordScraper(), LumentumScraper(), KeplerScraper()]
 logger.info(f"Scraping the jobs from the site")
 
 for scraper in scrapers:
     logger.info(f"Running {scraper.name} scraper now.")
     # driver.get(scraper.url)
-    current_jobs_id, scraped_jobs_db = scraper.scrape_jobs(driver)
+    current_jobs_id, scraped_jobs_db = scraper.scrape_jobs()
 
     all_current_job_ids.extend(current_jobs_id)
     all_scraped_jobs.update(scraped_jobs_db)
@@ -113,7 +99,7 @@ if EMAIL_ACTIVE:
             job["source"],
         )
 
-        jd = scraper.scrape_jd(driver, job)
+        jd = scraper.scrape_jd(job)
         send_email(job["job_name"], jd, job["source"])
 
         if len(new_jobs) > 1:
@@ -122,4 +108,4 @@ if EMAIL_ACTIVE:
 
 logger.info(f"Writing data to my database!\n-------------------")
 save_db(db)
-driver.quit()
+

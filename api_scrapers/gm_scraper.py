@@ -71,7 +71,7 @@ class GMScraper(ApiJobBoardScraper):
             offset += self.payload['limit']
         return current_jobs_id, job_data
 
-    def scrape_jd(self,driver=None, source:dict = None):
+    def scrape_jd(self, source:dict = None):
         # final=source['url'].split('/LITE/job/')[-1]
         # print(f'{final=}')
         final = self.jd_url + source['url'].split(self.url_lang)[1]
