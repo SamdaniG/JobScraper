@@ -3,12 +3,12 @@ from datetime import date
 from diff import diff_jobs
 from storage import load_db, save_db
 from log_starter import set_logger
-from api_scrapers.gm_scraper import GMScraper
-from api_scrapers.ford_scraper import FordScraper
-from api_scrapers.lumentum_scraper import LumentumScraper
-from api_scrapers.kepler_scraper import KeplerScraper
-from api_scrapers.waabi_scraper import WaabiScraper
-from api_scrapers.rivian_scraper import RivianScraper
+from scrapers.gm_scraper import GMScraper
+from scrapers.ford_scraper import FordScraper
+from scrapers.lumentum_scraper import LumentumScraper
+from scrapers.kepler_scraper import KeplerScraper
+from scrapers.waabi_scraper import WaabiScraper
+from scrapers.rivian_scraper import RivianScraper
 
 import argparse
 parser = argparse.ArgumentParser()

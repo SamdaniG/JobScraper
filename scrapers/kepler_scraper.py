@@ -1,6 +1,6 @@
 import json
 
-from api_scrapers.base import ApiJobBoardScraper, Job
+from scrapers.base import ApiJobBoardScraper, Job
 import requests as rq
 from utils import sha256_hex
 from datetime import datetime

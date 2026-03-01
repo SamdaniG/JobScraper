@@ -1,42 +1,58 @@
 from abc import ABC, abstractmethod
+from bs4 import BeautifulSoup
+import re
+from dataclasses import dataclass, asdict
+from typing import Optional
 
-from selenium.webdriver.ie.webdriver import WebDriver
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.common.by import By
-
-class JobBoardScraper(ABC):
-    name = "base"
-    url = ""
-    jd_locator=""
+class ApiJobBoardScraper(ABC):
+    name="base"
+    url=""
+    jd_url=""
+    base_domain=''
 
     @abstractmethod
-    def scrape_jobs(self, driver:WebDriver):
+    def scrape_jobs(self, **kwargs):
         raise NotImplementedError
 
+    @abstractmethod
+    def scrape_jd(self, source: dict=None):
+        raise NotImplementedError
 
-    def scrape_jd(self, driver: WebDriver, source):
-        url=source["url"]
-        # raise  NotImplementedError
+    def clean_html(self, raw_html: str) -> str:
+        soup = BeautifulSoup(raw_html, "html.parser")
 
-        original_window = driver.current_window_handle
+        for tag in soup(["script", "style"]):
+            tag.decompose()
 
-        driver.switch_to.new_window('tab')
-        driver.get(url)
+        text = soup.get_text(separator="\n")
 
-        wait = WebDriverWait(driver, 10)
-        info = f"{url}\n"
+        lines = [line.strip() for line in text.splitlines()]
+        text = "\n".join(line for line in lines if line)
 
-        descriptions = wait.until(
-            EC.presence_of_all_elements_located(
-                (By.CSS_SELECTOR, self.jd_locator)
-            )
-        )
+        # Fix colon formatting
+        text = re.sub(r"\n\s*:", ":", text)
 
-        for desc in descriptions:
-            info += desc.text
+        # Collapse multiple blank lines
+        text = re.sub(r"\n{2,}", "\n\n", text)
 
-        driver.close()
-        driver.switch_to.window(original_window)
+        return text.strip()
 
-        return info
+class BaseModel:
+    def to_dict(self):
+        return {
+            k: v
+            for k, v in asdict(self).items()
+            if v is not None
+        }
+
+@dataclass(kw_only=True)
+class Job(BaseModel):
+    job_id: str
+    job_name: str
+    source: str
+    work_policy: Optional[str] = None
+    location: str
+    posted_date: str
+    filled_date: Optional[str] = ''
+    url: str
+

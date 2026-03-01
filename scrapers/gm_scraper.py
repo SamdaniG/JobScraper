@@ -1,128 +1,109 @@
+from scrapers.base import ApiJobBoardScraper, Job
+import requests as rq
+from utils import sha256_hex
 import json
-import time
-from datetime import date
-
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.common.by import By
-
-from utils import sha256_hex, get_text_or_none, get_exact_posting_date
-from diff import DATE_FMT
-from scrapers.base import JobBoardScraper
+from utils import api_get_exact_posting_date
 
 
-class GMScraper(JobBoardScraper):
-    name = "gm"
-    #url = "https://generalmotors.wd5.myworkdayjobs.com/Careers_GM"
-    url= 'https://generalmotors.wd5.myworkdayjobs.com/Careers_GM?Location_Country=a30a87ed25634629aa6c3958aa2b91ea'
-    jd_locator = '[data-automation-id="jobPostingDescription"]'
+class GMScraper(ApiJobBoardScraper):
+    name='gm'
+    base_domain= 'https://generalmotors.wd5.myworkdayjobs.com'
+    url = base_domain + '/wday/cxs/generalmotors/Careers_GM/jobs'
 
-    def scrape_jobs(self, driver):
-        driver.get(self.url)
-        wait = WebDriverWait(driver, 10)
+    payload = {
+        "appliedFacets":
+            {
+                "Location_Country": ["a30a87ed25634629aa6c3958aa2b91ea"]
+            },
+        "limit": 20,
+        "offset": 0,
+        "searchText": ""
+    }
+    #application path
+    #base_domain + /en-GB/Careers_GM + externalPath
+    #https://generalmotors.wd5.myworkdayjobs.com/wday/cxs/generalmotors/Careers_GM/ + externalPath
+    jd_url = base_domain + '/wday/cxs/generalmotors/Careers_GM'
+    url_lang='/en-US/Careers_GM'
 
-        #self.filtering_by_country(driver)
-
-        current_jobs_id = []
+    def scrape_jobs(self, driver= None):
+        current_jobs_id=[]
         job_data = {}
-        flag = True
-        #time.sleep(3)
+        offset = 0
 
+        while True:
+            payload = {
+                **self.payload,
+                "offset": offset
+            }
 
-        while flag:
-            job_titles = wait.until(
-                EC.presence_of_all_elements_located(
-                    (By.CSS_SELECTOR, ".css-1q2dra3")
+            resp=rq.post(url=self.url, json= payload)
+            # print(resp.raise_for_status())
+            # print(resp)
+            dat=resp.json()
+            job_list=dat.get('jobPostings', [])
+            # print(json.dumps(job_list[0],indent=4))
+
+            for job in job_list:
+                path=job.get('externalPath', 0)
+                if path==0:
+                    continue
+                url = self.base_domain + self.url_lang + job['externalPath']
+                job_id=                 job.get('bulletFields',"00")[0]
+                job_title=              job.get('title',"")
+                hash_id= sha256_hex(url)
+                current_jobs_id.append(hash_id)
+
+                job_deets=Job(
+                    job_name=   job_title,
+                    job_id=     job_id,
+                    source=     self.name,
+                    location=           job.get('locationsText',""),
+                    posted_date=        api_get_exact_posting_date(job['postedOn']),
+                    url=        url,
+                    work_policy=        job.get('remoteType',"")
                 )
-            )
-
-            for job_title in job_titles:
-                try:
-                    url = job_title.find_element(
-                        By.CSS_SELECTOR,
-                        '.css-19uc56f'
-                    ).get_attribute("href")
-
-                    hash_id = sha256_hex(url)
-                    current_jobs_id.append(hash_id)
+                job_data[hash_id]=job_deets.to_dict()
 
 
-                    job_data[hash_id] = {
-                        "job_id": job_title.find_element(
-                            By.CSS_SELECTOR,
-                            '[data-automation-id="subtitle"]'
-                        ).text,
-                        "job_name": get_text_or_none(
-                            job_title,
-                            By.CSS_SELECTOR,
-                            '.css-19uc56f'
-                        ),
-                        "source":self.name,
-                        "work_policy": get_text_or_none(
-                            job_title,
-                            By.CSS_SELECTOR,
-                            '[data-automation-id="remoteType"] .css-129m7dg'
-                        ),
-                        "location": get_text_or_none(
-                            job_title,
-                            By.CSS_SELECTOR,
-                            '[data-automation-id="locations"] .css-129m7dg'
-                        ),
-                        "posted_date": get_exact_posting_date(
-                            job_title,
-                            By.CSS_SELECTOR,
-                            '.css-zoser8 .css-129m7dg'
-                        ),
-                        "filled_date": "",
-                        "url": url
-                    }
+            if len(job_list) < self.payload['limit']:
+                break
 
-                except Exception as e:
-                    print(f"Found an error skipping this, error is {e}")
-
-
-            next_page_button = driver.find_elements(
-                By.CSS_SELECTOR,
-                '[data-uxi-widget-type="stepToNextButton"]'
-            )
-
-            if next_page_button:
-                next_page_button[0].click()
-                time.sleep(5)
-                WebDriverWait(driver, 10).until(
-                    EC.staleness_of(job_titles[0])
-                )
-            else:
-                flag = False
-
+            offset += self.payload['limit']
         return current_jobs_id, job_data
 
-    def filtering_by_country(self, driver, country="Canada", timeout=10):
-        wait = WebDriverWait(driver, timeout)
+    def scrape_jd(self, source:dict = None):
+        # final=source['url'].split('/LITE/job/')[-1]
+        # print(f'{final=}')
+        final = self.jd_url + source['url'].split(self.url_lang)[1]
+        resp=rq.get(final)
+        # print(resp)
+        dat=resp.json()
+        jd=self.clean_html(dat['jobPostingInfo']['jobDescription'])
 
-        country_selector = wait.until(
-            EC.element_to_be_clickable(
-                (By.CSS_SELECTOR, '[data-uxi-element-id="filter_Location_Country"]')
-            )
-        )
-        country_selector.click()
+        return jd
 
-        country_option = wait.until(
-            EC.presence_of_element_located(
-                (By.CSS_SELECTOR, '#a30a87ed25634629aa6c3958aa2b91ea')
-            )
-        )
-        country_option.click()
 
-        view_jobs = wait.until(
-            EC.element_to_be_clickable(
-                (By.CSS_SELECTOR, '.css-wfmr0b')
-            )
-        )
-        view_jobs.click()
 
-        wait.until(
-            EC.presence_of_element_located(
-                (By.CSS_SELECTOR, '.css-1q2dra3')
-            )
-        )
+
+if __name__=='__main__':
+    test=GMScraper()
+    yolo, yolo_data=test.scrape_jobs()
+    # print(json.dumps(yolo_data['093ebd0ddc'],indent=4))
+    print(yolo_data)
+    a=dict()
+
+    # print(test.scrape_jd(source=yolo_data["093ebd0ddc"]))
+
+
+'''Sample Skeleton
+{
+    "title": "Senior Software Developer, Body Systems",
+    "externalPath": "/job/Markham-Ontario-Canada/Senior-Software-Developer--Body-Systems_JR-202518139",
+    "locationsText": "2 Locations",
+    "postedOn": "Posted 30+ Days Ago",
+    "remoteType": "Hybrid",
+    "bulletFields": [
+        "JR-202518139"
+    ]
+}
+'''
