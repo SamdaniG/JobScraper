@@ -9,7 +9,11 @@ def set_logger(args):
     logs_dir.mkdir(exist_ok=True)
 
     config_file = logs_dir / "log_config.json"
-    log_file = logs_dir/ f"logs.log"
+
+    if args.source == 'scheduler':
+        log_file = logs_dir / f"scheduler_logs.log"
+    else:
+        log_file = logs_dir/ f"logs.log"
 
     with open(config_file, "r") as f:
         logging_config = json.load(f)

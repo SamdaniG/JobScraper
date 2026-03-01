@@ -9,6 +9,8 @@ from scrapers.lumentum_scraper import LumentumScraper
 from scrapers.kepler_scraper import KeplerScraper
 from scrapers.waabi_scraper import WaabiScraper
 from scrapers.rivian_scraper import RivianScraper
+from scrapers.linamar_scraper import LinamarScraper
+from scrapers.honda_scraper import HondaScraper
 
 import argparse
 parser = argparse.ArgumentParser()
@@ -29,7 +31,7 @@ db = load_db()
 all_current_job_ids = []
 all_scraped_jobs = {}
 
-scrapers = [RivianScraper(), GMScraper(), WaabiScraper(), FordScraper(), LumentumScraper(), KeplerScraper()]
+scrapers = [RivianScraper(), GMScraper(), WaabiScraper(), FordScraper(), LumentumScraper(), KeplerScraper(), LinamarScraper()]
 logger.info(f"Scraping the jobs from the site")
 
 for scraper in scrapers:
