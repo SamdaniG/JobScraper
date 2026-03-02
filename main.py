@@ -11,6 +11,7 @@ from scrapers.waabi_scraper import WaabiScraper
 from scrapers.rivian_scraper import RivianScraper
 from scrapers.linamar_scraper import LinamarScraper
 from scrapers.honda_scraper import HondaScraper
+from scrapers.trimble_scraper import TrimbleScraper
 
 import argparse
 parser = argparse.ArgumentParser()
@@ -31,7 +32,9 @@ db = load_db()
 all_current_job_ids = []
 all_scraped_jobs = {}
 
-scrapers = [RivianScraper(), GMScraper(), WaabiScraper(), FordScraper(), LumentumScraper(), KeplerScraper(), LinamarScraper()]
+scrapers = [RivianScraper(), GMScraper(), WaabiScraper(),
+            FordScraper(), LumentumScraper(), KeplerScraper(),
+            LinamarScraper(), HondaScraper(), TrimbleScraper()]
 logger.info(f"Scraping the jobs from the site")
 
 for scraper in scrapers:

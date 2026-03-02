@@ -52,6 +52,7 @@ class Job(BaseModel):
     source: str
     work_policy: Optional[str] = None
     location: str
+    creation_date: str = None
     posted_date: str
     filled_date: Optional[str] = ''
     url: str
