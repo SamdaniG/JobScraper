@@ -14,6 +14,8 @@ from scrapers.honda_scraper import HondaScraper
 from scrapers.trimble_scraper import TrimbleScraper
 from scrapers.ztr_scraper import ZTRScraper
 from scrapers.aerovect_scraper import AerovectScraper
+from scrapers.cobot_scraper import CobotScraper
+from scrapers.kodiak_scraper import KodiakScraper
 
 import argparse
 parser = argparse.ArgumentParser()
@@ -28,6 +30,8 @@ logger=set_logger(args)
 
 EMAIL_ACTIVE = False
 EMAIL_DELAY_SECONDS=5
+if args.source == 'scheduler':
+    EMAIL_ACTIVE = True
 
 db = load_db()
 
@@ -37,7 +41,8 @@ all_scraped_jobs = {}
 scrapers = [RivianScraper(), GMScraper(), WaabiScraper(),
             FordScraper(), LumentumScraper(), KeplerScraper(),
             LinamarScraper(), HondaScraper(), TrimbleScraper(),
-            ZTRScraper(), AerovectScraper()]
+            ZTRScraper(), AerovectScraper(), CobotScraper(),
+            KodiakScraper()]
 logger.info(f"Scraping the jobs from the site")
 
 for scraper in scrapers:

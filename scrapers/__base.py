@@ -48,6 +48,7 @@ class BaseModel:
 @dataclass(kw_only=True)
 class Job(BaseModel):
     job_id: str
+    internal_job_id: Optional[str] = None
     job_name: str
     source: str
     work_policy: Optional[str] = None
@@ -55,7 +56,20 @@ class Job(BaseModel):
     secondary_loc: Optional[str] = None
     creation_date: str = None
     posted_date: str
+    updated_date: Optional[str] = None
     filled_date: Optional[str] = ''
     url: str
     comp : Optional[str] = None
+    hiring_manger: Optional[str] = None
 
+
+'''
+ashbyhq : Aerovect, Cobot
+oraclecloud : Ford, linamar
+myworkday : GM, Honda, lumentum
+lever : Kepler, Waabi
+eightfold ai: Trimble
+bamboohr: ZTR
+rivianvw :Rivian
+greenhouse: Kodiak
+'''
