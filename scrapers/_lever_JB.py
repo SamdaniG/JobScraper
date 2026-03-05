@@ -30,7 +30,7 @@ class LeverBase(ApiJobBoardScraper):
                 job_id=     job_id,
                 job_name=   job_title,
                 source=     self.name,
-                location=job["categories"].get('allLocations',''),
+                location="; ".join(job["categories"].get('allLocations','')),
                 posted_date=(datetime.fromtimestamp(job['createdAt'] / 1000)).strftime(DATE_FMT),
                 url=        url,
                 work_policy=job["workplaceType"]

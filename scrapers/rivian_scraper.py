@@ -77,9 +77,10 @@ if __name__=='__main__':
     test=RivianScraper()
     yo,yol=test.scrape_jobs()
     print(yo[1])
+    print(yol)
     # print(json.dumps(yol['283d25d951'],indent=4))
 
-    print(test.scrape_jd(source=yol['283d25d951']))
+    print(test.scrape_jd(source=yol['fce12e2832']))
 
 
 

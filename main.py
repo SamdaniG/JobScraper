@@ -16,6 +16,8 @@ from scrapers.ztr_scraper import ZTRScraper
 from scrapers.aerovect_scraper import AerovectScraper
 from scrapers.cobot_scraper import CobotScraper
 from scrapers.kodiak_scraper import KodiakScraper
+from scrapers.lucidmotors_scrapers import LucidMotorsScraper
+from scrapers.appliedintuition_scraper import AppliedIntuitionScraper
 
 import argparse
 parser = argparse.ArgumentParser()
@@ -42,7 +44,7 @@ scrapers = [RivianScraper(), GMScraper(), WaabiScraper(),
             FordScraper(), LumentumScraper(), KeplerScraper(),
             LinamarScraper(), HondaScraper(), TrimbleScraper(),
             ZTRScraper(), AerovectScraper(), CobotScraper(),
-            KodiakScraper()]
+            KodiakScraper(), LucidMotorsScraper(), AppliedIntuitionScraper()]
 logger.info(f"Scraping the jobs from the site")
 
 for scraper in scrapers:

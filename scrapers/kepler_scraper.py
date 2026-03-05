@@ -1,3 +1,5 @@
+import json
+
 from scrapers._lever_JB import LeverBase
 
 class KeplerScraper(LeverBase):
@@ -11,10 +13,11 @@ class KeplerScraper(LeverBase):
 if __name__=='__main__':
     test=KeplerScraper()
     yo,yol = test.scrape_jobs()
-    print(yo)
+    # print(yo)
+    print(json.dumps(yol,indent=4))
 
     jd_test=test.scrape_jd(source=yol['4caa328e28'])
-    print(jd_test)
+    # print(jd_test)
 
 
 
