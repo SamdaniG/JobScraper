@@ -11,7 +11,7 @@ DATE_FMT = "%a %d-%b-%Y"
 
 class ZTRScraper(ApiJobBoardScraper):
     base_domain='https://ztr.bamboohr.com/careers/'
-    url = base_domain + 'list'
+    url = base_domain + 'list/'
     name = 'ztr'
 
 
@@ -20,7 +20,7 @@ class ZTRScraper(ApiJobBoardScraper):
         job_data={}
 
         resp=rq.get(url= self.url)
-        resp.raise_for_status()
+        # print(resp.raise_for_status())
         dat=resp.json()
         job_list=dat['result']
         # print(json.dumps(job_list[0], indent=4))
@@ -35,8 +35,8 @@ class ZTRScraper(ApiJobBoardScraper):
                 job_name=           job_name,
                 source=             self.name,
                 location=           job['location']['city'],
-                posted_date=        self.scrape_posted_date(job_id),
-                url=                self.url + job_id,
+                posted_date=        "",#self.scrape_posted_date(job_id),
+                url=                self.base_domain + job_id,
             )
             job_data[hash_id]=job_deets.to_dict()
 
@@ -64,6 +64,7 @@ class ZTRScraper(ApiJobBoardScraper):
         resp.raise_for_status()
 
         data=resp.json()
+        # print(data)
         jd=data['result']['jobOpening']['description']
 
 
@@ -75,9 +76,10 @@ if __name__=='__main__':
     test=ZTRScraper()
 
     yo,yol=test.scrape_jobs()
-    # print(yo)
-    print(yol['614dd0a5a3'])
-    # print(test.scrape_jd(yol['614dd0a5a3']))
+    print(yo)
+    print(yol)
+    # print(yol['844354a354'])
+    print(test.scrape_jd(yol['844354a354']))
 
 
 

@@ -13,9 +13,7 @@ def diff_jobs(db: dict, current_jobs_id: list, today):
 
     for job_id in db:
         if job_id not in current_jobs_id and db[job_id]["filled_date"] == "":
-            db[job_id]["filled_date"] = (
-                today - timedelta(days=1)
-            ).strftime(DATE_FMT)
+            db[job_id]["filled_date"] = today.strftime(DATE_FMT)
             filled_jobs.append(job_id)
 
     return new_jobs, filled_jobs

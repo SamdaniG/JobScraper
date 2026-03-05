@@ -3,6 +3,7 @@ import requests as rq
 from utils import sha256_hex
 import json
 from utils import api_get_exact_posting_date
+import time
 
 
 class GMScraper(ApiJobBoardScraper):
@@ -69,6 +70,7 @@ class GMScraper(ApiJobBoardScraper):
                 break
 
             offset += self.payload['limit']
+            time.sleep(2)
         return current_jobs_id, job_data
 
     def scrape_jd(self, source:dict = None):
@@ -89,7 +91,10 @@ if __name__=='__main__':
     test=GMScraper()
     yolo, yolo_data=test.scrape_jobs()
     # print(json.dumps(yolo_data['093ebd0ddc'],indent=4))
-    print(yolo_data)
+    # print(len(yolo))
+    # print(json.dumps(yolo_data,indent=4))
+    job_names=[yolo_data[job]['job_name'] for job in yolo_data]
+    print(json.dumps(job_names,indent=4))
     a=dict()
 
     # print(test.scrape_jd(source=yolo_data["093ebd0ddc"]))

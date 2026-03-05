@@ -13,6 +13,7 @@ from scrapers.linamar_scraper import LinamarScraper
 from scrapers.honda_scraper import HondaScraper
 from scrapers.trimble_scraper import TrimbleScraper
 from scrapers.ztr_scraper import ZTRScraper
+from scrapers.aerovect_scraper import AerovectScraper
 
 import argparse
 parser = argparse.ArgumentParser()
@@ -36,7 +37,7 @@ all_scraped_jobs = {}
 scrapers = [RivianScraper(), GMScraper(), WaabiScraper(),
             FordScraper(), LumentumScraper(), KeplerScraper(),
             LinamarScraper(), HondaScraper(), TrimbleScraper(),
-            ZTRScraper()]
+            ZTRScraper(), AerovectScraper()]
 logger.info(f"Scraping the jobs from the site")
 
 for scraper in scrapers:
@@ -70,22 +71,37 @@ if EMAIL_ACTIVE:
 
     # 1️⃣ Email filled jobs
     if filled_jobs:
+        lines = []
+        html_lines = []
         logger.debug("Emailing filled jobs")
-
         for j in filled_jobs:
+            job = db[j]
             logger.info(
-                f'{db[j]["source"]} - '
-                f'{db[j].get("job_id","")} - '
-                f'{db[j]["job_name"]}'
+                f'{job["source"]} - '
+                f'{job.get("job_id","")} - '
+                f'{job["job_name"]}'
             )
 
-        body = "\n".join(
-            f'{db[j]["source"]} - '
-            f'{db[j].get("job_id",{db[j]["url"]})} - '
-            f'{db[j]["job_name"]}'
-            for j in filled_jobs
-        )
-        send_email("Filled Positions", body)
+            text_line = (
+                f'{job["source"]} - '
+                f'{job.get("job_id", job["url"])} - '
+                f'{job["job_name"]}'
+            )
+
+            html_line = (
+                f'{job["source"]} - '
+                f'{job.get("job_id", job["url"])} - '
+                f'<a href="{job["url"]}">{job["job_name"]}</a>'
+            )
+
+            lines.append(text_line)
+            html_lines.append(html_line)
+
+        text_body = "\n".join(lines)
+        html_body = "<br>".join(html_lines)
+
+        send_email("Filled Positions", text_body, html_body, "System")
+
 
     # 2️⃣ Email new jobs with correct scraper
     for job_id in new_jobs:
@@ -101,13 +117,25 @@ if EMAIL_ACTIVE:
             continue
 
         logger.debug(
-            "Emailing new job: %s (%s)",
+            "Emailing new job: %s (%s) (%s)",
             job["job_name"],
             job["source"],
+            job.get('job_id',"")
         )
+        jd_content = scraper.scrape_jd(job)
+        text_body = job['url'] + '\n'
+        text_body += jd_content
 
-        jd = scraper.scrape_jd(job)
-        send_email(job["job_name"], jd, job["source"])
+        html_body = f"""
+        <p>
+        <a href="{job['url']}">View Job Posting</a>
+        </p>
+        <pre>
+        {jd_content}
+        </pre>
+        """
+
+        send_email(job["job_name"], text_body, html_body, job["source"])
 
         if len(new_jobs) > 1:
             time.sleep(EMAIL_DELAY_SECONDS)

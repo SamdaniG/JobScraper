@@ -4,15 +4,30 @@ from email.message import EmailMessage
 from email.utils import formataddr
 import email_info as ei
 
-def send_email(subject: str, body: str, source:str = ""):
+# def send_email(subject: str, body: str, source:str = ""):
+#     msg = EmailMessage()
+#     msg["From"] = formataddr((f"{source} Job Alert", ei.email))
+#     msg["To"] = ei.receivers_email
+#     msg["Subject"] = subject
+#     msg.set_content(body)
+#
+#     with smtplib.SMTP(ei.host_address, ei.port_address) as connection:
+#         connection.starttls()
+#         connection.login(ei.email, ei.password)
+#         connection.send_message(msg)
+
+def send_email(subject: str, body: str, html_body: str = None, source: str = ""):
     msg = EmailMessage()
     msg["From"] = formataddr((f"{source} Job Alert", ei.email))
     msg["To"] = ei.receivers_email
     msg["Subject"] = subject
+
     msg.set_content(body)
+
+    if html_body:
+        msg.add_alternative(html_body, subtype="html")
 
     with smtplib.SMTP(ei.host_address, ei.port_address) as connection:
         connection.starttls()
         connection.login(ei.email, ei.password)
         connection.send_message(msg)
-
