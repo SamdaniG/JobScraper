@@ -1328,7 +1328,7 @@
         "work_policy": "Remote/Hybrid",
         "location": "2 Locations",
         "posted_date": "Fri 27-Feb-2026",
-        "filled_date": "",
+        "filled_date": "Fri 06-Mar-2026",
         "url": "https://generalmotors.wd5.myworkdayjobs.com/en-US/Careers_GM/job/Markham-Ontario-Canada/Senior-Chassis-Calibration-Specialist---Brake-Diagnostics_JR-202604568-1"
     },
     "c271a9c545": {
@@ -1478,7 +1478,7 @@
         "work_policy": "Hybrid",
         "location": "Markham Elevation Centre - Markham Elevation Centre",
         "posted_date": "Fri 20-Feb-2026",
-        "filled_date": "",
+        "filled_date": "Fri 06-Mar-2026",
         "url": "https://generalmotors.wd5.myworkdayjobs.com/en-US/Careers_GM/job/Markham-Elevation-Centre---Markham-Elevation-Centre/Software-Developer---PHEV-Vehicle-Dynamics-Control--VMEC-Chassis_JR-202602504-1"
     },
     "ec88588de6": {
@@ -11447,5 +11447,148 @@
         "filled_date": "",
         "url": "https://job-boards.greenhouse.io/lucidmotors/jobs/5071354007",
         "hiring_manger": "Anya Mirzoyan; anyamirzoyan@lucidmotors.com"
+    },
+    "0cf64d96e7": {
+        "job_id": "9205981880694_1",
+        "job_name": "Senior Financial Analyst (FP&A)",
+        "source": "nextstar",
+        "work_policy": "Full Time Permanent",
+        "location": "Windsor ON",
+        "posted_date": "Fri 20-Feb-2026",
+        "url": "https://workforcenow.adp.com/mascsr/default/mdf/recruitment/recruitment.html?cid=8aa53a99-a3f5-4260-aae3-17ca04fdef62&jobId=992165"
+    },
+    "7a00878e2f": {
+        "job_id": "9205981196573_1",
+        "job_name": "Cell Inspection Technician",
+        "source": "nextstar",
+        "work_policy": "Full Time Permanent",
+        "location": "Windsor ON",
+        "posted_date": "Thu 19-Feb-2026",
+        "url": "https://workforcenow.adp.com/mascsr/default/mdf/recruitment/recruitment.html?cid=8aa53a99-a3f5-4260-aae3-17ca04fdef62&jobId=992071"
+    },
+    "21d6445181": {
+        "job_id": "9205941100406_1",
+        "job_name": "Director of Electrode & Cell Battery Manufacturing",
+        "source": "nextstar",
+        "work_policy": "Full Time Permanent",
+        "location": "Windsor ON",
+        "posted_date": "Fri 13-Feb-2026",
+        "url": "https://workforcenow.adp.com/mascsr/default/mdf/recruitment/recruitment.html?cid=8aa53a99-a3f5-4260-aae3-17ca04fdef62&jobId=991687"
+    },
+    "40ba01cd60": {
+        "job_id": "9205939035308_1",
+        "job_name": "Maintenance Technician ",
+        "source": "nextstar",
+        "work_policy": "Full Time Permanent",
+        "location": "Windsor ON",
+        "posted_date": "Fri 13-Feb-2026",
+        "url": "https://workforcenow.adp.com/mascsr/default/mdf/recruitment/recruitment.html?cid=8aa53a99-a3f5-4260-aae3-17ca04fdef62&jobId=991508"
+    },
+    "acaceb8afe": {
+        "job_id": "9205045728269_1",
+        "job_name": "Factory Automation Technician",
+        "source": "nextstar",
+        "work_policy": "Full Time Permanent",
+        "location": "Windsor ON",
+        "posted_date": "Fri 13-Feb-2026",
+        "url": "https://workforcenow.adp.com/mascsr/default/mdf/recruitment/recruitment.html?cid=8aa53a99-a3f5-4260-aae3-17ca04fdef62&jobId=980450"
+    },
+    "b997433053": {
+        "job_id": "9205939951138_1",
+        "job_name": "Equipment Technician",
+        "source": "nextstar",
+        "work_policy": "Full Time Permanent",
+        "location": "Windsor ON",
+        "posted_date": "Thu 12-Feb-2026",
+        "url": "https://workforcenow.adp.com/mascsr/default/mdf/recruitment/recruitment.html?cid=8aa53a99-a3f5-4260-aae3-17ca04fdef62&jobId=991572"
+    },
+    "7fdad8d05c": {
+        "job_id": "9205148822416_1",
+        "job_name": "Shift Operations Manager",
+        "source": "nextstar",
+        "work_policy": "Full Time Permanent",
+        "location": "Windsor ON",
+        "posted_date": "Wed 04-Feb-2026",
+        "url": "https://workforcenow.adp.com/mascsr/default/mdf/recruitment/recruitment.html?cid=8aa53a99-a3f5-4260-aae3-17ca04fdef62&jobId=982062"
+    },
+    "b558b5608b": {
+        "job_id": "9205321237687_1",
+        "job_name": "Electrode Inspection Engineer",
+        "source": "nextstar",
+        "work_policy": "Full Time Permanent",
+        "location": "Windsor ON",
+        "posted_date": "Tue 03-Feb-2026",
+        "url": "https://workforcenow.adp.com/mascsr/default/mdf/recruitment/recruitment.html?cid=8aa53a99-a3f5-4260-aae3-17ca04fdef62&jobId=984372"
+    },
+    "04ab9b3af6": {
+        "job_id": "9205859630350_1",
+        "job_name": "Production Planning Specialist",
+        "source": "nextstar",
+        "work_policy": "Full Time Permanent",
+        "location": "Windsor ON",
+        "posted_date": "Tue 03-Feb-2026",
+        "url": "https://workforcenow.adp.com/mascsr/default/mdf/recruitment/recruitment.html?cid=8aa53a99-a3f5-4260-aae3-17ca04fdef62&jobId=990726"
+    },
+    "3cc81a3728": {
+        "job_id": "9205859200435_1",
+        "job_name": "Cell Process Engineer ",
+        "source": "nextstar",
+        "work_policy": "Full Time Permanent",
+        "location": "Windsor ON",
+        "posted_date": "Mon 02-Feb-2026",
+        "url": "https://workforcenow.adp.com/mascsr/default/mdf/recruitment/recruitment.html?cid=8aa53a99-a3f5-4260-aae3-17ca04fdef62&jobId=990691"
+    },
+    "544bcc81df": {
+        "job_id": "9205817071110_1",
+        "job_name": "Integration Equipment Engineer ",
+        "source": "nextstar",
+        "work_policy": "Full Time Permanent",
+        "location": "Windsor ON",
+        "posted_date": "Tue 20-Jan-2026",
+        "url": "https://workforcenow.adp.com/mascsr/default/mdf/recruitment/recruitment.html?cid=8aa53a99-a3f5-4260-aae3-17ca04fdef62&jobId=989968"
+    },
+    "5b46cb61f4": {
+        "job_id": "9205619768690_1",
+        "job_name": "Area Manager (Logistics Sr Specialist)",
+        "source": "nextstar",
+        "work_policy": "Full Time Permanent",
+        "location": "Windsor ON",
+        "posted_date": "Wed 17-Dec-2025",
+        "url": "https://workforcenow.adp.com/mascsr/default/mdf/recruitment/recruitment.html?cid=8aa53a99-a3f5-4260-aae3-17ca04fdef62&jobId=988167"
+    },
+    "de78e46b97": {
+        "job_id": "9205582742656_1",
+        "job_name": "EHS Sr. Manager",
+        "source": "nextstar",
+        "work_policy": "Full Time Permanent",
+        "location": "Windsor ON",
+        "posted_date": "Fri 12-Dec-2025",
+        "url": "https://workforcenow.adp.com/mascsr/default/mdf/recruitment/recruitment.html?cid=8aa53a99-a3f5-4260-aae3-17ca04fdef62&jobId=987834"
+    },
+    "ecbf909922": {
+        "job_id": "9205466357156_1",
+        "job_name": "Equipment Electrician",
+        "source": "nextstar",
+        "location": "Windsor ON",
+        "posted_date": "Tue 18-Nov-2025",
+        "url": "https://workforcenow.adp.com/mascsr/default/mdf/recruitment/recruitment.html?cid=8aa53a99-a3f5-4260-aae3-17ca04fdef62&jobId=986098"
+    },
+    "d186712ab0": {
+        "job_id": "9205432118320_1",
+        "job_name": "Electrode Equipment Technician",
+        "source": "nextstar",
+        "work_policy": "Full Time Permanent",
+        "location": "Windsor ON",
+        "posted_date": "Tue 18-Nov-2025",
+        "url": "https://workforcenow.adp.com/mascsr/default/mdf/recruitment/recruitment.html?cid=8aa53a99-a3f5-4260-aae3-17ca04fdef62&jobId=985841"
+    },
+    "4344f9563f": {
+        "job_id": "9204912251437_1",
+        "job_name": "Legal Counsel",
+        "source": "nextstar",
+        "work_policy": "Full Time Permanent",
+        "location": "Windsor ON",
+        "posted_date": "Thu 23-Oct-2025",
+        "url": "https://workforcenow.adp.com/mascsr/default/mdf/recruitment/recruitment.html?cid=8aa53a99-a3f5-4260-aae3-17ca04fdef62&jobId=978786"
     }
 }

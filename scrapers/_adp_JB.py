@@ -18,6 +18,7 @@ class ADPBase(ApiJobBoardScraper):
         "locale": "en_CA",
         '$top': 100
     }
+    apply_url=base_domain + f'/mdf/recruitment/recruitment.html?cid={params['cid']}&jobId='
 
     def scrape_jobs(self, **kwargs):
         current_jobs_id=[]
@@ -47,10 +48,10 @@ class ADPBase(ApiJobBoardScraper):
                 job_id=job_id,
                 job_name=job_name,
                 source=self.name,
-                work_policy=job.get('workLevelCode', {}).get('shortName', ''),
+                work_policy=job.get('workLevelCode', {}).get('shortName', None),
                 location=location,
                 posted_date=datetime.strptime(job.get('postDate', ''),FMT).strftime(DATE_FMT),
-                url=self.base_domain + f'/mdf/recruitment/recruitment.html?cid={self.params['cid']}&jobId=' + application_id
+                url= self.apply_url + application_id
             )
 
             job_data[hash_id] = job_deets.to_dict()

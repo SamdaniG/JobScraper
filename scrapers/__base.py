@@ -72,5 +72,5 @@ eightfold ai: Trimble
 bamboohr: ZTR
 rivianvw :Rivian
 greenhouse: Kodiak, Applied Intuition, Lucid Motors, Gatik, Nuro
-ADP: NextStar, 
+ADP: NextStar, GAstops
 '''

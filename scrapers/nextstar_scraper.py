@@ -7,21 +7,19 @@ class NextStarSraper(ADPBase):
     url = base_domain + '/careercenter/public/events/staffing/v1/job-requisitions'
 
     params={
-        'cid': '44dfb970-4042-4c3d-8525-e26b418cc3b1',
+        'cid': '8aa53a99-a3f5-4260-aae3-17ca04fdef62',
         "lang": "en_CA",
         "locale": "en_CA",
-        'ccId' : '19000101_000003',
-        '$top': 100,
-        'jwId' : 'SYS:JW: 001',
-        'isWidget': 'true'
+        '$top': 100
     }
+    apply_url = base_domain + f'/mdf/recruitment/recruitment.html?cid={params['cid']}&jobId='
 
 if __name__=='__main__':
     test=NextStarSraper()
     yo,yol=test.scrape_jobs()
     print(yo)
     print(json.dumps(yol,indent=4))
-    # print(test.scrape_jd(yol['4344f9563f']))
+    print(test.scrape_jd(yol['4344f9563f']))
 
 
 
@@ -203,7 +201,3 @@ if __name__=='__main__':
     ]
 }
 '''
-#
-# https://workforcenow.adp.com/mascsr/default/mdf/recruitment/recruitment.html?cid=44dfb970-4042-4c3d-8525-e26b418cc3b1&ccId=19000101_000003&lang=en_CA&jobId=588338&jwId=SYS:JW:001
-# "https://workforcenow.adp.com/mascsr/default/mdf/recruitment/recruitment.html?cid=44dfb970-4042-4c3d-8525-e26b418cc3b1&jobId=588338"
-#  https://workforcenow.adp.com/mascsr/default/mdf/recruitment/recruitment.html?cid=44dfb970-4042-4c3d-8525-e26b418cc3b1&jobId=588338
