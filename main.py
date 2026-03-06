@@ -19,9 +19,13 @@ from scrapers.kodiak_scraper import KodiakScraper
 from scrapers.lucidmotors_scrapers import LucidMotorsScraper
 from scrapers.appliedintuition_scraper import AppliedIntuitionScraper
 from scrapers.gatik_scraper import GatikScraper
-from scrapers.nuro import NuroScraper
+from scrapers.nuro_scraper import NuroScraper
 from scrapers.nextstar_scraper import NextStarSraper
 from scrapers.gastops_scraper import GAStopsSraper
+from scrapers.metrolinx_scraper import MetrolinxScraper
+from scrapers.kongsberg_geospatial_scraper import KongsbergGeospatialSraper
+from scrapers.boston_scientific_scraper import BostonScientificScraper
+from scrapers.eaton_scraper import EatonScraper
 
 import argparse
 parser = argparse.ArgumentParser()
@@ -50,7 +54,8 @@ scrapers = [RivianScraper(), GMScraper(), WaabiScraper(),
             ZTRScraper(), AerovectScraper(), CobotScraper(),
             KodiakScraper(), LucidMotorsScraper(), AppliedIntuitionScraper(),
             GatikScraper(), NuroScraper(), NextStarSraper(),
-            GAStopsSraper()]
+            GAStopsSraper(), MetrolinxScraper(), KongsbergGeospatialSraper(),
+            BostonScientificScraper(),EatonScraper()]
 logger.info(f"Scraping the jobs from the site")
 
 for scraper in scrapers:
