@@ -21,7 +21,7 @@ class GreenhouseScraper(ApiJobBoardScraper):
         resp = rq.get(url=url)#,params=self.params)
         # print(resp.raise_for_status())
         dat=resp.json()
-        print(json.dumps(dat,indent=4))
+        # print(json.dumps(dat,indent=4))
         jobs_list=dat['jobs']
 
         for job in jobs_list:
@@ -34,7 +34,7 @@ class GreenhouseScraper(ApiJobBoardScraper):
             keywords = ["hiring manager", "hr", "recruiter"]
             hm_details = None
 
-            for m in job.get("metadata", []):
+            for m in job.get("metadata") or []:
                 if any(k in (m.get("name") or "").lower() for k in keywords):
                     v = m.get("value") or {}
                     hm_details = f"{v.get('name', '')}; {v.get('email', '')}".strip() or None

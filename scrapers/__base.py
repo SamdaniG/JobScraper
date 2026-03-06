@@ -57,7 +57,7 @@ class Job(BaseModel):
     creation_date: str = None
     posted_date: str
     updated_date: Optional[str] = None
-    filled_date: Optional[str] = ''
+    filled_date: Optional[str] = None
     url: str
     comp : Optional[str] = None
     hiring_manger: Optional[str] = None
@@ -71,5 +71,6 @@ lever : Kepler, Waabi
 eightfold ai: Trimble
 bamboohr: ZTR
 rivianvw :Rivian
-greenhouse: Kodiak
+greenhouse: Kodiak, Applied Intuition, Lucid Motors, Gatik, Nuro
+ADP: NextStar, 
 '''
