@@ -18,7 +18,7 @@ import email_info as ei
 
 def send_email(subject: str, body: str, html_body: str = None, source: str = ""):
     msg = EmailMessage()
-    msg["From"] = formataddr((f"{source} Job Alert", ei.email))
+    msg["From"] = formataddr((f"{source.title()} Job Alert", ei.email))
     msg["To"] = ei.receivers_email
     msg["Subject"] = subject
 

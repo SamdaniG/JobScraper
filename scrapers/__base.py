@@ -66,13 +66,13 @@ class Job(BaseModel):
 '''
 ashbyhq : Aerovect, Cobot
 oraclecloud : Ford, linamar, Metrolinx
-myworkday : GM, Honda, lumentum
-lever : Kepler, Waabi
+myworkday : GM, Honda, lumentum, multimatic
+lever : Kepler, Waabi, intersect
 eightfold ai: Trimble, Boston Scientific, Eaton
 bamboohr: ZTR
 rivianvw :Rivian
 greenhouse: Kodiak, Applied Intuition, Lucid Motors, Gatik, Nuro
 ADP: NextStar, GAstops, Kongsberg Geospatial
-rmk successfactors? : alstom, apotex, bwxt, celestica,
-
+rmk successfactors? : alstom, apotex, bwxt, celestica, epiroc
+ats rippling - kraken robotics, blue water autonomy
 '''

@@ -26,6 +26,10 @@ from scrapers.metrolinx_scraper import MetrolinxScraper
 from scrapers.kongsberg_geospatial_scraper import KongsbergGeospatialSraper
 from scrapers.boston_scientific_scraper import BostonScientificScraper
 from scrapers.eaton_scraper import EatonScraper
+from scrapers.zoox_scraper import ZooxScraper
+from scrapers.multimatic_scraper import MultimaticScraper
+from scrapers.kiongroup_scraper import KionGroupScraper
+from scrapers.kraken_robotics import KrakenRobotics
 
 import argparse
 parser = argparse.ArgumentParser()
@@ -47,6 +51,7 @@ db = load_db()
 
 all_current_job_ids = []
 all_scraped_jobs = {}
+successful_scrapers = set()
 
 scrapers = [RivianScraper(), GMScraper(), WaabiScraper(),
             FordScraper(), LumentumScraper(), KeplerScraper(),
@@ -55,13 +60,20 @@ scrapers = [RivianScraper(), GMScraper(), WaabiScraper(),
             KodiakScraper(), LucidMotorsScraper(), AppliedIntuitionScraper(),
             GatikScraper(), NuroScraper(), NextStarSraper(),
             GAStopsSraper(), MetrolinxScraper(), KongsbergGeospatialSraper(),
-            BostonScientificScraper(),EatonScraper()]
+            BostonScientificScraper(),EatonScraper(), ZooxScraper(),
+            MultimaticScraper(), KionGroupScraper(), KrakenRobotics()]
 logger.info(f"Scraping the jobs from the site")
 
 for scraper in scrapers:
     logger.info(f"Running {scraper.name} scraper now.")
     # driver.get(scraper.url)
-    current_jobs_id, scraped_jobs_db = scraper.scrape_jobs()
+    # current_jobs_id, scraped_jobs_db = scraper.scrape_jobs()
+    try:
+        current_jobs_id, scraped_jobs_db = scraper.scrape_jobs()
+        successful_scrapers.add(scraper.name)
+    except Exception as e:
+        logger.error(f"{scraper.name} failed: {e}")
+        continue
 
     all_current_job_ids.extend(current_jobs_id)
     all_scraped_jobs.update(scraped_jobs_db)
@@ -69,7 +81,7 @@ for scraper in scrapers:
 # current_jobs_id, scraped_jobs_db = scrape_jobs(driver)
 
 logger.info(f"Checking the new/old jobs created.")
-new_jobs, filled_jobs = diff_jobs(db, all_current_job_ids, date.today())
+new_jobs, filled_jobs = diff_jobs(db, all_current_job_ids, date.today(), successful_scrapers)
 logger.info(
     "Diff complete | new_jobs=%d filled_jobs=%d",
     len(new_jobs),
@@ -146,7 +158,7 @@ if EMAIL_ACTIVE:
 
         html_body = f"""
         <p>
-        <a href="{job['url']}">View Job Posting</a>
+        <a href="{job['url']}">{job["job_name"]}</a>
         </p>
         <pre>
         {jd_content}
@@ -157,7 +169,26 @@ if EMAIL_ACTIVE:
 
         if len(new_jobs) > 1:
             time.sleep(EMAIL_DELAY_SECONDS)
-
+else:
+    if filled_jobs:
+        logger.info('Filled Jobs\n')
+        for j in filled_jobs:
+            job = db[j]
+            logger.info(
+                f'{job["source"]} - '
+                f'{job.get("job_id","")} - '
+                f'{job["job_name"]}'
+            )
+    if new_jobs:
+        logger.info('New jobs\n')
+        for job_id in new_jobs:
+            job = db[job_id]
+            logger.debug(
+                "New job alert: %s (%s) (%s)",
+                job["job_name"],
+                job["source"],
+                job.get('job_id',"")
+            )
 
 logger.info(f"Writing data to my database!\n-------------------")
 save_db(db)

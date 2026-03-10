@@ -25,7 +25,7 @@ class MyworkdayBase(ApiJobBoardScraper):
 
             resp=rq.post(url=self.url, json= payload)
             # print(resp.raise_for_status())
-            # print(resp)
+            # print(resp.text)
             dat=resp.json()
             job_list=dat.get('jobPostings', [])
             # print(json.dumps(job_list,indent=4))

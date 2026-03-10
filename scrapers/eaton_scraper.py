@@ -1,4 +1,4 @@
-from scrapers._eightfoldai import EightfoldaiBase
+from scrapers._eightfoldaiJB import EightfoldaiBase
 class EatonScraper(EightfoldaiBase):
     name='eaton'
     base_domain= f'https://{name}.eightfold.ai'

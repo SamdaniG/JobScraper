@@ -1,4 +1,4 @@
-from scrapers._eightfoldai import EightfoldaiBase
+from scrapers._eightfoldaiJB import EightfoldaiBase
 class TrimbleScraper(EightfoldaiBase):
     name='trimble'
     base_domain= 'https://trimble.eightfold.ai'

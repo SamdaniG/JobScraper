@@ -1,4 +1,4 @@
-from scrapers._eightfoldai import EightfoldaiBase
+from scrapers._eightfoldaiJB import EightfoldaiBase
 class BostonScientificScraper(EightfoldaiBase):
     name='bostonscientific'
     base_domain= 'https://bostonscientific.eightfold.ai'
