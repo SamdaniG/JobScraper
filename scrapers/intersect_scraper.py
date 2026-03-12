@@ -3,10 +3,6 @@ import json
 
 class IntersectScraper(LeverBase):
     name='intersect'
-    base_domain = f'https://api.lever.co/v0/postings/{name}'
-    param = {
-        'mode':'json',
-    }
 
 if __name__=='__main__':
     test=IntersectScraper()

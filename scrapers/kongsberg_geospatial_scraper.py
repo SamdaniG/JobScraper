@@ -3,8 +3,8 @@ import json
 
 class KongsbergGeospatialSraper(ADPBase):
     name= 'kongsberg geospatial'
-    base_domain = 'https://workforcenow.adp.com/mascsr/default'
-    url = base_domain + '/careercenter/public/events/staffing/v1/job-requisitions'
+    # base_domain = 'https://workforcenow.adp.com/mascsr/default'
+    # url = base_domain + '/careercenter/public/events/staffing/v1/job-requisitions'
 
     params={
         'cid': '8fd13316-1f93-4d98-b39c-59a884b85873',
@@ -13,7 +13,7 @@ class KongsbergGeospatialSraper(ADPBase):
         "locale": "en_CA",
         '$top': 100
     }
-    apply_url = base_domain + f'/mdf/recruitment/recruitment.html?cid={params['cid']}&ccId={params['ccId']}&jobId='
+    # apply_url = base_domain + f'/mdf/recruitment/recruitment.html?cid={params['cid']}&ccId={params['ccId']}&jobId='
 
 if __name__=='__main__':
     test=KongsbergGeospatialSraper()

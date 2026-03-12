@@ -12,13 +12,17 @@ class GreenhouseScraper(ApiJobBoardScraper):
     base_domain = 'https://boards-api.greenhouse.io/v1/boards/'
     # url = base_domain+ f'{name}/jobs'
 
+    @property
+    def url(self):
+        return self.base_domain + f'{self.name}/jobs'
+
 
     def scrape_jobs(self):
         current_jobs_id=[]
         job_data = {}
         # self.params['page'] = 1
         url = self.base_domain + f'{self.name}/jobs'
-        resp = rq.get(url=url, timeout=30)#,params=self.params)
+        resp = rq.get(url=self.url, timeout=30)#,params=self.params)
         # print(resp.raise_for_status())
         dat=resp.json()
         # print(json.dumps(dat,indent=4))

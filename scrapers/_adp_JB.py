@@ -11,14 +11,17 @@ class ADPBase(ApiJobBoardScraper):
     name= 'base'
     base_domain = 'https://workforcenow.adp.com/mascsr/default'
     url = base_domain + '/careercenter/public/events/staffing/v1/job-requisitions'
-
-    params={
-        'cid': '',
-        "lang": "en_CA",
-        "locale": "en_CA",
-        '$top': 100
-    }
-    apply_url=base_domain + f'/mdf/recruitment/recruitment.html?cid={params['cid']}&jobId='
+    # params = {
+    #     'cid': '',
+    #     "lang": "en_CA",
+    #     "locale": "en_CA",
+    #     '$top': 100
+    # }
+    params={}
+    @property
+    def apply_url(self):
+        return (self.base_domain +
+                f'/mdf/recruitment/recruitment.html?cid={self.params['cid']}&jobId=')
 
     def scrape_jobs(self, **kwargs):
         current_jobs_id=[]

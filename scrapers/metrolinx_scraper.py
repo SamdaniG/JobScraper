@@ -2,10 +2,6 @@ from scrapers._oraclecloud_JB import OracleCloudScraper
 class MetrolinxScraper(OracleCloudScraper):
     name="metrolinx"
     base_domain='https://ehtc.fa.ca2.oraclecloud.com'
-
-    url = (base_domain +
-           "/hcmRestApi/resources/latest/recruitingCEJobRequisitions")
-
     params = {
         "onlyData": "true",
 
@@ -26,9 +22,6 @@ class MetrolinxScraper(OracleCloudScraper):
             "sortBy=POSTING_DATES_DESC"
         )
     }
-
-    jd_url= (base_domain +
-       "/hcmRestApi/resources/latest/recruitingCEJobRequisitionDetails")
 
 if __name__=='__main__':
     test=MetrolinxScraper()

@@ -7,14 +7,22 @@ DATE_FMT = "%a %d-%b-%Y"
 
 class LeverBase(ApiJobBoardScraper):
     name='base'
-    base_domain = ''
-    param = {}
+
+    @property
+    def base_domain(self):
+        return f"https://api.lever.co/v0/postings/{self.name}"
+
+    @property
+    def params(self):
+        return {
+        'mode':'json',
+    }
 
     def scrape_jobs(self):
         current_jobs_id=[]
         job_data={}
 
-        resp=rq.get(url=self.base_domain, params= self.param, timeout=30)
+        resp=rq.get(url=self.base_domain, params= self.params, timeout=30)
         resp.raise_for_status()
         job_list=resp.json()
         # print(json.dumps(job_list[0],indent=4))
@@ -44,7 +52,7 @@ class LeverBase(ApiJobBoardScraper):
 
         resp = rq.get(
             url=f"{self.base_domain}/{job_id}",
-            params={'mode': 'json'}, timeout=30
+            params=self.params, timeout=30
         )
         resp.raise_for_status()
 

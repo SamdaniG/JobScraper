@@ -3,10 +3,6 @@ import json
 
 class WaabiScraper(LeverBase):
     name='waabi'
-    base_domain = f'https://api.lever.co/v0/postings/{name}'
-    param = {
-        'mode':'json',
-    }
 
 if __name__=='__main__':
     test=WaabiScraper()

@@ -1,22 +1,6 @@
 from scrapers._eightfoldaiJB import EightfoldaiBase
 class TrimbleScraper(EightfoldaiBase):
     name='trimble'
-    base_domain= 'https://trimble.eightfold.ai'
-    url = base_domain + '/api/pcsx/search'
-    params = {
-        'domain' : 'trimble.com',
-        # query =
-        'location' : 'Canada',
-        'start' : 0,
-        'sort_by' : 'distance',
-        'filter_include_remote' : 1
-    }
-    jd_url = base_domain + '/api/pcsx/position_details'
-    jd_params={
-        'position_id' : 'sample',
-        'domain' : 'trimble.com',
-        'hl' : 'en'
-    }
 
 if __name__=='__main__':
     test=TrimbleScraper()

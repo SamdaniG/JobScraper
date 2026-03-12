@@ -10,17 +10,19 @@ class AshbyhqBase(ApiJobBoardScraper):
     base_domain = 'https://jobs.ashbyhq.com/'
     url = base_domain + 'api/non-user-graphql'
 
-    apply_url= base_domain + 'ashbyhq/'
-
     url_params={
         'op': 'ApiJobBoardWithTeams'
     }
-    url_payload={}
-
     jd_params={
         'op' :    'ApiJobPosting'
     }
+
+    @property
+    def apply_url(self):
+        return self.base_domain + f'{self.name}/'
+
     jd_payload={}
+    url_payload = {}
 
     def scrape_jobs(self, **kwargs):
         current_jobs_id=[]

@@ -3,17 +3,12 @@ import json
 
 class NextStarSraper(ADPBase):
     name= 'nextstar'
-    base_domain = 'https://workforcenow.adp.com/mascsr/default'
-    url = base_domain + '/careercenter/public/events/staffing/v1/job-requisitions'
-
     params={
         'cid': '8aa53a99-a3f5-4260-aae3-17ca04fdef62',
         "lang": "en_CA",
         "locale": "en_CA",
         '$top': 100
     }
-    apply_url = base_domain + f'/mdf/recruitment/recruitment.html?cid={params['cid']}&jobId='
-
 if __name__=='__main__':
     test=NextStarSraper()
     yo,yol=test.scrape_jobs()

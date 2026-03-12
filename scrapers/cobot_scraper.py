@@ -2,11 +2,6 @@ from scrapers._ashbyhq_JB import AshbyhqBase
 
 class CobotScraper(AshbyhqBase):
     name = 'cobot'
-    base_domain = 'https://jobs.ashbyhq.com/'
-    url = base_domain + 'api/non-user-graphql'
-
-    apply_url= base_domain + 'cobot/'
-
     url_payload={
         'operationName': "ApiJobBoardWithTeams",
         'variables':
@@ -28,6 +23,6 @@ class CobotScraper(AshbyhqBase):
 if __name__=='__main__':
     test=CobotScraper()
     yo,yol=test.scrape_jobs()
-    # print(yo)
+    print(yo)
     # print(yol['b0b418a9ee'])
     # print(test.scrape_jd(yol['b0b418a9ee']))

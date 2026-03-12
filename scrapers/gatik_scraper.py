@@ -10,5 +10,5 @@ if __name__=='__main__':
     yo,yol=test.scrape_jobs()
 
     # print(yo)
-    # print(json.dumps(yol,indent=4))
+    print(json.dumps(yol,indent=4))
     # print(test.scrape_jd(yol['e6650ab1f2']))

@@ -3,9 +3,6 @@ import json
 
 class GAStopsSraper(ADPBase):
     name= 'gastops'
-    base_domain = 'https://workforcenow.adp.com/mascsr/default'
-    url = base_domain + '/careercenter/public/events/staffing/v1/job-requisitions'
-
     params={
         'cid': '44dfb970-4042-4c3d-8525-e26b418cc3b1',
         'ccId': '19000101_000003',
@@ -13,7 +10,6 @@ class GAStopsSraper(ADPBase):
         "locale": "en_CA",
         '$top': 100
     }
-    apply_url = base_domain + f'/mdf/recruitment/recruitment.html?cid={params['cid']}&ccId={params['ccId']}&jobId='
 
 if __name__=='__main__':
     test=GAStopsSraper()

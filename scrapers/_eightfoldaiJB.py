@@ -8,22 +8,35 @@ DATE_FMT = "%a %d-%b-%Y"
 
 class EightfoldaiBase(ApiJobBoardScraper):
     name='base'
-    base_domain= f'https://{name}.eightfold.ai'
-    url = base_domain + '/api/pcsx/search'
-    params = {
-        'domain' : '',
-        # query =
-        'location' : 'Canada',
-        'start' : 0,
-        'sort_by' : 'distance',
-        'filter_include_remote' : 1
-    }
-    jd_url = base_domain + '/api/pcsx/position_details'
-    jd_params={
-        'position_id' : 'sample',
-        'domain' : '',
-        'hl' : 'en'
-    }
+    @property
+    def base_domain(self):
+        return f"https://{self.name}.eightfold.ai"
+
+    @property
+    def url(self):
+        return f"{self.base_domain}/api/pcsx/search"
+
+    @property
+    def params(self):
+        return {
+            "domain": f'{self.name}.com',
+            "location": "Canada",
+            "start": 0,
+            "sort_by": "distance",
+            "filter_include_remote": 1,
+        }
+
+    @property
+    def jd_url(self):
+        return f"{self.base_domain}/api/pcsx/position_details"
+
+    @property
+    def jd_params(self):
+        return {
+            "position_id": "",
+            "domain": self.name,
+            "hl": "en",
+        }
 
     def scrape_jobs(self, **kwargs):
         current_jobs_id=[]

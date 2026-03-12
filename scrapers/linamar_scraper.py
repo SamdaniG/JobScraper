@@ -5,9 +5,6 @@ class LinamarScraper(OracleCloudScraper):
     name="linamar"
     base_domain="https://fa-epmd-saasfaprod1.fa.ocs.oraclecloud.com"
 
-    url = (base_domain +
-           "/hcmRestApi/resources/latest/recruitingCEJobRequisitions")
-
     params = {
         "onlyData": "true",
         "expand": "requisitionList.workLocation,"
@@ -25,8 +22,6 @@ class LinamarScraper(OracleCloudScraper):
             "sortBy=POSTING_DATES_DESC"
         )
     }
-    jd_url= (base_domain +
-       "/hcmRestApi/resources/latest/recruitingCEJobRequisitionDetails")
 
 if __name__=='__main__':
     test=LinamarScraper()

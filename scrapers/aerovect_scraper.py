@@ -2,11 +2,6 @@ from scrapers._ashbyhq_JB import AshbyhqBase
 
 class AerovectScraper(AshbyhqBase):
     name = 'aerovect'
-    base_domain = 'https://jobs.ashbyhq.com/'
-    url = base_domain + 'api/non-user-graphql'
-
-    apply_url= base_domain + 'Aerovect/'
-
     url_payload={
         'operationName': "ApiJobBoardWithTeams",
         'variables':

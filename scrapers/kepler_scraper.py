@@ -4,7 +4,6 @@ from scrapers._lever_JB import LeverBase
 
 class KeplerScraper(LeverBase):
     name='kepler'
-    base_domain = f'https://api.lever.co/v0/postings/{name}'
     param = {
         'mode':'json',
         'location': 'Toronto, Ontario'
@@ -16,7 +15,7 @@ if __name__=='__main__':
     # print(yo)
     print(json.dumps(yol,indent=4))
 
-    jd_test=test.scrape_jd(source=yol['4caa328e28'])
+    # jd_test=test.scrape_jd(source=yol['4caa328e28'])
     # print(jd_test)
 
 

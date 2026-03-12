@@ -8,12 +8,18 @@ DATE_FMT = "%a %d-%b-%Y"
 
 class OracleCloudScraper(ApiJobBoardScraper):
     name="base"
-    base_domain=""
-
-    url = ''
-
+    base_domain = ''
     params = {}
-    jd_url= ''
+
+    @property
+    def url(self):
+        return (self.base_domain +
+           "/hcmRestApi/resources/latest/recruitingCEJobRequisitions")
+
+    @property
+    def jd_url(self):
+        return (self.base_domain +
+       "/hcmRestApi/resources/latest/recruitingCEJobRequisitionDetails")
 
     def scrape_jobs(self):
         resp=rq.get(url=self.url,params=self.params, timeout=30)

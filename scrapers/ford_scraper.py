@@ -2,10 +2,6 @@ from scrapers._oraclecloud_JB import OracleCloudScraper
 class FordScraper(OracleCloudScraper):
     name="ford"
     base_domain="https://efds.fa.em5.oraclecloud.com"
-
-    url = (base_domain +
-           "/hcmRestApi/resources/latest/recruitingCEJobRequisitions")
-
     params = {
         "onlyData": "true",
         "expand": "requisitionList.workLocation,"
@@ -24,8 +20,6 @@ class FordScraper(OracleCloudScraper):
             "sortBy=POSTING_DATES_DESC"
         )
     }
-    jd_url= (base_domain +
-       "/hcmRestApi/resources/latest/recruitingCEJobRequisitionDetails")
 
 if __name__=='__main__':
     test=FordScraper()

@@ -1,9 +1,10 @@
 from scrapers._lever_JB import LeverBase
+import json
 
-class ZooxScraper(LeverBase):
-    name = 'zoox'
+class AgtonomyScraper(LeverBase):
+    name = 'agtonomy'
 
 if __name__=='__main__':
-    test=ZooxScraper()
+    test=AgtonomyScraper()
     yo,yol=test.scrape_jobs()
     print(yo)
