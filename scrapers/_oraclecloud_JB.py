@@ -22,7 +22,7 @@ class OracleCloudScraper(ApiJobBoardScraper):
        "/hcmRestApi/resources/latest/recruitingCEJobRequisitionDetails")
 
     def scrape_jobs(self):
-        resp=rq.get(url=self.url,params=self.params, timeout=30)
+        resp=self.session.get(url=self.url,params=self.params, timeout=30)
         # print(resp)
         # print(resp.raise_for_status())
         current_jobs_id=[]
@@ -62,7 +62,7 @@ class OracleCloudScraper(ApiJobBoardScraper):
             "expand": 'all',
             "finder": f'ById;Id="{job_id}",siteNumber=CX_1'
         }
-        resp=rq.get(url=self.jd_url,params=jd_params, timeout=30)
+        resp=self.session.get(url=self.jd_url,params=jd_params, timeout=30)
         dat=resp.json()
         items=dat.get("items","")
         if items=="":

@@ -26,7 +26,7 @@ class ADPBase(ApiJobBoardScraper):
     def scrape_jobs(self, **kwargs):
         current_jobs_id=[]
         job_data = {}
-        resp=rq.get(url=self.url,params=self.params, timeout=30)
+        resp=self.session.get(url=self.url,params=self.params, timeout=30)
         # print(resp.raise_for_status())
         dat=resp.json()
 
@@ -64,7 +64,7 @@ class ADPBase(ApiJobBoardScraper):
     def scrape_jd(self, source: dict = None):
         job_id = source["job_id"]
         url = f"{self.url}/{job_id}"
-        resp = rq.get(url,self.params, timeout=30)
+        resp = self.session.get(url,self.params, timeout=30)
         dat = resp.json()
         print(dat)
         jd = dat.get("jobDescription", "")

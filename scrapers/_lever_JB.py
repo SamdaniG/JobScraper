@@ -22,7 +22,7 @@ class LeverBase(ApiJobBoardScraper):
         current_jobs_id=[]
         job_data={}
 
-        resp=rq.get(url=self.base_domain, params= self.params, timeout=30)
+        resp=self.session.get(url=self.base_domain, params= self.params, timeout=30)
         resp.raise_for_status()
         job_list=resp.json()
         # print(json.dumps(job_list[0],indent=4))
@@ -50,7 +50,7 @@ class LeverBase(ApiJobBoardScraper):
     def scrape_jd(self, source:dict=None):
         job_id = source['job_id']
 
-        resp = rq.get(
+        resp = self.session.get(
             url=f"{self.base_domain}/{job_id}",
             params=self.params, timeout=30
         )

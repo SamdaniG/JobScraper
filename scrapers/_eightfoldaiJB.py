@@ -42,7 +42,7 @@ class EightfoldaiBase(ApiJobBoardScraper):
         current_jobs_id=[]
         job_data = {}
 
-        resp=rq.get(url=self.url,params=self.params, timeout=30)
+        resp=self.session.get(url=self.url,params=self.params, timeout=30)
         # print(resp.raise_for_status())
         dat=resp.json()
         # print(json.dumps(dat,indent=4))
@@ -70,7 +70,7 @@ class EightfoldaiBase(ApiJobBoardScraper):
         jd_params= self.jd_params
         jd_params['position_id']=source['url'].split('job/')[1]
         # print(jd_params)
-        resp = rq.get(
+        resp = self.session.get(
             url=self.jd_url,
             params=jd_params, timeout=30
         )

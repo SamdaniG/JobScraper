@@ -23,7 +23,7 @@ class MyworkdayBase(ApiJobBoardScraper):
                 "offset": offset
             }
 
-            resp=rq.post(url=self.url, json= payload, timeout=30)
+            resp=self.session.post(url=self.url, json= payload, timeout=30)
             # print(resp.raise_for_status())
             # print(resp.text)
             dat=resp.json()
@@ -62,7 +62,7 @@ class MyworkdayBase(ApiJobBoardScraper):
         # final=source['url'].split('/LITE/job/')[-1]
         # print(f'{final=}')
         final = self.jd_url + source['url'].split(self.url_lang)[1]
-        resp=rq.get(final, timeout=30)
+        resp=self.session.get(final, timeout=30)
         # print(resp)
         dat=resp.json()
         jd=self.clean_html(dat['jobPostingInfo']['jobDescription'])

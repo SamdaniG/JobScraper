@@ -27,7 +27,7 @@ class ATSRippling(ApiJobBoardScraper):
     def scrape_jobs(self, **kwargs):
         current_jobs_id=[]
         job_data = {}
-        resp=rq.get(url=self.url,params=self.params, timeout=30)
+        resp=self.session.get(url=self.url,params=self.params, timeout=30)
         # print(resp.raise_for_status())
         dat=resp.json()
         # print(json.dumps(dat,indent=4))
@@ -58,7 +58,7 @@ class ATSRippling(ApiJobBoardScraper):
     def scrape_jd(self, source: dict=None):
         job_id = source['job_id']
         jd_url= self.url + f'/{job_id}'
-        resp=rq.get(url=jd_url, timeout=30)
+        resp=self.session.get(url=jd_url, timeout=30)
         # print(resp.raise_for_status())
         dat=resp.json()
         # print(json.dumps(dat,indent=4))

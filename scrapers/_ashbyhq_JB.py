@@ -28,7 +28,7 @@ class AshbyhqBase(ApiJobBoardScraper):
         current_jobs_id=[]
         job_data = {}
 
-        resp=rq.post(url= self.url,
+        resp=self.session.post(url= self.url,
                      params=self.url_params,
                      json= self.url_payload, timeout=30)
 
@@ -70,7 +70,7 @@ class AshbyhqBase(ApiJobBoardScraper):
         job_id=source['job_id']
         self.jd_payload['variables']['jobPostingId']=job_id
         # print(json.dumps(self.jd_payload, indent=4))
-        resp=   rq.post(self.url,
+        resp=   self.session.post(self.url,
                         params=     self.jd_params,
                         json=       self.jd_payload, timeout=30)
         # print(resp.raise_for_status())

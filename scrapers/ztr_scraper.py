@@ -19,7 +19,7 @@ class ZTRScraper(ApiJobBoardScraper):
         current_jobs_id=[]
         job_data={}
 
-        resp=rq.get(url= self.url, timeout=30)
+        resp=self.session.get(url= self.url, timeout=30)
         # print(resp.raise_for_status())
         dat=resp.json()
         job_list=dat['result']
@@ -45,7 +45,7 @@ class ZTRScraper(ApiJobBoardScraper):
     def scrape_posted_date(self,job_id):
         # id=source['job_id']
         jd_url= self.base_domain + job_id +'/detail'
-        resp=rq.get(jd_url, timeout=30)
+        resp=self.session.get(jd_url, timeout=30)
         # resp.raise_for_status()
 
         data=resp.json()
@@ -60,7 +60,7 @@ class ZTRScraper(ApiJobBoardScraper):
     def scrape_jd(self, source: dict=None):
         id=source['job_id']
         jd_url= self.base_domain + id +'/detail'
-        resp=rq.get(jd_url)
+        resp=self.session.get(jd_url)
         resp.raise_for_status()
 
         data=resp.json()

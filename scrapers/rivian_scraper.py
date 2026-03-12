@@ -26,7 +26,7 @@ class RivianScraper(ApiJobBoardScraper):
         current_jobs_id=[]
         job_data={}
 
-        resp = rq.get(url=self.url, params=self.params, timeout=30)
+        resp = self.session.get(url=self.url, params=self.params, timeout=30)
         # print(resp.raise_for_status())
         dat=resp.json()
         jobs_list=dat['jobs']
@@ -55,7 +55,7 @@ class RivianScraper(ApiJobBoardScraper):
     def scrape_jd(self, source: dict=None):
         job_id=source['job_id']
         jd=''
-        resp = rq.get(url=self.url, params=self.params, timeout=30)
+        resp = self.session.get(url=self.url, params=self.params, timeout=30)
         dat = resp.json()
         jobs_list = dat['jobs']
 

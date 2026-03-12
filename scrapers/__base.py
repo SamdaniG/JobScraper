@@ -1,4 +1,6 @@
 from abc import ABC, abstractmethod
+
+import requests
 from bs4 import BeautifulSoup
 import re
 from dataclasses import dataclass, asdict
@@ -10,6 +12,13 @@ class ApiJobBoardScraper(ABC):
     jd_url=""
     base_domain=''
     registry={}
+
+    def __init__(self):
+        self.session=requests.Session()
+        self.session.headers.update({
+            "User-Agent": "Mozilla/5.0",
+            "Accept": "application/json"
+        })
 
     def __init_subclass__(cls, **kwargs):
         super().__init_subclass__(**kwargs)
