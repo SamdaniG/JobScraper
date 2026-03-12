@@ -9,6 +9,14 @@ class ApiJobBoardScraper(ABC):
     url=""
     jd_url=""
     base_domain=''
+    registry={}
+
+    def __init_subclass__(cls, **kwargs):
+        super().__init_subclass__(**kwargs)
+
+        # Don't register abstract base classes
+        if cls.name and cls.name != "base":
+            ApiJobBoardScraper.registry[cls.name] = cls
 
     @abstractmethod
     def scrape_jobs(self, **kwargs):
@@ -66,13 +74,13 @@ class Job(BaseModel):
 '''
 ashbyhq : Aerovect, Cobot
 oraclecloud : Ford, linamar, Metrolinx
-myworkday : GM, Honda, lumentum, multimatic
-lever : Kepler, Waabi, intersect
+myworkday : GM, Honda, lumentum, multimatic, Caterpillar, kiongroup
+lever : Kepler, Waabi, intersect, zoox, Cyngn
 eightfold ai: Trimble, Boston Scientific, Eaton
 bamboohr: ZTR
 rivianvw :Rivian
 greenhouse: Kodiak, Applied Intuition, Lucid Motors, Gatik, Nuro
 ADP: NextStar, GAstops, Kongsberg Geospatial
-rmk successfactors? : alstom, apotex, bwxt, celestica, epiroc
+rmk successfactors? : alstom, apotex, bwxt, celestica, epiroc, komatsu
 ats rippling - kraken robotics, blue water autonomy
 '''

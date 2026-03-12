@@ -3,33 +3,7 @@ from datetime import date
 from diff import diff_jobs
 from storage import load_db, save_db
 from log_starter import set_logger
-from scrapers.gm_scraper import GMScraper
-from scrapers.ford_scraper import FordScraper
-from scrapers.lumentum_scraper import LumentumScraper
-from scrapers.kepler_scraper import KeplerScraper
-from scrapers.waabi_scraper import WaabiScraper
-from scrapers.rivian_scraper import RivianScraper
-from scrapers.linamar_scraper import LinamarScraper
-from scrapers.honda_scraper import HondaScraper
-from scrapers.trimble_scraper import TrimbleScraper
-from scrapers.ztr_scraper import ZTRScraper
-from scrapers.aerovect_scraper import AerovectScraper
-from scrapers.cobot_scraper import CobotScraper
-from scrapers.kodiak_scraper import KodiakScraper
-from scrapers.lucidmotors_scrapers import LucidMotorsScraper
-from scrapers.appliedintuition_scraper import AppliedIntuitionScraper
-from scrapers.gatik_scraper import GatikScraper
-from scrapers.nuro_scraper import NuroScraper
-from scrapers.nextstar_scraper import NextStarSraper
-from scrapers.gastops_scraper import GAStopsSraper
-from scrapers.metrolinx_scraper import MetrolinxScraper
-from scrapers.kongsberg_geospatial_scraper import KongsbergGeospatialSraper
-from scrapers.boston_scientific_scraper import BostonScientificScraper
-from scrapers.eaton_scraper import EatonScraper
-from scrapers.zoox_scraper import ZooxScraper
-from scrapers.multimatic_scraper import MultimaticScraper
-from scrapers.kiongroup_scraper import KionGroupScraper
-from scrapers.kraken_robotics import KrakenRobotics
+from scrapers.__base import ApiJobBoardScraper
 
 import argparse
 parser = argparse.ArgumentParser()
@@ -37,6 +11,11 @@ parser.add_argument(
     "--source",
     default="manual",
     help="Who triggered the script (manual, scheduler, api, ci, etc.)"
+)
+parser.add_argument(
+    "--company",
+    nargs="+",
+    help="Run specific company scrapers"
 )
 
 args = parser.parse_args()
@@ -48,23 +27,27 @@ if args.source == 'scheduler':
     EMAIL_ACTIVE = True
 
 db = load_db()
-
 all_current_job_ids = []
 all_scraped_jobs = {}
 successful_scrapers = set()
 
-scrapers = [RivianScraper(), GMScraper(), WaabiScraper(),
-            FordScraper(), LumentumScraper(), KeplerScraper(),
-            LinamarScraper(), HondaScraper(), TrimbleScraper(),
-            ZTRScraper(), AerovectScraper(), CobotScraper(),
-            KodiakScraper(), LucidMotorsScraper(), AppliedIntuitionScraper(),
-            GatikScraper(), NuroScraper(), NextStarSraper(),
-            GAStopsSraper(), MetrolinxScraper(), KongsbergGeospatialSraper(),
-            BostonScientificScraper(),EatonScraper(), ZooxScraper(),
-            MultimaticScraper(), KionGroupScraper(), KrakenRobotics()]
-logger.info(f"Scraping the jobs from the site")
+if args.company:
+    scrapers_to_run = []
 
-for scraper in scrapers:
+    for c in args.company:
+        if c not in ApiJobBoardScraper.registry:
+            available = ", ".join(ApiJobBoardScraper.registry.keys())
+            raise ValueError(f"Unknown scraper: {c}. Available: {available}")
+
+        scrapers_to_run.append(ApiJobBoardScraper.registry[c])
+else:
+    scrapers_to_run = ApiJobBoardScraper.registry.values()
+
+# logger.info(f"Scraping the jobs from the site")
+logger.info(f"Running {len(scrapers_to_run)} scraper(s)")
+
+for Scraper in scrapers_to_run:
+    scraper=Scraper()
     logger.info(f"Running {scraper.name} scraper now.")
     # driver.get(scraper.url)
     # current_jobs_id, scraped_jobs_db = scraper.scrape_jobs()
@@ -97,7 +80,7 @@ for job_id, data in all_scraped_jobs.items():
 if EMAIL_ACTIVE:
     from emailer import send_email
 
-    scraper_map = {s.name: s for s in scrapers}
+    scraper_map = {s.name: s() for s in scrapers_to_run}
 
     # 1️⃣ Email filled jobs
     if filled_jobs:
@@ -167,11 +150,11 @@ if EMAIL_ACTIVE:
 
         send_email(job["job_name"], text_body, html_body, job["source"])
 
-        if len(new_jobs) > 1:
-            time.sleep(EMAIL_DELAY_SECONDS)
+        # if len(new_jobs) > 1:
+        #     time.sleep(EMAIL_DELAY_SECONDS)
 else:
     if filled_jobs:
-        logger.info('Filled Jobs\n')
+        logger.info('Filled Jobs')
         for j in filled_jobs:
             job = db[j]
             logger.info(
@@ -180,7 +163,7 @@ else:
                 f'{job["job_name"]}'
             )
     if new_jobs:
-        logger.info('New jobs\n')
+        # logger.info('New jobs')
         for job_id in new_jobs:
             job = db[job_id]
             logger.debug(

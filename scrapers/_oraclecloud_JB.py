@@ -7,7 +7,7 @@ FMT='%Y-%m-%d'
 DATE_FMT = "%a %d-%b-%Y"
 
 class OracleCloudScraper(ApiJobBoardScraper):
-    name="oraclecloud"
+    name="base"
     base_domain=""
 
     url = ''
@@ -16,7 +16,7 @@ class OracleCloudScraper(ApiJobBoardScraper):
     jd_url= ''
 
     def scrape_jobs(self):
-        resp=rq.get(url=self.url,params=self.params)
+        resp=rq.get(url=self.url,params=self.params, timeout=30)
         # print(resp)
         # print(resp.raise_for_status())
         current_jobs_id=[]
@@ -49,14 +49,14 @@ class OracleCloudScraper(ApiJobBoardScraper):
 
         return current_jobs_id, job_data
 
-    def scrape_jd(self, source= dict):
+    def scrape_jd(self, source: dict = None):
         job_id=source["job_id"]
         jd_params = {
             "onlyData": "true",
             "expand": 'all',
             "finder": f'ById;Id="{job_id}",siteNumber=CX_1'
         }
-        resp=rq.get(url=self.jd_url,params=jd_params)
+        resp=rq.get(url=self.jd_url,params=jd_params, timeout=30)
         dat=resp.json()
         items=dat.get("items","")
         if items=="":

@@ -8,7 +8,7 @@ FMT='%Y-%m-%dT%H:%M:%S%z'
 DATE_FMT = "%a %d-%b-%Y"
 
 class GreenhouseScraper(ApiJobBoardScraper):
-    name = ''
+    name = 'base'
     base_domain = 'https://boards-api.greenhouse.io/v1/boards/'
     # url = base_domain+ f'{name}/jobs'
 
@@ -18,7 +18,7 @@ class GreenhouseScraper(ApiJobBoardScraper):
         job_data = {}
         # self.params['page'] = 1
         url = self.base_domain + f'{self.name}/jobs'
-        resp = rq.get(url=url)#,params=self.params)
+        resp = rq.get(url=url, timeout=30)#,params=self.params)
         # print(resp.raise_for_status())
         dat=resp.json()
         # print(json.dumps(dat,indent=4))
@@ -60,7 +60,7 @@ class GreenhouseScraper(ApiJobBoardScraper):
         job_id=source['job_id']
         jd_url = self.base_domain + f"{self.name}/jobs/{job_id}"
 
-        resp=rq.get(jd_url)
+        resp=rq.get(jd_url, timeout=30)
         dat=resp.json()
         jd=dat['content']
         # print(json.dumps(dat,indent=4))

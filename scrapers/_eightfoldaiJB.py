@@ -7,7 +7,7 @@ import json
 DATE_FMT = "%a %d-%b-%Y"
 
 class EightfoldaiBase(ApiJobBoardScraper):
-    name=''
+    name='base'
     base_domain= f'https://{name}.eightfold.ai'
     url = base_domain + '/api/pcsx/search'
     params = {
@@ -29,7 +29,7 @@ class EightfoldaiBase(ApiJobBoardScraper):
         current_jobs_id=[]
         job_data = {}
 
-        resp=rq.get(url=self.url,params=self.params)
+        resp=rq.get(url=self.url,params=self.params, timeout=30)
         # print(resp.raise_for_status())
         dat=resp.json()
         # print(json.dumps(dat,indent=4))
@@ -59,7 +59,7 @@ class EightfoldaiBase(ApiJobBoardScraper):
         # print(jd_params)
         resp = rq.get(
             url=self.jd_url,
-            params=jd_params
+            params=jd_params, timeout=30
         )
         # print(resp.raise_for_status())
 

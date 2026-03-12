@@ -6,7 +6,7 @@ from utils import sha256_hex
 
 
 class AshbyhqBase(ApiJobBoardScraper):
-    name = 'ashbyhq'
+    name = 'base'
     base_domain = 'https://jobs.ashbyhq.com/'
     url = base_domain + 'api/non-user-graphql'
 
@@ -28,7 +28,7 @@ class AshbyhqBase(ApiJobBoardScraper):
 
         resp=rq.post(url= self.url,
                      params=self.url_params,
-                     json= self.url_payload)
+                     json= self.url_payload, timeout=30)
 
         dat=resp.json()
         # print(json.dumps(dat,indent=4))
@@ -70,7 +70,7 @@ class AshbyhqBase(ApiJobBoardScraper):
         # print(json.dumps(self.jd_payload, indent=4))
         resp=   rq.post(self.url,
                         params=     self.jd_params,
-                        json=       self.jd_payload)
+                        json=       self.jd_payload, timeout=30)
         # print(resp.raise_for_status())
         dat=resp.json()
         # print(dat)

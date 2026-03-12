@@ -34,7 +34,7 @@ class AerovectScraper(AshbyhqBase):
 if __name__=='__main__':
     test=AerovectScraper()
     yo,yol=test.scrape_jobs()
-    # print(yo)
+    print(yo)
     print(test.scrape_jd(yol['c5e20fd8a6']))
 
 

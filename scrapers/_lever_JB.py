@@ -6,7 +6,7 @@ from datetime import datetime
 DATE_FMT = "%a %d-%b-%Y"
 
 class LeverBase(ApiJobBoardScraper):
-    name='level'
+    name='base'
     base_domain = ''
     param = {}
 
@@ -14,7 +14,7 @@ class LeverBase(ApiJobBoardScraper):
         current_jobs_id=[]
         job_data={}
 
-        resp=rq.get(url=self.base_domain, params= self.param)
+        resp=rq.get(url=self.base_domain, params= self.param, timeout=30)
         resp.raise_for_status()
         job_list=resp.json()
         # print(json.dumps(job_list[0],indent=4))
@@ -44,7 +44,7 @@ class LeverBase(ApiJobBoardScraper):
 
         resp = rq.get(
             url=f"{self.base_domain}/{job_id}",
-            params={'mode': 'json'}
+            params={'mode': 'json'}, timeout=30
         )
         resp.raise_for_status()
 
