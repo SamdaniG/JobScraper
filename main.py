@@ -4,8 +4,10 @@ from diff import diff_jobs
 from storage import load_db, save_db
 from log_starter import set_logger
 from scrapers.__base import ApiJobBoardScraper
-
+from concurrent.futures import ThreadPoolExecutor, as_completed
 import argparse
+
+###Adding parser arguments
 parser = argparse.ArgumentParser()
 parser.add_argument(
     "--source",
@@ -17,19 +19,28 @@ parser.add_argument(
     nargs="+",
     help="Run specific company scrapers"
 )
-
 args = parser.parse_args()
 logger=set_logger(args)
 
+####Activating Email
 EMAIL_ACTIVE = False
 EMAIL_DELAY_SECONDS=5
 if args.source == 'scheduler':
     EMAIL_ACTIVE = True
 
+#Initiating variables
 db = load_db()
 all_current_job_ids = []
 all_scraped_jobs = {}
 successful_scrapers = set()
+
+def run_scraper(Scraper):
+    scraper = Scraper()
+    try:
+        current_jobs_id, scraped_jobs_db = scraper.scrape_jobs()
+        return scraper.name, current_jobs_id, scraped_jobs_db, None
+    except Exception as e:
+        return scraper.name, None, None, e
 
 if args.company:
     scrapers_to_run = []
@@ -45,23 +56,27 @@ else:
 
 # logger.info(f"Scraping the jobs from the site")
 logger.info(f"Running {len(scrapers_to_run)} scraper(s)")
-
 for Scraper in scrapers_to_run:
-    scraper=Scraper()
-    logger.info(f"Running {scraper.name} scraper now.")
-    # driver.get(scraper.url)
-    # current_jobs_id, scraped_jobs_db = scraper.scrape_jobs()
-    try:
-        current_jobs_id, scraped_jobs_db = scraper.scrape_jobs()
-        successful_scrapers.add(scraper.name)
-    except Exception as e:
-        logger.error(f"{scraper.name} failed: {e}")
-        continue
+    logger.info(f"Submitting {Scraper.name} scraper")
 
-    all_current_job_ids.extend(current_jobs_id)
-    all_scraped_jobs.update(scraped_jobs_db)
-# logger.info(f"Scraping the jobs from the site")
-# current_jobs_id, scraped_jobs_db = scrape_jobs(driver)
+with ThreadPoolExecutor(max_workers=min(10,len(scrapers_to_run))) as executor:
+    futures = [
+        executor.submit(run_scraper, Scraper)
+        for Scraper in scrapers_to_run
+    ]
+
+    for future in as_completed(futures):
+        name, current_jobs_id, scraped_jobs_db, error = future.result()
+
+        if error:
+            logger.error(f"{name} failed: {error}")
+            continue
+
+        logger.info(f"{name} scraper finished.")
+
+        successful_scrapers.add(name)
+        all_current_job_ids.extend(current_jobs_id)
+        all_scraped_jobs.update(scraped_jobs_db)
 
 logger.info(f"Checking the new/old jobs created.")
 new_jobs, filled_jobs = diff_jobs(db, all_current_job_ids, date.today(), successful_scrapers)
