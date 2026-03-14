@@ -34,7 +34,7 @@ class EightfoldaiBase(ApiJobBoardScraper):
     def jd_params(self):
         return {
             "position_id": "",
-            "domain": self.name,
+            "domain": f'{self.name}.com',
             "hl": "en",
         }
 
@@ -70,6 +70,7 @@ class EightfoldaiBase(ApiJobBoardScraper):
         jd_params= self.jd_params
         jd_params['position_id']=source['url'].split('job/')[1]
         # print(jd_params)
+        # print(self.jd_url)
         resp = self.session.get(
             url=self.jd_url,
             params=jd_params, timeout=30

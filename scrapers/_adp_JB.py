@@ -64,9 +64,9 @@ class ADPBase(ApiJobBoardScraper):
     def scrape_jd(self, source: dict = None):
         job_id = source["job_id"]
         url = f"{self.url}/{job_id}"
-        resp = self.session.get(url,self.params, timeout=30)
+        resp = self.session.get(url=url,params=self.params, timeout=30)
         dat = resp.json()
-        print(dat)
+        # print(dat)
         jd = dat.get("jobDescription", "")
 
         return self.clean_html(jd)

@@ -56,9 +56,10 @@ else:
 
 # logger.info(f"Scraping the jobs from the site")
 logger.info(f"Running {len(scrapers_to_run)} scraper(s)")
-for Scraper in scrapers_to_run:
-    logger.info(f"Submitting {Scraper.name} scraper")
+# for Scraper in scrapers_to_run:
+#     logger.info(f"Submitting {Scraper.name} scraper")
 
+i=1
 with ThreadPoolExecutor(max_workers=min(10,len(scrapers_to_run))) as executor:
     futures = [
         executor.submit(run_scraper, Scraper)
@@ -72,11 +73,12 @@ with ThreadPoolExecutor(max_workers=min(10,len(scrapers_to_run))) as executor:
             logger.error(f"{name} failed: {error}")
             continue
 
-        logger.info(f"{name} scraper finished.")
+        logger.info(f"{i}: {name} scraper finished.")
 
         successful_scrapers.add(name)
         all_current_job_ids.extend(current_jobs_id)
         all_scraped_jobs.update(scraped_jobs_db)
+        i+=1
 
 logger.info(f"Checking the new/old jobs created.")
 new_jobs, filled_jobs = diff_jobs(db, all_current_job_ids, date.today(), successful_scrapers)
@@ -129,9 +131,11 @@ if EMAIL_ACTIVE:
         html_body = "<br>".join(html_lines)
 
         send_email("Filled Positions", text_body, html_body, "System")
-
+        if len(new_jobs) > 1:
+            time.sleep(EMAIL_DELAY_SECONDS)
 
     # 2️⃣ Email new jobs with correct scraper
+    filled_email_composing = ""
     for job_id in new_jobs:
         job = db[job_id]
         scraper = scraper_map.get(job["source"])
@@ -150,23 +154,32 @@ if EMAIL_ACTIVE:
             job["source"],
             job.get('job_id',"")
         )
-        jd_content = scraper.scrape_jd(job)
+
+        try:
+            jd_content = scraper.scrape_jd(job)
+        except Exception as e:
+            logger.error(f'This error popped up: {e}')
+            continue
         text_body = job['url'] + '\n'
         text_body += jd_content
 
-        html_body = f"""
-        <p>
+        html_link = f"""
+        <p> {job["source"]} - 
         <a href="{job['url']}">{job["job_name"]}</a>
         </p>
+        """
+        html_body=html_link + f"""
         <pre>
         {jd_content}
         </pre>
         """
 
         send_email(job["job_name"], text_body, html_body, job["source"])
+        filled_email_composing += html_link + "\n"
 
-        # if len(new_jobs) > 1:
-        #     time.sleep(EMAIL_DELAY_SECONDS)
+    if new_jobs:
+        send_email("New Jobs List",html_body=filled_email_composing,body="", source= 'new')
+
 else:
     if filled_jobs:
         logger.info('Filled Jobs')

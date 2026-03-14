@@ -16,7 +16,11 @@ import email_info as ei
 #         connection.login(ei.email, ei.password)
 #         connection.send_message(msg)
 
-def send_email(subject: str, body: str, html_body: str = None, source: str = ""):
+def send_email(subject: str,
+               body: str,
+               html_body: str = None,
+               source: str = ""):
+
     msg = EmailMessage()
     msg["From"] = formataddr((f"{source.title()} Job Alert", ei.email))
     msg["To"] = ei.receivers_email
