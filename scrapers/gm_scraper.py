@@ -26,9 +26,9 @@ if __name__=='__main__':
     test=GMScraper()
     yolo, yolo_data=test.scrape_jobs()
     # print(json.dumps(yolo_data['093ebd0ddc'],indent=4))
-    print(len(yolo))
+    # print(len(yolo))
     # print(yolo_data)
-    # print(json.dumps(yolo_data,indent=4))
+    print(json.dumps(yolo_data,indent=4))
     # job_names=[yolo_data[job]['job_name'] for job in yolo_data]
     # print(json.dumps(job_names,indent=4))
     a=dict()

@@ -1,6 +1,6 @@
 import time
 from datetime import date
-from diff import diff_jobs
+from diff import diff_jobs, updating_db
 from storage import load_db, save_db
 from log_starter import set_logger
 from scrapers.__base import ApiJobBoardScraper
@@ -54,11 +54,7 @@ if args.company:
 else:
     scrapers_to_run = ApiJobBoardScraper.registry.values()
 
-# logger.info(f"Scraping the jobs from the site")
 logger.info(f"Running {len(scrapers_to_run)} scraper(s)")
-# for Scraper in scrapers_to_run:
-#     logger.info(f"Submitting {Scraper.name} scraper")
-
 i=1
 with ThreadPoolExecutor(max_workers=min(10,len(scrapers_to_run))) as executor:
     futures = [
@@ -73,7 +69,7 @@ with ThreadPoolExecutor(max_workers=min(10,len(scrapers_to_run))) as executor:
             logger.error(f"{name} failed: {error}")
             continue
 
-        logger.info(f"{i}: {name} scraper finished.")
+        logger.info(f"{i:02d}: {name}")
 
         successful_scrapers.add(name)
         all_current_job_ids.extend(current_jobs_id)
@@ -81,16 +77,16 @@ with ThreadPoolExecutor(max_workers=min(10,len(scrapers_to_run))) as executor:
         i+=1
 
 logger.info(f"Checking the new/old jobs created.")
-new_jobs, filled_jobs = diff_jobs(db, all_current_job_ids, date.today(), successful_scrapers)
+new_jobs, filled_jobs, updated_jobs = diff_jobs(db, all_current_job_ids, date.today(),
+                                                successful_scrapers, all_scraped_jobs)
 logger.info(
-    "Diff complete | new_jobs=%d filled_jobs=%d",
+    "Diff complete | new_jobs=%d filled_jobs=%d updated_jobs=%d",
     len(new_jobs),
     len(filled_jobs),
+    len(updated_jobs)
 )
 
-for job_id, data in all_scraped_jobs.items():
-    if job_id not in db:
-        db[job_id] = data
+db = updating_db(db,all_scraped_jobs, new_jobs, updated_jobs, logger)
 
 # new_jobs, filled_jobs = diff_jobs(db, current_jobs_id, date.today())
 # print(f"{new_jobs= }\n{filled_jobs= }")

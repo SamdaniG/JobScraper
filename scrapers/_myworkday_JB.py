@@ -47,7 +47,7 @@ class MyworkdayBase(ApiJobBoardScraper):
                     location=           job.get('locationsText',""),
                     posted_date=        api_get_exact_posting_date(job['postedOn']),
                     url=        url,
-                    # work_policy=        job.get('remoteType',"")
+                    work_policy=        job.get('remoteType',None)
                 )
                 job_data[hash_id]=job_deets.to_dict()
 

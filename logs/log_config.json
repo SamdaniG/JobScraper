@@ -20,7 +20,7 @@
             "level": "DEBUG",
             "formatter": "simple",
             "filename": "INSERT ACTUAL PATH",
-            "maxBytes": 50000,
+            "maxBytes": 100000,
             "backupCount": 3
         }
     },
