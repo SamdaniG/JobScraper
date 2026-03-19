@@ -22,3 +22,5 @@ if __name__=='__main__':
     test=KionGroupScraper()
     yo,yol=test.scrape_jobs()
     print(yo)
+    print(yol)
+    print(test.scrape_jd(yol['66e3e54e63']))

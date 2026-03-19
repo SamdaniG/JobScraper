@@ -16,7 +16,7 @@ class MyworkdayBase(ApiJobBoardScraper):
         current_jobs_id=[]
         job_data = {}
         offset = 0
-
+        i=0
         while True:
             payload = {
                 **self.payload,
@@ -56,6 +56,9 @@ class MyworkdayBase(ApiJobBoardScraper):
                 break
 
             offset += self.payload['limit']
+            i+=1
+            if i>=30:
+                break
         return current_jobs_id, job_data
 
     def scrape_jd(self, source:dict = None):
@@ -65,6 +68,8 @@ class MyworkdayBase(ApiJobBoardScraper):
         resp=self.session.get(final, timeout=30)
         # print(resp)
         dat=resp.json()
-        jd=self.clean_html(dat['jobPostingInfo']['jobDescription'])
+        # print(json.dumps(dat,indent=4))
+        jd=dat.get('jobPostingInfo',{}).get('jobDescription',"")
+        jd=self.clean_html(jd)
 
         return jd

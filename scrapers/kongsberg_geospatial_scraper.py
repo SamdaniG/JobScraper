@@ -18,7 +18,7 @@ class KongsbergGeospatialSraper(ADPBase):
 if __name__=='__main__':
     test=KongsbergGeospatialSraper()
     yo,yol=test.scrape_jobs()
-    print(yo)
-    print(yol)
-    print(json.dumps(yol,indent=4))
-    # print(test.scrape_jd(yol['4344f9563f']))
+    # print(yo)
+    # print(yol)
+    # print(json.dumps(yol,indent=4))
+    print(test.scrape_jd(yol['8c011edc59']))

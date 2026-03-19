@@ -1,4 +1,5 @@
 from scrapers._myworkday_JB import MyworkdayBase
+import json
 
 class HondaScraper(MyworkdayBase):
     name='honda'
@@ -23,9 +24,9 @@ class HondaScraper(MyworkdayBase):
 if __name__=='__main__':
     test=HondaScraper()
     yo, yolo = test.scrape_jobs()
-    print(yo)
-    # print(json.dumps(yolo,indent=4))
-    print(test.scrape_jd(source= yolo['ace5ac7b6c']))
+    # print(yo)
+    print(json.dumps(yolo,indent=4))
+    # print(test.scrape_jd(source= yolo['ace5ac7b6c']))
 
 '''Sample Skeleton
     {

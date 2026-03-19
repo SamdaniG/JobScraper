@@ -90,6 +90,7 @@ bamboohr: ZTR
 rivianvw :Rivian
 greenhouse: Kodiak, Applied Intuition, Lucid Motors, Gatik, Nuro
 ADP: NextStar, GAstops, Kongsberg Geospatial
+smartrecruiter: GeneralDynamics,
 rmk successfactors? : alstom, apotex, bwxt, celestica, epiroc, komatsu
 ats rippling - kraken robotics, blue water autonomy
 '''

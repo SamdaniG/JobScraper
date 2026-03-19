@@ -21,5 +21,6 @@ class MarvellScraper(MyworkdayBase):
 if __name__=='__main__':
     test=MarvellScraper()
     yo,yol=test.scrape_jobs()
-    # print(yo)
+    print(yo)
     print(yol)
+    print(test.scrape_jd(yol['2cd1cbb7b0']))
