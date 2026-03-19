@@ -292,7 +292,8 @@
         "location": "San Francisco, CA; Remote US",
         "posted_date": "Tue 06-Jan-2026",
         "url": "https://jobs.lever.co/waabi/b6d1e273-9b8b-458c-b80c-d4a292e84c84",
-        "job_id": "b6d1e273-9b8b-458c-b80c-d4a292e84c84"
+        "job_id": "b6d1e273-9b8b-458c-b80c-d4a292e84c84",
+        "filled_date": "Thu 19-Mar-2026"
     },
     "5a135c3cc8": {
         "job_name": "Global Supply Manager - EDS",
@@ -1546,7 +1547,8 @@
         "work_policy": "Hybrid",
         "location": "2 Locations",
         "posted_date": "Thu 01-Jan-2026",
-        "url": "https://generalmotors.wd5.myworkdayjobs.com/en-US/Careers_GM/job/Markham-Ontario-Canada/Software-Developer---Early-Career_JR-202518826"
+        "url": "https://generalmotors.wd5.myworkdayjobs.com/en-US/Careers_GM/job/Markham-Ontario-Canada/Software-Developer---Early-Career_JR-202518826",
+        "filled_date": "Thu 19-Mar-2026"
     },
     "780f3bf702": {
         "job_id": "JR-202518919",
@@ -3426,7 +3428,7 @@
     },
     "44d0c2d66d": {
         "job_id": "0758b284-02cb-4bec-88c2-96d658b3cbf7",
-        "job_name": "Senior Program Manager - Satellite Systems",
+        "job_name": "Senior Program Manager",
         "source": "kepler",
         "work_policy": "hybrid",
         "location": "Toronto, Ontario",
@@ -15768,7 +15770,8 @@
         "work_policy": "Full Time Permanent",
         "location": "Windsor ON",
         "posted_date": "Wed 11-Mar-2026",
-        "url": "https://workforcenow.adp.com/mascsr/default/mdf/recruitment/recruitment.html?cid=8aa53a99-a3f5-4260-aae3-17ca04fdef62&jobId=993602"
+        "url": "https://workforcenow.adp.com/mascsr/default/mdf/recruitment/recruitment.html?cid=8aa53a99-a3f5-4260-aae3-17ca04fdef62&jobId=993602",
+        "filled_date": "Thu 19-Mar-2026"
     },
     "20d358bcf9": {
         "job_id": "507f22b8-405b-42f2-abf5-aa52dee91048",
@@ -16439,7 +16442,7 @@
         "source": "lucidmotors",
         "location": "Amsterdam, NH",
         "posted_date": "Thu 12-Mar-2026",
-        "updated_date": "Mon 16-Mar-2026",
+        "updated_date": "Thu 19-Mar-2026",
         "url": "https://job-boards.greenhouse.io/lucidmotors/jobs/5071759007",
         "hiring_manger": "Anneke Dirksen; annekedirksen@lucidmotors.com"
     },
@@ -20604,5 +20607,31 @@
         "updated_date": "Thu 19-Mar-2026",
         "url": "https://job-boards.greenhouse.io/lucidmotors/jobs/5079121007",
         "hiring_manger": "Kaylyn Tran; kaylyntran@lucidmotors.com"
+    },
+    "c008905b9e": {
+        "job_id": "115095",
+        "job_name": "Senior Advisor, Commercial Management",
+        "source": "metrolinx",
+        "location": "Canada",
+        "posted_date": "Thu 19-Mar-2026",
+        "url": "https://ehtc.fa.ca2.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1/job/115095"
+    },
+    "b50adbbb4b": {
+        "job_id": "JR-202604746",
+        "job_name": "Central Region Sales & Marketing Co-op, Business Analyst",
+        "source": "gm",
+        "work_policy": "Hybrid",
+        "location": "Oshawa, Ontario, Canada",
+        "posted_date": "Thu 19-Mar-2026",
+        "url": "https://generalmotors.wd5.myworkdayjobs.com/en-US/Careers_GM/job/Oshawa-Ontario-Canada/Central-Region-Sales---Marketing-Co-op--Business-Analyst_JR-202604746"
+    },
+    "38b41fee7f": {
+        "job_id": "b7d7bf75-0c75-4367-9d0e-1cb23f75d5e2",
+        "job_name": "Staff Program Manager",
+        "source": "kepler",
+        "work_policy": "hybrid",
+        "location": "Toronto, Ontario",
+        "posted_date": "Thu 19-Mar-2026",
+        "url": "https://jobs.lever.co/kepler/b7d7bf75-0c75-4367-9d0e-1cb23f75d5e2"
     }
 }

@@ -13,7 +13,7 @@ class MyworkdayBase(ApiJobBoardScraper):
     url_lang=''
 
     def scrape_jobs(self):
-        current_jobs_id=[]
+        # current_jobs_id=[]
         job_data = {}
         offset = 0
         i=0
@@ -38,7 +38,7 @@ class MyworkdayBase(ApiJobBoardScraper):
                 job_id=                 job.get('bulletFields',"00")[0]
                 job_title=              job.get('title',"")
                 hash_id= sha256_hex(url)
-                current_jobs_id.append(hash_id)
+                # current_jobs_id.append(hash_id)
 
                 job_deets=Job(
                     job_name=   job_title,
@@ -59,7 +59,7 @@ class MyworkdayBase(ApiJobBoardScraper):
             i+=1
             if i>=30:
                 break
-        return current_jobs_id, job_data
+        return job_data
 
     def scrape_jd(self, source:dict = None):
         # final=source['url'].split('/LITE/job/')[-1]

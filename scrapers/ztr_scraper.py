@@ -16,7 +16,7 @@ class ZTRScraper(ApiJobBoardScraper):
 
 
     def scrape_jobs(self, **kwargs):
-        current_jobs_id=[]
+        # current_jobs_id=[]
         job_data={}
 
         resp=self.session.get(url= self.url, timeout=30)
@@ -28,7 +28,7 @@ class ZTRScraper(ApiJobBoardScraper):
             job_id=             job['id']
             job_name=           job["jobOpeningName"]
             hash_id=sha256_hex(job_id + job_name)
-            current_jobs_id.append(hash_id)
+            # current_jobs_id.append(hash_id)
 
             job_deets=Job(
                 job_id=             job_id,
@@ -40,7 +40,7 @@ class ZTRScraper(ApiJobBoardScraper):
             )
             job_data[hash_id]=job_deets.to_dict()
 
-        return current_jobs_id, job_data
+        return job_data
 
     def scrape_posted_date(self,job_id):
         # id=source['job_id']

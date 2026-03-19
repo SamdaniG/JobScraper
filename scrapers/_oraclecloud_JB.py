@@ -25,7 +25,7 @@ class OracleCloudScraper(ApiJobBoardScraper):
         resp=self.session.get(url=self.url,params=self.params, timeout=30)
         # print(resp)
         # print(resp.raise_for_status())
-        current_jobs_id=[]
+        # current_jobs_id=[]
         job_data = {}
 
         dat = resp.json()
@@ -36,7 +36,7 @@ class OracleCloudScraper(ApiJobBoardScraper):
             # print(json.dumps(job,indent=4))
             hash_id = sha256_hex(job["Id"] + job["Title"] + job["PostedDate"])
             # print(hash_id)
-            current_jobs_id.append(hash_id)
+            # current_jobs_id.append(hash_id)
             job_deets=Job(
                 job_name=job["Title"],
                 job_id=     job["Id"],
@@ -53,7 +53,7 @@ class OracleCloudScraper(ApiJobBoardScraper):
             # print(job_data[hash_id]['posted_date'])
             # print("************")
 
-        return current_jobs_id, job_data
+        return job_data
 
     def scrape_jd(self, source: dict = None):
         job_id=source["job_id"]

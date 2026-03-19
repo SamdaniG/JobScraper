@@ -18,7 +18,7 @@ class GreenhouseScraper(ApiJobBoardScraper):
 
 
     def scrape_jobs(self):
-        current_jobs_id=[]
+        # current_jobs_id=[]
         job_data = {}
         # self.params['page'] = 1
         url = self.base_domain + f'{self.name}/jobs'
@@ -32,7 +32,7 @@ class GreenhouseScraper(ApiJobBoardScraper):
             job_id=         job['id']
             job_name =      job['title']
             hash_id=        sha256_hex(str(job_id))
-            current_jobs_id.append(hash_id)
+            # current_jobs_id.append(hash_id)
 
 
             keywords = ["hiring manager", "hr", "recruiter"]
@@ -58,7 +58,7 @@ class GreenhouseScraper(ApiJobBoardScraper):
             job_data[hash_id]=job_deets.to_dict()
 
 
-        return  current_jobs_id,job_data
+        return  job_data
 
     def scrape_jd(self, source: dict=None):
         job_id=source['job_id']

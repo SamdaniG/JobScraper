@@ -30,17 +30,17 @@ if args.source == 'scheduler':
 
 #Initiating variables
 db = load_db()
-all_current_job_ids = []
+# all_current_job_ids = set()
 all_scraped_jobs = {}
 successful_scrapers = set()
 
 def run_scraper(Scraper):
     scraper = Scraper()
     try:
-        current_jobs_id, scraped_jobs_db = scraper.scrape_jobs()
-        return scraper.name, current_jobs_id, scraped_jobs_db, None
+        scraped_jobs_db = scraper.scrape_jobs()
+        return scraper.name,scraped_jobs_db, None
     except Exception as e:
-        return scraper.name, None, None, e
+        return scraper.name, None, e
 
 if args.company:
     scrapers_to_run = []
@@ -63,7 +63,7 @@ with ThreadPoolExecutor(max_workers=min(10,len(scrapers_to_run))) as executor:
     ]
 
     for future in as_completed(futures):
-        name, current_jobs_id, scraped_jobs_db, error = future.result()
+        name, scraped_jobs_db, error = future.result()
 
         if error:
             logger.error(f"{name} failed: {error}")
@@ -72,13 +72,12 @@ with ThreadPoolExecutor(max_workers=min(10,len(scrapers_to_run))) as executor:
         logger.info(f"{i:02d}: {name}")
 
         successful_scrapers.add(name)
-        all_current_job_ids.extend(current_jobs_id)
+        # all_current_job_ids.add(current_jobs_id)
         all_scraped_jobs.update(scraped_jobs_db)
         i+=1
 
 logger.info(f"Checking the new/old jobs created.")
-new_jobs, filled_jobs, updated_jobs = diff_jobs(db, all_current_job_ids, date.today(),
-                                                successful_scrapers, all_scraped_jobs)
+new_jobs, filled_jobs, updated_jobs = diff_jobs(db,all_scraped_jobs,successful_scrapers,)
 logger.info(
     "Diff complete | new_jobs=%d filled_jobs=%d updated_jobs=%d",
     len(new_jobs),

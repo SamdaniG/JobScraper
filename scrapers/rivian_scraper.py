@@ -23,7 +23,7 @@ class RivianScraper(ApiJobBoardScraper):
     click_link = base_domain + 'rivian-vw-group-technology/jobs/'
 
     def scrape_jobs(self):
-        current_jobs_id=[]
+        # current_jobs_id=[]
         job_data={}
 
         resp = self.session.get(url=self.url, params=self.params, timeout=30)
@@ -37,7 +37,7 @@ class RivianScraper(ApiJobBoardScraper):
             job_id = job['slug']
             url= self.click_link + job_id
             hash_id=sha256_hex(url)
-            current_jobs_id.append(hash_id)
+            # current_jobs_id.append(hash_id)
 
             job_deets=Job(
                 job_id=             job_id,
@@ -50,7 +50,7 @@ class RivianScraper(ApiJobBoardScraper):
             )
             job_data[hash_id]=job_deets.to_dict()
 
-        return current_jobs_id,job_data
+        return job_data
 
     def scrape_jd(self, source: dict=None):
         job_id=source['job_id']

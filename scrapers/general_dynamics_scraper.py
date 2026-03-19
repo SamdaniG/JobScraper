@@ -42,7 +42,7 @@ class GeneralDynamicsScraper(ApiJobBoardScraper):
             )
             job_data[hash_id]=job_deets.to_dict()
 
-        return list(job_data), job_data
+        return job_data
 
 
 

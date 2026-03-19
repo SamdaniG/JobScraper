@@ -25,7 +25,7 @@ class AshbyhqBase(ApiJobBoardScraper):
     url_payload = {}
 
     def scrape_jobs(self, **kwargs):
-        current_jobs_id=[]
+        # current_jobs_id=[]
         job_data = {}
 
         resp=self.session.post(url= self.url,
@@ -40,7 +40,7 @@ class AshbyhqBase(ApiJobBoardScraper):
         for job in job_list:
             job_id=job['id']
             hash_id=sha256_hex(job_id)
-            current_jobs_id.append(hash_id)
+            # current_jobs_id.append(hash_id)
 
             secondary = job.get("secondaryLocations")
 
@@ -64,7 +64,7 @@ class AshbyhqBase(ApiJobBoardScraper):
             )
             job_data[hash_id]=job_deets.to_dict()
 
-        return current_jobs_id, job_data
+        return job_data
 
     def scrape_jd(self, source: dict=None):
         job_id=source['job_id']

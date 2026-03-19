@@ -39,7 +39,7 @@ class EightfoldaiBase(ApiJobBoardScraper):
         }
 
     def scrape_jobs(self, **kwargs):
-        current_jobs_id=[]
+        # current_jobs_id=[]
         job_data = {}
 
         resp=self.session.get(url=self.url,params=self.params, timeout=30)
@@ -52,7 +52,7 @@ class EightfoldaiBase(ApiJobBoardScraper):
             job_id=             job['atsJobId']
             job_name=           job['name']
             hash_id=            sha256_hex(job_id)
-            current_jobs_id.append(hash_id)
+            # current_jobs_id.append(hash_id)
             job_deets=Job(
                 job_name=           job_name,
                 job_id=             job_id,
@@ -64,7 +64,7 @@ class EightfoldaiBase(ApiJobBoardScraper):
             )
             job_data[hash_id]=job_deets.to_dict()
 
-        return current_jobs_id, job_data
+        return job_data
 
     def scrape_jd(self, source: dict=None):
         jd_params= self.jd_params
