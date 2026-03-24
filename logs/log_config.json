@@ -5,9 +5,16 @@
         "simple": {
             "format": "%(asctime)-12s %(executor)-10s %(levelname)-8s %(message)s",
             "datefmt":"%d-%b-%Y %H:%M:%S%z"
+        },
+        "json": {
+            "()": "log_starter.JsonFormatter"
         }
     },
-
+    "filters": {
+        "event_only": {
+            "()": "log_starter.EventOnlyFilter"
+        }
+    },
     "handlers": {
         "stdout": {
             "class": "logging.StreamHandler",
@@ -22,12 +29,21 @@
             "filename": "INSERT ACTUAL PATH",
             "maxBytes": 100000,
             "backupCount": 3
+        },
+        "json_file": {
+            "class": "logging.handlers.RotatingFileHandler",
+            "level": "DEBUG",
+            "formatter": "json",
+            "filters": ["event_only"],
+            "filename": "INSERT JSON PATH",
+            "maxBytes": 200000,
+            "backupCount": 3
         }
     },
     "loggers": {
         "scraper": {
             "level": "DEBUG",
-            "handlers": ["stdout", "file"],
+            "handlers": ["stdout", "file","json_file"],
             "propagate": false
         }
     }

@@ -94,15 +94,26 @@ def updating_db(db,all_scraped_jobs, new_jobs, updated_jobs, logger):
         changes = dict_changes(old, new)#, ignore={"filled_date"})
 
         if changes:
-            logger.info(
-                "%s %s %s updated:",
-                old["source"],
-                job_id,
-                old["job_name"]
-            )
+            # logger.updated(
+            #     "%s %s %s updated:",
+            #     old["source"],
+            #     job_id,
+            #     old["job_name"]
+            # )
 
             for field, (old_val, new_val) in changes.items():
-                logger.info("  %s: %s -> %s", field, old_val, new_val)
+                logger.updated("%s %s %s updated:\n\t\t\t\t\t\t\t  %s: %s -> %s", old["source"],
+                job_id,old["job_name"],field, old_val, new_val,
+                               extra={
+                               "job_name" : old["job_name"],
+                               "source" : old["source"],
+                               "job_id" : job_id,
+                               "field" : field,
+                               "old_val": old_val,
+                               "new_val": new_val,
+                               "location": old['location']
+                                }
+                               )
 
         db[job_id].update(new)
         db[job_id].pop("filled_date", None)

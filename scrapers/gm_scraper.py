@@ -24,7 +24,7 @@ class GMScraper(MyworkdayBase):
 
 if __name__=='__main__':
     test=GMScraper()
-    yolo, yolo_data=test.scrape_jobs()
+    yolo_data=test.scrape_jobs()
     # print(json.dumps(yolo_data['093ebd0ddc'],indent=4))
     # print(len(yolo))
     # print(yolo_data)

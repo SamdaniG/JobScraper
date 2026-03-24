@@ -81,16 +81,17 @@ class Job(BaseModel):
 
 
 '''
-ashbyhq : Aerovect, Cobot
+ashbyhq : Aerovect, Cobot, trexo , serve, dominion dynamics
 oraclecloud : Ford, linamar, Metrolinx
 myworkday : GM, Honda, lumentum, multimatic, Caterpillar, kiongroup
-lever : Kepler, Waabi, intersect, zoox, Cyngn
+lever : Kepler, Waabi, intersect, zoox, Cyngn, promise
 eightfold ai: Trimble, Boston Scientific, Eaton
-bamboohr: ZTR
+bamboohr: ZTR, Avidbots
 rivianvw :Rivian
-greenhouse: Kodiak, Applied Intuition, Lucid Motors, Gatik, Nuro
+greenhouse: Kodiak, Applied Intuition, Lucid Motors, Gatik, Nuro, torcrobotics, ATOMS
 ADP: NextStar, GAstops, Kongsberg Geospatial
 smartrecruiter: GeneralDynamics,
 rmk successfactors? : alstom, apotex, bwxt, celestica, epiroc, komatsu
 ats rippling - kraken robotics, blue water autonomy
+workable- Red Rabbit Robotics
 '''

@@ -101,10 +101,16 @@ if EMAIL_ACTIVE:
         logger.debug("Emailing filled jobs")
         for j in filled_jobs:
             job = db[j]
-            logger.info(
+            logger.filled(
                 f'{job["source"]} - '
                 f'{job.get("job_id","")} - '
-                f'{job["job_name"]}'
+                f'{job["job_name"]}',
+                extra={
+                "job_name":job["job_name"],
+                "source":job["source"],
+                "job_id":job.get('job_id', ""),
+                "location":job.get('location',"")
+            }
             )
 
             text_line = (
@@ -143,11 +149,18 @@ if EMAIL_ACTIVE:
             )
             continue
 
-        logger.debug(
-            "Emailing new job: %s (%s) (%s)",
+        logger.new(
+            "%s (%s) (%s)",
             job["job_name"],
             job["source"],
-            job.get('job_id',"")
+            job.get('job_id', ""),
+            extra={
+                "job_name": job["job_name"],
+                "source": job["source"],
+                "job_id": job.get('job_id', ""),
+                "location": job.get('location', "")
+            }
+
         )
 
         try:
@@ -177,23 +190,36 @@ if EMAIL_ACTIVE:
 
 else:
     if filled_jobs:
-        logger.info('Filled Jobs')
+        # logger.filled('Filled Jobs')
         for j in filled_jobs:
             job = db[j]
-            logger.info(
+            logger.filled(
                 f'{job["source"]} - '
                 f'{job.get("job_id","")} - '
-                f'{job["job_name"]}'
+                f'{job["job_name"]}',
+                extra={
+                "job_name":job["job_name"],
+                "source":job["source"],
+                "job_id":job.get('job_id', ""),
+                "location": job.get('location', "")
+            }
             )
     if new_jobs:
         # logger.info('New jobs')
         for job_id in new_jobs:
             job = db[job_id]
-            logger.debug(
-                "New job alert: %s (%s) (%s)",
+            logger.new(
+                "%s (%s) (%s)",
                 job["job_name"],
                 job["source"],
-                job.get('job_id',"")
+                job.get('job_id',""),
+                extra={
+                "job_name" : job["job_name"],
+                "source" : job["source"],
+                "job_id" : job.get('job_id',""),
+                "location": job.get('location', "")
+            }
+
             )
 
 logger.info(f"Writing data to my database!\n-------------------")

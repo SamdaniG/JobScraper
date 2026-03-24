@@ -1,0 +1,12 @@
+from scrapers._greenhouse_JB import GreenhouseScraper
+import json
+
+class AtomsScraper(GreenhouseScraper):
+    name= 'cssmerge'
+
+
+if __name__=='__main__':
+    test=AtomsScraper()
+    yol=test.scrape_jobs()
+    print(yol)
+    # print(test.scrape_jd(yol['9568969768']))
