@@ -6,7 +6,7 @@ from log_starter import set_logger
 from scrapers.__base import ApiJobBoardScraper
 from concurrent.futures import ThreadPoolExecutor, as_completed
 import argparse
-
+from functools import wraps
 ###Adding parser arguments
 parser = argparse.ArgumentParser()
 parser.add_argument(
@@ -34,6 +34,19 @@ db = load_db()
 all_scraped_jobs = {}
 successful_scrapers = set()
 
+def time_taken(func):
+    """This is a python decorator to calculate the time taken to run every function, gives us a useful metric to keep track"""
+    @wraps(func)
+    def wrapper(*args):
+        start = time.time()
+        #print(f"Started the timer!")
+        results = func(*args)
+        end = time.time()
+        logger.debug(f"\t\tTime taken to run the {args[0]().name}: {end - start:.4f}s")
+        return results
+    return wrapper
+
+@time_taken
 def run_scraper(Scraper):
     scraper = Scraper()
     try:
@@ -56,7 +69,7 @@ else:
 
 logger.info(f"Running {len(scrapers_to_run)} scraper(s)")
 i=1
-with ThreadPoolExecutor(max_workers=min(10,len(scrapers_to_run))) as executor:
+with ThreadPoolExecutor(max_workers=min(15,len(scrapers_to_run))) as executor:
     futures = [
         executor.submit(run_scraper, Scraper)
         for Scraper in scrapers_to_run
@@ -137,53 +150,56 @@ if EMAIL_ACTIVE:
 
     # 2️⃣ Email new jobs with correct scraper
     filled_email_composing = ""
-    for job_id in new_jobs:
-        job = db[job_id]
-        scraper = scraper_map.get(job["source"])
+    try:
+        for job_id in new_jobs:
+            job = db[job_id]
+            scraper = scraper_map.get(job["source"])
 
-        if not scraper:
-            logger.warning(
-                "No scraper found for source=%s (job_id=%s)",
+            if not scraper:
+                logger.warning(
+                    "No scraper found for source=%s (job_id=%s)",
+                    job["source"],
+                    job_id,
+                )
+                continue
+
+            logger.new(
+                "%s (%s) (%s)",
+                job["job_name"],
                 job["source"],
-                job_id,
+                job.get('job_id', ""),
+                extra={
+                    "job_name": job["job_name"],
+                    "source": job["source"],
+                    "job_id": job.get('job_id', ""),
+                    "location": job.get('location', "")
+                }
+
             )
-            continue
 
-        logger.new(
-            "%s (%s) (%s)",
-            job["job_name"],
-            job["source"],
-            job.get('job_id', ""),
-            extra={
-                "job_name": job["job_name"],
-                "source": job["source"],
-                "job_id": job.get('job_id', ""),
-                "location": job.get('location', "")
-            }
+            try:
+                jd_content = scraper.scrape_jd(job)
+            except Exception as e:
+                logger.error(f'This error popped up: {e}')
+                continue
+            text_body = job['url'] + '\n'
+            text_body += jd_content
 
-        )
+            html_link = f"""
+            <p> {job["source"]} - 
+            <a href="{job['url']}">{job["job_name"]}</a>
+            </p>
+            """
+            html_body=html_link + f"""
+            <pre>
+            {jd_content}
+            </pre>
+            """
 
-        try:
-            jd_content = scraper.scrape_jd(job)
-        except Exception as e:
-            logger.error(f'This error popped up: {e}')
-            continue
-        text_body = job['url'] + '\n'
-        text_body += jd_content
-
-        html_link = f"""
-        <p> {job["source"]} - 
-        <a href="{job['url']}">{job["job_name"]}</a>
-        </p>
-        """
-        html_body=html_link + f"""
-        <pre>
-        {jd_content}
-        </pre>
-        """
-
-        send_email(job["job_name"], text_body, html_body, job["source"])
-        filled_email_composing += html_link + "\n"
+            send_email(job["job_name"], text_body, html_body, job["source"])
+            filled_email_composing += html_link + "\n"
+    except Exception as e:
+        logger.error(f"The following error occurred: {e}")
 
     if new_jobs:
         send_email("New Jobs List",html_body=filled_email_composing,body="", source= 'new')

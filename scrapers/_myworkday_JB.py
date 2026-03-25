@@ -45,7 +45,7 @@ class MyworkdayBase(ApiJobBoardScraper):
                     job_id=     job_id,
                     source=     self.name,
                     location=           job.get('locationsText',""),
-                    posted_date=        api_get_exact_posting_date(job['postedOn']),
+                    posted_date=        api_get_exact_posting_date(job.get('postedOn',None)),
                     url=        url,
                     work_policy=        job.get('remoteType',None)
                 )

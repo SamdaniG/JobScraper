@@ -43,7 +43,7 @@ class BambooHRBase(ApiJobBoardScraper):
                 job_name=           job_name,
                 source=             self.name,
                 location=           job['location']['city'],
-                posted_date=        "",#self.scrape_posted_date(job_id),
+                posted_date=        None,#self.scrape_posted_date(job_id),
                 url=                self.base_domain + job_id,
             )
             job_data[hash_id]=job_deets.to_dict()

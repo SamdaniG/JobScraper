@@ -1,7 +1,7 @@
 from scrapers.__base import ApiJobBoardScraper,Job
 import requests as rq
 import json
-from utils import sha256_hex
+from utils import sha256_hex, api_get_exact_posting_date
 
 
 class ATSRippling(ApiJobBoardScraper):
@@ -47,7 +47,7 @@ class ATSRippling(ApiJobBoardScraper):
                 work_policy=    '; '.join([x.get('workplaceType','') for x in job.get('locations',[])]),
                 location=       '; '.join([x.get('name','') for x in job.get('locations',[])]),
                 url=            job.get('url',''),
-                posted_date=    ''
+                posted_date=    None #api_get_exact_posting_date(None)
             )
 
             job_data[hash_id]=job_deets.to_dict()

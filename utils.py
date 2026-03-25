@@ -38,8 +38,11 @@ def get_exact_posting_date(parent, by, value, default_date="Thu 01-Jan-2026"):
 
 def api_get_exact_posting_date(text, default_date="Thu 01-Jan-2026"):
     today = date.today()
-    text=text.lower()
+
     # Explicit 30+ days case
+    if text is None:
+        return None
+    text = text.lower()
     if "30+" in text:
         return default_date
 

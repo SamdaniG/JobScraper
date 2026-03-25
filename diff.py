@@ -114,7 +114,7 @@ def updating_db(db,all_scraped_jobs, new_jobs, updated_jobs, logger):
                                "location": old['location']
                                 }
                                )
-
+        # db[job_id].clear()
         db[job_id].update(new)
         db[job_id].pop("filled_date", None)
 
