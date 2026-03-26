@@ -1,3 +1,5 @@
+import json
+
 from scrapers._myworkday_JB import MyworkdayBase
 
 class WeirScraper(MyworkdayBase):
@@ -22,5 +24,6 @@ if __name__=='__main__':
     test=WeirScraper()
     yol=test.scrape_jobs()
     # print(yo)
-    print(yol)
+    print(len(yol))
+    print(json.dumps(yol,indent=4))
     # print(test.scrape_jd(yol['66e3e54e63']))

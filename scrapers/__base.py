@@ -81,7 +81,7 @@ class Job(BaseModel):
 
 
 '''
-ashbyhq : Aerovect, Cobot, trexo , serve, dominion dynamics
+ashbyhq : Aerovect, Cobot, trexo , serve, dominion dynamics, bedrock robotics
 oraclecloud : Ford, linamar, Metrolinx
 myworkday : GM, Honda, lumentum, multimatic, Caterpillar, kiongroup, airbus
 lever : Kepler, Waabi, intersect, zoox, Cyngn, promise

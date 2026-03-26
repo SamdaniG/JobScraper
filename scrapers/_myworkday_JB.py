@@ -28,17 +28,21 @@ class MyworkdayBase(ApiJobBoardScraper):
             # print(resp.text)
             dat=resp.json()
             job_list=dat.get('jobPostings', [])
-            # print(json.dumps(job_list,indent=4))
+            # print(json.dumps(job_list[0],indent=4))
 
             for job in job_list:
                 path=job.get('externalPath', 0)
                 if path==0:
                     continue
                 url = self.base_domain + self.url_lang + job['externalPath']
-                job_id=                 job.get('bulletFields',"00")[0]
+
                 job_title=              job.get('title',"")
                 hash_id= sha256_hex(url)
                 # current_jobs_id.append(hash_id)
+                if self.name != "weir":
+                    job_id = job.get('bulletFields', "00")[0]
+                else:
+                    job_id = job['externalPath'].split('_')[1]
 
                 job_deets=Job(
                     job_name=   job_title,

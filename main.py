@@ -7,6 +7,7 @@ from scrapers.__base import ApiJobBoardScraper
 from concurrent.futures import ThreadPoolExecutor, as_completed
 import argparse
 from functools import wraps
+
 ###Adding parser arguments
 parser = argparse.ArgumentParser()
 parser.add_argument(
@@ -37,13 +38,17 @@ successful_scrapers = set()
 def time_taken(func):
     """This is a python decorator to calculate the time taken to run every function, gives us a useful metric to keep track"""
     @wraps(func)
-    def wrapper(*args):
-        start = time.time()
+    def wrapper(*args, **kwargs):
+        start = time.perf_counter()
         #print(f"Started the timer!")
-        results = func(*args)
-        end = time.time()
-        logger.debug(f"\t\tTime taken to run the {args[0]().name}: {end - start:.4f}s")
-        return results
+        name, result, error= func(*args, **kwargs)
+        end = time.perf_counter()
+        logger.timer(f"Time taken to run the {name}: {end - start:.4f}s",
+                     extra={
+                         "source"               : name,
+                         "timer"                : end - start
+                     })
+        return name, result, error
     return wrapper
 
 @time_taken
@@ -100,8 +105,6 @@ logger.info(
 
 db = updating_db(db,all_scraped_jobs, new_jobs, updated_jobs, logger)
 
-# new_jobs, filled_jobs = diff_jobs(db, current_jobs_id, date.today())
-# print(f"{new_jobs= }\n{filled_jobs= }")
 if EMAIL_ACTIVE:
     from emailer import send_email
 
@@ -164,18 +167,13 @@ if EMAIL_ACTIVE:
                 continue
 
             logger.new(
-                "%s (%s) (%s)",
-                job["job_name"],
-                job["source"],
-                job.get('job_id', ""),
+                f"{job["job_name"]} ({job["source"]} ({job.get('job_id',"")})",
                 extra={
-                    "job_name": job["job_name"],
-                    "source": job["source"],
-                    "job_id": job.get('job_id', ""),
-                    "location": job.get('location', "")
-                }
-
-            )
+                "job_name" : job["job_name"],
+                "source" : job["source"],
+                "job_id" : job.get('job_id',""),
+                "location": job.get('location', "")
+            })
 
             try:
                 jd_content = scraper.scrape_jd(job)
@@ -225,10 +223,7 @@ else:
         for job_id in new_jobs:
             job = db[job_id]
             logger.new(
-                "%s (%s) (%s)",
-                job["job_name"],
-                job["source"],
-                job.get('job_id',""),
+                f"{job["job_name"]} ({job["source"]} ({job.get('job_id',"")})",
                 extra={
                 "job_name" : job["job_name"],
                 "source" : job["source"],

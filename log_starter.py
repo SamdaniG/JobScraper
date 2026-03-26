@@ -7,10 +7,12 @@ from datetime import datetime
 NEW_LEVEL = 25
 UPDATED_LEVEL = 26
 FILLED_LEVEL = 27
+TIMER_LEVEL = 28
 
 logging.addLevelName(NEW_LEVEL, "NEW")
 logging.addLevelName(UPDATED_LEVEL, "UPDATED")
 logging.addLevelName(FILLED_LEVEL, "FILLED")
+logging.addLevelName(TIMER_LEVEL, "TIMER")
 def set_logger(args):
     """This sets up the logging module!"""
     parent_dir=Path(__file__).resolve().parent
@@ -26,9 +28,12 @@ def set_logger(args):
 
     with open(config_file, "r") as f:
         logging_config = json.load(f)
-    json_log_file = logs_dir / "logs.jsonl"
+    json_log_file = logs_dir / "event_logs.jsonl"
     logging_config["handlers"]["file"]["filename"] = str(log_file)
     logging_config["handlers"]["json_file"]["filename"] = str(json_log_file)
+
+    timer_log_file = logs_dir / "timer.jsonl"
+    logging_config["handlers"]["timer_file"]["filename"] = str(timer_log_file)
 
     logging.config.dictConfig(config=logging_config)
     #logger = logging.getLogger("scraper")
@@ -53,6 +58,9 @@ class CustomLoggerAdapter(logging.LoggerAdapter):
     def filled(self, msg, *args, **kwargs):
         self.log(FILLED_LEVEL, msg, *args, **kwargs)
 
+    def timer(self, msg, *args, **kwargs):
+        self.log(TIMER_LEVEL, msg, *args, **kwargs)
+
     def process(self, msg, kwargs):
         # get extra passed in log call
         extra = kwargs.get("extra", {})
@@ -65,13 +73,13 @@ class CustomLoggerAdapter(logging.LoggerAdapter):
 class JsonFormatter(logging.Formatter):
     def format(self, record):
         log_record = {
-            "timestamp":        datetime.utcnow().isoformat(),
             "event":            record.levelname,  # or use record.event if you prefer
             "job_id":           getattr(record, "job_id", None),
             "job_name":         getattr(record, "job_name", None),
             "location":         getattr(record, "location", None),
             "source":           getattr(record, "source", None),
             "executor":         getattr(record, "executor", None),
+            "timestamp": datetime.utcnow().isoformat()
         }
 
         # Only for UPDATED
@@ -84,6 +92,24 @@ class JsonFormatter(logging.Formatter):
 
         return json.dumps(log_record)
 
+class JsonTimerFormatter(logging.Formatter):
+    def format(self, record):
+        timer_record = {
+            "source":           getattr(record, "source", None),
+            "time_taken":       getattr(record, "timer", None),
+            "timestamp":        datetime.utcnow().isoformat(),
+        }
+
+        return json.dumps(timer_record)
+
 class EventOnlyFilter(logging.Filter):
     def filter(self, record):
         return record.levelno in {25, 27}
+
+class TimerOnlyFilter(logging.Filter):
+    def filter(self, record):
+        return record.levelno in {28}
+
+class NoTimerFilter(logging.Filter):
+    def filter(self, record):
+        return record.levelno != TIMER_LEVEL
