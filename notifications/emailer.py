@@ -2,7 +2,7 @@
 import smtplib
 from email.message import EmailMessage
 from email.utils import formataddr
-import email_info as ei
+import notifications.email_info as ei
 
 # def send_email(subject: str, body: str, source:str = ""):
 #     msg = EmailMessage()
