@@ -10,6 +10,7 @@ class OracleCloudScraper(ApiJobBoardScraper):
     name="base"
     base_domain = ''
     params = {}
+    jobBoard = 'oraclecloud'
 
     @property
     def url(self):
@@ -46,7 +47,8 @@ class OracleCloudScraper(ApiJobBoardScraper):
                 location=   job['PrimaryLocation'],
                 posted_date=datetime.strptime(job['PostedDate'],FMT).strftime(DATE_FMT),
                 url=        f"{self.base_domain}/hcmUI/CandidateExperience/"
-                f"en/sites/CX_1/job/{job['Id']}"
+                f"en/sites/CX_1/job/{job['Id']}",
+                job_board=  self.jobBoard
             )
             job_data[hash_id]=job_deets.to_dict()
             # print(job_data)

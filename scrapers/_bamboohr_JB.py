@@ -11,6 +11,7 @@ DATE_FMT = "%a %d-%b-%Y"
 
 class BambooHRBase(ApiJobBoardScraper):
     name = 'base'
+    jobBoard = 'bamboohr'
 
     @property
     def base_domain(self):
@@ -45,6 +46,7 @@ class BambooHRBase(ApiJobBoardScraper):
                 location=           job['location']['city'],
                 posted_date=        None,#self.scrape_posted_date(job_id),
                 url=                self.base_domain + job_id,
+                job_board=          self.jobBoard
             )
             job_data[hash_id]=job_deets.to_dict()
 

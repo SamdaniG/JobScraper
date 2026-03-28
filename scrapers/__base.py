@@ -12,6 +12,8 @@ class ApiJobBoardScraper(ABC):
     jd_url=""
     base_domain=''
     registry={}
+    jobBoard=''
+    job_board_registry={}
 
     def __init__(self):
         self.session=requests.Session()
@@ -26,6 +28,11 @@ class ApiJobBoardScraper(ABC):
         # Don't register abstract base classes
         if cls.name and cls.name != "base":
             ApiJobBoardScraper.registry[cls.name] = cls
+
+        if cls.jobBoard and cls.name != 'base':
+            ApiJobBoardScraper.job_board_registry.setdefault(
+                cls.jobBoard, []
+            ).append(cls)
 
     @abstractmethod
     def scrape_jobs(self, **kwargs):
@@ -68,6 +75,7 @@ class Job(BaseModel):
     internal_job_id: Optional[str] = None
     job_name: str
     source: str
+    job_board: str
     work_policy: Optional[str] = None
     location: str
     secondary_loc: Optional[str] = None

@@ -14,6 +14,7 @@ class RedRabbitRoboticsScraper(ApiJobBoardScraper):
 
     #https://apply.workable.com/api/v2/accounts/red-rabbit-robotics/jobs/5B8938477D
     jd_url = base_domain + f'api/v2/accounts/{company_slug}/jobs/'
+    jobBoard = 'workable'
 
     def scrape_jobs(self, **kwargs):
         job_data={}
@@ -36,7 +37,8 @@ class RedRabbitRoboticsScraper(ApiJobBoardScraper):
                 posted_date=    datetime.strptime(job.get('published', ''), FMT).strftime(DATE_FMT),
                 url=            f'{self.base_domain}{self.company_slug}/j/{job.get("shortcode")}',
                 work_policy=    job.get('workplace'),
-                location=       '; '.join(f'{x.get('city')}, {x.get('region')}' for x in job.get('locations',{}))
+                location=       '; '.join(f'{x.get('city')}, {x.get('region')}' for x in job.get('locations',{})),
+                job_board=      self.jobBoard
             )
 
             job_data[hash_id]=job_deets.to_dict()

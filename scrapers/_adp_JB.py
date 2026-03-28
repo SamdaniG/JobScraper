@@ -9,6 +9,7 @@ DATE_FMT = "%a %d-%b-%Y"
 
 class ADPBase(ApiJobBoardScraper):
     name= 'base'
+    jobBoard = 'adp'
     base_domain = 'https://workforcenow.adp.com/mascsr/default'
     url = base_domain + '/careercenter/public/events/staffing/v1/job-requisitions'
     params={}
@@ -48,7 +49,8 @@ class ADPBase(ApiJobBoardScraper):
                 work_policy=job.get('workLevelCode', {}).get('shortName', None),
                 location=location,
                 posted_date=datetime.strptime(job.get('postDate', ''),FMT).strftime(DATE_FMT),
-                url= self.apply_url + application_id
+                url= self.apply_url + application_id,
+                job_board=self.jobBoard
             )
 
             job_data[hash_id] = job_deets.to_dict()

@@ -17,6 +17,7 @@ class GeneralDynamicsScraper(ApiJobBoardScraper):
         return f'https://api.smartrecruiters.com/v1/companies/{self.job_slug}/postings'
 
     apply_url = f'https://jobs.smartrecruiters.com/{job_slug}/'
+    jobBoard = 'general_dynamics'
 
     def scrape_jobs(self, **kwargs):
         job_data = {}
@@ -38,7 +39,8 @@ class GeneralDynamicsScraper(ApiJobBoardScraper):
                 source=         self.name,
                 location=       job.get('location',{}).get('fullLocation',{}),
                 posted_date=    datetime.strptime(job.get('releasedDate', ''),FMT).strftime(DATE_FMT),
-                url=            f'{self.apply_url}{job_id}'
+                url=            f'{self.apply_url}{job_id}',
+                job_board=      self.jobBoard
             )
             job_data[hash_id]=job_deets.to_dict()
 

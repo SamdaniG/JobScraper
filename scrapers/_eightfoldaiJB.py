@@ -8,6 +8,7 @@ DATE_FMT = "%a %d-%b-%Y"
 
 class EightfoldaiBase(ApiJobBoardScraper):
     name='base'
+    jobBoard = 'eightfoldai'
     @property
     def base_domain(self):
         return f"https://{self.name}.eightfold.ai"
@@ -60,7 +61,8 @@ class EightfoldaiBase(ApiJobBoardScraper):
                 location=           "; ".join(job["locations"]),
                 posted_date=        datetime.fromtimestamp(job['postedTs']).strftime(DATE_FMT),
                 creation_date=      datetime.fromtimestamp(job['creationTs']).strftime(DATE_FMT),
-                url=                self.base_domain + job['positionUrl']
+                url=                self.base_domain + job['positionUrl'],
+                job_board=          self.jobBoard
             )
             job_data[hash_id]=job_deets.to_dict()
 

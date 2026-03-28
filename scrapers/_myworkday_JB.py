@@ -11,6 +11,7 @@ class MyworkdayBase(ApiJobBoardScraper):
     payload = {}
     jd_url = ''
     url_lang=''
+    jobBoard = 'myworkday'
 
     def scrape_jobs(self):
         # current_jobs_id=[]
@@ -51,7 +52,8 @@ class MyworkdayBase(ApiJobBoardScraper):
                     location=           job.get('locationsText',""),
                     posted_date=        api_get_exact_posting_date(job.get('postedOn',None)),
                     url=        url,
-                    work_policy=        job.get('remoteType',None)
+                    work_policy=        job.get('remoteType',None),
+                    job_board=          self.jobBoard
                 )
                 job_data[hash_id]=job_deets.to_dict()
 

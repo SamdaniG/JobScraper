@@ -8,6 +8,7 @@ class ATSRippling(ApiJobBoardScraper):
     name = 'base'
     base_domain = 'https://ats.rippling.com/api/v2/board/'
     jobBoardSlug = ''
+    jobBoard = 'atsrippling'
 
     @property
     def url(self):
@@ -47,7 +48,8 @@ class ATSRippling(ApiJobBoardScraper):
                 work_policy=    '; '.join([x.get('workplaceType','') for x in job.get('locations',[])]),
                 location=       '; '.join([x.get('name','') for x in job.get('locations',[])]),
                 url=            job.get('url',''),
-                posted_date=    None #api_get_exact_posting_date(None)
+                posted_date=    None, #api_get_exact_posting_date(None),
+                job_board=      self.jobBoard
             )
 
             job_data[hash_id]=job_deets.to_dict()

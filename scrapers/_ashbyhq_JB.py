@@ -9,6 +9,7 @@ class AshbyhqBase(ApiJobBoardScraper):
     name = 'base'
     base_domain = 'https://jobs.ashbyhq.com/'
     url = base_domain + 'api/non-user-graphql'
+    jobBoard = 'ashbyhq'
 
     url_params={
         'op': 'ApiJobBoardWithTeams'
@@ -59,7 +60,8 @@ class AshbyhqBase(ApiJobBoardScraper):
                 posted_date=            job.get('posted_date',None),
                 url =                   self.apply_url + job_id,
                 work_policy=            job['employmentType'],
-                comp=                   job['compensationTierSummary']
+                comp=                   job['compensationTierSummary'],
+                job_board=              self.jobBoard
 
             )
             job_data[hash_id]=job_deets.to_dict()

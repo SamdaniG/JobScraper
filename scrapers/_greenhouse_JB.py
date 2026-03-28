@@ -11,6 +11,7 @@ class GreenhouseScraper(ApiJobBoardScraper):
     name = 'base'
     base_domain = 'https://boards-api.greenhouse.io/v1/boards/'
     # url = base_domain+ f'{name}/jobs'
+    jobBoard = 'greenhouse'
 
     @property
     def url(self):
@@ -53,7 +54,9 @@ class GreenhouseScraper(ApiJobBoardScraper):
                 posted_date=    datetime.strptime(job['first_published'],FMT).strftime(DATE_FMT),
                 updated_date =  datetime.strptime(job['updated_at'],FMT).strftime(DATE_FMT),
                 url=            job['absolute_url'],
-                hiring_manger=  hm_details
+                hiring_manger=  hm_details,
+                job_board=      self.jobBoard
+
             )
             job_data[hash_id]=job_deets.to_dict()
 

@@ -21,6 +21,7 @@ class RivianScraper(ApiJobBoardScraper):
         'tags2':'Rivian and VW Group Technology'
      }
     click_link = base_domain + 'rivian-vw-group-technology/jobs/'
+    jobBoard = 'rivian'
 
     def scrape_jobs(self):
         # current_jobs_id=[]
@@ -47,6 +48,7 @@ class RivianScraper(ApiJobBoardScraper):
                 posted_date=        datetime.strptime(job['posted_date'],FMT).strftime(DATE_FMT),
                 url=                url,
                 work_policy=        job['tags1'][0],
+                job_board=          self.jobBoard
             )
             job_data[hash_id]=job_deets.to_dict()
 

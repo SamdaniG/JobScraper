@@ -7,6 +7,7 @@ DATE_FMT = "%a %d-%b-%Y"
 
 class LeverBase(ApiJobBoardScraper):
     name='base'
+    jobBoard = 'lever'
 
     @property
     def base_domain(self):
@@ -35,13 +36,14 @@ class LeverBase(ApiJobBoardScraper):
             # current_jobs_id.append(hash_id)
 
             job_deets=Job(
-                job_id=     job_id,
-                job_name=   job_title,
-                source=     self.name,
-                location="; ".join(job["categories"].get('allLocations','')),
-                posted_date=(datetime.fromtimestamp(job['createdAt'] / 1000)).strftime(DATE_FMT),
-                url=        url,
-                work_policy=job["workplaceType"]
+                job_id=         job_id,
+                job_name=       job_title,
+                source=         self.name,
+                location=       "; ".join(job["categories"].get('allLocations','')),
+                posted_date=    (datetime.fromtimestamp(job['createdAt'] / 1000)).strftime(DATE_FMT),
+                url=            url,
+                work_policy=    job["workplaceType"],
+                job_board=      self.jobBoard
             )
             job_data[hash_id]=job_deets.to_dict()
 
