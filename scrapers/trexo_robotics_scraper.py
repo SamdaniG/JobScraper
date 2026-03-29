@@ -2,6 +2,7 @@ from scrapers._ashbyhq_JB import AshbyhqBase
 
 class TrexoRoboticsScraper(AshbyhqBase):
     name = 'trexorobotics'
+    url_name = 'Trexo%20Robotics'
     url_payload={
         'operationName': "ApiJobBoardWithTeams",
         'variables':

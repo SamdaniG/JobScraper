@@ -2,6 +2,7 @@ from scrapers._ashbyhq_JB import AshbyhqBase
 
 class DominionDynamicsScraper(AshbyhqBase):
     name = 'dominiondynamics'
+    url_name = 'Dominion%20Dynamics'
     url_payload={
         'operationName': "ApiJobBoardWithTeams",
         'variables':

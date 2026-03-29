@@ -2,6 +2,7 @@ from scrapers._ashbyhq_JB import AshbyhqBase
 
 class ServeRoboticsScraper(AshbyhqBase):
     name = 'serverobotics'
+    url_name = name
     url_payload={
         'operationName': "ApiJobBoardWithTeams",
         'variables':
@@ -25,5 +26,5 @@ if __name__=='__main__':
     test=ServeRoboticsScraper()
     yol=test.scrape_jobs()
     # print(set(yol))
-    # print(yol)
-    print(test.scrape_jd(yol['4a839a0ec6']))
+    print(yol)
+    # print(test.scrape_jd(yol['4a839a0ec6']))

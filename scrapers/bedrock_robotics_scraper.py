@@ -2,6 +2,7 @@ from scrapers._ashbyhq_JB import AshbyhqBase
 
 class BedrockRoboticsScraper(AshbyhqBase):
     name = 'bedrock robotics'
+    url_name = 'bedrock-robotics'
     url_payload={
         'operationName': "ApiJobBoardWithTeams",
         'variables':
@@ -23,5 +24,5 @@ class BedrockRoboticsScraper(AshbyhqBase):
 if __name__=='__main__':
     test=BedrockRoboticsScraper()
     yol=test.scrape_jobs()
-    # print(yol)
+    print(yol)
     print(test.scrape_jd(yol['53fe83b018']))

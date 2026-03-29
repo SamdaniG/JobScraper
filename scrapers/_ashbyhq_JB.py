@@ -17,10 +17,10 @@ class AshbyhqBase(ApiJobBoardScraper):
     jd_params={
         'op' :    'ApiJobPosting'
     }
-
+    url_name=''
     @property
     def apply_url(self):
-        return self.base_domain + f'{self.name}/'
+        return self.base_domain + f'{self.url_name}/'
 
     jd_payload={}
     url_payload = {}

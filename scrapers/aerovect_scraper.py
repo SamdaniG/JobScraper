@@ -2,6 +2,7 @@ from scrapers._ashbyhq_JB import AshbyhqBase
 
 class AerovectScraper(AshbyhqBase):
     name = 'aerovect'
+    url_name = name
     url_payload={
         'operationName': "ApiJobBoardWithTeams",
         'variables':
