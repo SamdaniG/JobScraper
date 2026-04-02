@@ -14,18 +14,31 @@ def time_taken(func):
         logger = kwargs.get("logger")
         start = time.perf_counter()
         # print(f"Started the timer!")
+        name = func.__name__
         output = func(*args, **kwargs)
+        scraper_count = None
+        job_board = None
         if isinstance(output, tuple) and len(output) == 3:
             name, result, error = output
+            job_board = args[0]().jobBoard
+            # scraper_count = None
         else:
-            name = func.__name__
+            scrapers_to_run = args[1]
+            scraper_count= len(scrapers_to_run)
 
         end = time.perf_counter()
+
+        extra_data = {
+            "source": name,
+            "timer": end - start
+            }
+
+        if scraper_count is not None:
+            extra_data["scraper_count"] = scraper_count
+        if job_board is not None:
+            extra_data['jobBoard'] = job_board
         logger.timer(f"Time taken to run the {name}: {end - start:.4f}s",
-                     extra={
-                         "source": name,
-                         "timer": end - start
-                     })
+                     extra=extra_data)
         return output
     return wrapper
 
@@ -48,7 +61,7 @@ def main(args, scrapers_to_run, logger= None):
     )
 
     ####Activating Email
-    EMAIL_ACTIVE = False
+    EMAIL_ACTIVE = True
     if args.source == 'scheduler':
         EMAIL_ACTIVE = True
 
@@ -89,12 +102,10 @@ def main(args, scrapers_to_run, logger= None):
     )
 
     db = updating_db(db, all_scraped_jobs, new_jobs, updated_jobs, logger)
-
     notify(db, scrapers_to_run, filled_jobs, new_jobs, logger, EMAIL_ACTIVE)
 
     logger.info(f"Writing data to my database!\n-------------------")
     save_db(db)
-
 
 if __name__=='__main__':
     args, scrapers_to_run = cli_main()

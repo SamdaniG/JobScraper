@@ -97,8 +97,13 @@ class JsonTimerFormatter(logging.Formatter):
         timer_record = {
             "source":           getattr(record, "source", None),
             "time_taken":       getattr(record, "timer", None),
-            "timestamp":        datetime.utcnow().isoformat(),
+            "timestamp":        datetime.utcfromtimestamp(record.created).isoformat(),
         }
+        if hasattr(record, "jobBoard"):
+            timer_record["job_board"] = record.jobBoard
+
+        if hasattr(record, "scraper_count"):
+            timer_record["scrapers_run"] = record.scraper_count
 
         return json.dumps(timer_record)
 
