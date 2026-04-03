@@ -5,7 +5,8 @@ from log_starter import set_logger
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from functools import wraps
 from cli.main import cli_main
-from notifications.notify import notify
+EMAIL_DELAY_SECONDS = 0
+
 
 def time_taken(func):
     """This is a python decorator to calculate the time taken to run every function, gives us a useful metric to keep track"""
@@ -61,7 +62,7 @@ def main(args, scrapers_to_run, logger= None):
     )
 
     ####Activating Email
-    EMAIL_ACTIVE = True
+    EMAIL_ACTIVE = False
     if args.source == 'scheduler':
         EMAIL_ACTIVE = True
 
@@ -102,7 +103,136 @@ def main(args, scrapers_to_run, logger= None):
     )
 
     db = updating_db(db, all_scraped_jobs, new_jobs, updated_jobs, logger)
-    notify(db, scrapers_to_run, filled_jobs, new_jobs, logger, EMAIL_ACTIVE)
+    # notify(db, scrapers_to_run, filled_jobs, new_jobs, logger, EMAIL_ACTIVE)
+
+    if EMAIL_ACTIVE:
+        # from emailer import send_email
+        from notifications.emailer import send_email
+
+        scraper_map = {s.name: s() for s in scrapers_to_run}
+
+        # 1️⃣ Email filled jobs
+        if filled_jobs:
+            lines = []
+            html_lines = []
+            logger.debug("Emailing filled jobs")
+            for j in filled_jobs:
+                job = db[j]
+                logger.filled(
+                    f'{job["source"]} - '
+                    f'{job.get("job_id", "")} - '
+                    f'{job["job_name"]}',
+                    extra={
+                        "job_name": job["job_name"],
+                        "source": job["source"],
+                        "job_id": job.get('job_id', ""),
+                        "location": job.get('location', "")
+                    }
+                )
+
+                text_line = (
+                    f'{job["source"]} - '
+                    f'{job.get("job_id", job["url"])} - '
+                    f'{job["job_name"]}'
+                )
+
+                html_line = (
+                    f'{job["source"]} - '
+                    f'{job.get("job_id", job["url"])} - '
+                    f'<a href="{job["url"]}">{job["job_name"]}</a>'
+                )
+
+                lines.append(text_line)
+                html_lines.append(html_line)
+
+            text_body = "\n".join(lines)
+            html_body = "<br>".join(html_lines)
+
+            send_email("Filled Positions", text_body, html_body, "System")
+            # if len(new_jobs) > 1:
+            #     time.sleep(EMAIL_DELAY_SECONDS)
+
+        # 2️⃣ Email new jobs with correct scraper
+        filled_email_composing = ""
+        try:
+            for job_id in new_jobs:
+                job = db[job_id]
+                scraper = scraper_map.get(job["source"])
+
+                if not scraper:
+                    logger.warning(
+                        "No scraper found for source=%s (job_id=%s)",
+                        job["source"],
+                        job_id,
+                    )
+                    continue
+
+                logger.new(
+                    f"{job["job_name"]} ({job["source"]}) ({job.get('job_id', "")})",
+                    extra={
+                        "job_name": job["job_name"],
+                        "source": job["source"],
+                        "job_id": job.get('job_id', ""),
+                        "location": job.get('location', "")
+                    })
+
+                try:
+                    jd_content = scraper.scrape_jd(job)
+                except Exception as e:
+                    logger.error(f'This error popped up: {e}')
+                    continue
+                text_body = job['url'] + '\n'
+                text_body += jd_content
+
+                html_link = f"""
+                <p> {job["source"]} - 
+                <a href="{job['url']}">{job["job_name"]}</a>
+                </p>
+                """
+                html_body = html_link + f"""
+                <pre>
+                {jd_content}
+                </pre>
+                """
+
+                send_email(job["job_name"], text_body, html_body, job["source"])
+                filled_email_composing += html_link + "\n"
+        except Exception as e:
+            logger.error(f"The following error occurred: {e}")
+
+        if new_jobs:
+            send_email("New Jobs List", html_body=filled_email_composing, body="", source='new')
+
+    else:
+        if filled_jobs:
+            # logger.filled('Filled Jobs')
+            for j in filled_jobs:
+                job = db[j]
+                logger.filled(
+                    f'{job["source"]} - '
+                    f'{job.get("job_id", "")} - '
+                    f'{job["job_name"]}',
+                    extra={
+                        "job_name": job["job_name"],
+                        "source": job["source"],
+                        "job_id": job.get('job_id', ""),
+                        "location": job.get('location', "")
+                    }
+                )
+        if new_jobs:
+            # logger.info('New jobs')
+            for job_id in new_jobs:
+                job = db[job_id]
+                logger.new(
+                    f"{job["job_name"]} ({job["source"]} ({job.get('job_id', "")})",
+                    extra={
+                        "job_name": job["job_name"],
+                        "source": job["source"],
+                        "job_id": job.get('job_id', ""),
+                        "location": job.get('location', "")
+                    }
+
+                )
 
     logger.info(f"Writing data to my database!\n-------------------")
     save_db(db)
