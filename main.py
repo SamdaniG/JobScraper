@@ -168,7 +168,7 @@ def main(args, scrapers_to_run, logger= None):
                     continue
 
                 logger.new(
-                    f"{job["job_name"]} ({job["source"]}) ({job.get('job_id', "")})",
+                    f'{job["source"]} - {job.get('job_id', "")} - {job["job_name"]}',
                     extra={
                         "job_name": job["job_name"],
                         "source": job["source"],
@@ -224,7 +224,7 @@ def main(args, scrapers_to_run, logger= None):
             for job_id in new_jobs:
                 job = db[job_id]
                 logger.new(
-                    f"{job["job_name"]} ({job["source"]} ({job.get('job_id', "")})",
+                    f'{job["source"]} - {job.get('job_id', "")} - {job["job_name"]}',
                     extra={
                         "job_name": job["job_name"],
                         "source": job["source"],

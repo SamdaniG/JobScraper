@@ -6,33 +6,27 @@ DEFAULT_DATE = "Thu 01-Jan-2026"
 
 def diff_jobs(db: dict, current_jobs_db: dict, successful_sources: set):
     today = date.today().strftime(DATE_FMT)
+    current_jobs_id=set(current_jobs_db)
+    new_jobs = []
+    update_jobs=[]
+    filled_jobs=[]
 
-    db_ids = set(db)
-    current_ids = set(current_jobs_db)
-
-    # New jobs
-    new_jobs = current_ids - db_ids
-
-    # Updated jobs
-    common_ids = current_ids & db_ids
-    update_jobs = {
-        job_id for job_id in common_ids
-        if current_jobs_db[job_id] != db[job_id]
-        }
-
-    # Filled jobs
-    filled_jobs = set()
-    missing_ids = db_ids - current_ids
-
-    for job_id in missing_ids:
-        job = db[job_id]
-
-        if job["source"] not in successful_sources:
+    for job_id in current_jobs_db:
+        if job_id not in db:
+            new_jobs.append(job_id)
             continue
 
-        if job.get("filled_date", "") == "":
-            job["filled_date"] = today
-            filled_jobs.add(job_id)
+        if current_jobs_db[job_id]!=db[job_id]:
+            update_jobs.append(job_id)
+
+    for job_id,job in db.items():
+        source = job["source"]
+        if source not in successful_sources:
+            continue
+        # if job_id not in current_jobs_id:
+        if job_id not in current_jobs_id and job.get("filled_date","") == "":
+            db[job_id]["filled_date"] = today
+            filled_jobs.append(job_id)
 
     return new_jobs, filled_jobs, update_jobs
 
@@ -78,8 +72,8 @@ def updating_db(db,all_scraped_jobs, new_jobs, updated_jobs, logger):
         if changes:
             for field, (old_val, new_val) in changes.items():
                 logger.updated(
-                    f'{old["source"]} {job_id} {old["job_name"]} updated:'
-                    f"\n\t\t\t\t\t\t\t\t {field}: {old_val} -> {new_val}",
+                    f'{old["source"]} - {job_id} - {old["job_name"]} updated:'
+                    f"\n\t\t\t\t\t\t {field}: {old_val} -> {new_val}",
                     extra=
                     {
                        "job_name" : old["job_name"],
