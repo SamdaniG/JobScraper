@@ -3735,12 +3735,12 @@
         "internal_job_id": 4004613009,
         "job_name": "Applied AI Engineer - Flywheel Automation & Continuous Learning",
         "source": "kodiak",
+        "job_board": "greenhouse",
         "location": "San Francisco Bay Area",
         "posted_date": "Mon 23-Jun-2025",
-        "updated_date": "Fri 27-Feb-2026",
+        "updated_date": "Fri 03-Apr-2026",
         "url": "https://job-boards.greenhouse.io/kodiak/jobs/4005932009",
-        "hiring_manger": "Shubham Shrivastava; s.shrivastava@kodiak.ai",
-        "filled_date": "Tue 17-Mar-2026"
+        "hiring_manger": "Shubham Shrivastava; s.shrivastava@kodiak.ai"
     },
     "5e58795b7c": {
         "job_id": 4003770009,
@@ -3904,12 +3904,12 @@
         "internal_job_id": 4080668009,
         "job_name": "Functional Safety Engineer, Hardware",
         "source": "kodiak",
+        "job_board": "greenhouse",
         "location": "Mountain View, CA",
         "posted_date": "Fri 06-Feb-2026",
-        "updated_date": "Fri 27-Mar-2026",
+        "updated_date": "Fri 03-Apr-2026",
         "url": "https://job-boards.greenhouse.io/kodiak/jobs/4118785009",
-        "hiring_manger": "Suzanne Woll; s.woll@kodiak.ai",
-        "job_board": "greenhouse"
+        "hiring_manger": "Suzanne Woll; s.woll@kodiak.ai"
     },
     "cbf9ae3e7e": {
         "job_id": 4062289009,
@@ -4331,7 +4331,8 @@
         "posted_date": "Thu 12-Feb-2026",
         "updated_date": "Fri 03-Apr-2026",
         "url": "https://job-boards.greenhouse.io/kodiak/jobs/4130558009",
-        "hiring_manger": "Mike Pierce; m.pierce@kodiak.ai"
+        "hiring_manger": "Mike Pierce; m.pierce@kodiak.ai",
+        "filled_date": "Sat 04-Apr-2026"
     },
     "292a17b88b": {
         "job_id": 4012631009,
@@ -4472,7 +4473,7 @@
         "job_board": "greenhouse",
         "location": "King Abdullah Economic City, 02",
         "posted_date": "Mon 15-Dec-2025",
-        "updated_date": "Fri 03-Apr-2026",
+        "updated_date": "Sat 04-Apr-2026",
         "url": "https://job-boards.greenhouse.io/lucidmotors/jobs/4996819007",
         "hiring_manger": "Kholoud AlShamrani; kholoudalshamrani@lucidmotors.com"
     },
@@ -4556,7 +4557,7 @@
         "job_board": "greenhouse",
         "location": "Costa Mesa, CA",
         "posted_date": "Mon 27-Oct-2025",
-        "updated_date": "Fri 03-Apr-2026",
+        "updated_date": "Sat 04-Apr-2026",
         "url": "https://job-boards.greenhouse.io/lucidmotors/jobs/4957542007",
         "hiring_manger": "Patrick Stephenson; patrickstephenson@lucidmotors.com"
     },
@@ -4604,7 +4605,7 @@
         "job_board": "greenhouse",
         "location": "Montreal, QC",
         "posted_date": "Fri 19-Dec-2025",
-        "updated_date": "Fri 03-Apr-2026",
+        "updated_date": "Sat 04-Apr-2026",
         "url": "https://job-boards.greenhouse.io/lucidmotors/jobs/5009464007",
         "hiring_manger": "Patrick Stephenson; patrickstephenson@lucidmotors.com"
     },
@@ -4678,7 +4679,7 @@
         "job_board": "greenhouse",
         "location": "King Abdullah Economic City, 02",
         "posted_date": "Thu 02-Oct-2025",
-        "updated_date": "Fri 03-Apr-2026",
+        "updated_date": "Sat 04-Apr-2026",
         "url": "https://job-boards.greenhouse.io/lucidmotors/jobs/4838987007",
         "hiring_manger": "Kholoud AlShamrani; kholoudalshamrani@lucidmotors.com"
     },
@@ -4690,7 +4691,7 @@
         "job_board": "greenhouse",
         "location": "King Abdullah Economic City, 02",
         "posted_date": "Wed 08-Oct-2025",
-        "updated_date": "Fri 03-Apr-2026",
+        "updated_date": "Sat 04-Apr-2026",
         "url": "https://job-boards.greenhouse.io/lucidmotors/jobs/4839015007",
         "hiring_manger": "Kholoud AlShamrani; kholoudalshamrani@lucidmotors.com"
     },
@@ -4823,7 +4824,7 @@
         "job_board": "greenhouse",
         "location": "Canada",
         "posted_date": "Tue 17-Feb-2026",
-        "updated_date": "Fri 03-Apr-2026",
+        "updated_date": "Sat 04-Apr-2026",
         "url": "https://job-boards.greenhouse.io/lucidmotors/jobs/5053157007",
         "hiring_manger": "Spencer Caldwell; spencercaldwell@lucidmotors.com"
     },
@@ -4860,9 +4861,9 @@
         "job_board": "greenhouse",
         "location": "Phoenix, AZ",
         "posted_date": "Mon 03-Nov-2025",
-        "updated_date": "Fri 03-Apr-2026",
+        "updated_date": "Sat 04-Apr-2026",
         "url": "https://job-boards.greenhouse.io/lucidmotors/jobs/4957536007",
-        "hiring_manger": "Kyle Lo; kylelo@lucidmotors.com"
+        "hiring_manger": "Ruben Gonzalez; rubengonzalezjr@lucidmotors.com"
     },
     "eb05bc2e8d": {
         "job_id": 4915643007,
@@ -4886,7 +4887,8 @@
         "updated_date": "Wed 01-Apr-2026",
         "url": "https://job-boards.greenhouse.io/lucidmotors/jobs/4922167007",
         "hiring_manger": "Adam Dazell; adamdazell@lucidmotors.com",
-        "job_board": "greenhouse"
+        "job_board": "greenhouse",
+        "filled_date": "Sat 04-Apr-2026"
     },
     "260471fed3": {
         "job_id": 4922153007,
@@ -4908,7 +4910,7 @@
         "job_board": "greenhouse",
         "location": "Casa Grande, AZ",
         "posted_date": "Fri 13-Feb-2026",
-        "updated_date": "Fri 03-Apr-2026",
+        "updated_date": "Sat 04-Apr-2026",
         "url": "https://job-boards.greenhouse.io/lucidmotors/jobs/4953758007",
         "hiring_manger": "Tiffany Lopez; tiffanylopez@lucidmotors.com"
     },
@@ -5260,7 +5262,7 @@
         "job_board": "greenhouse",
         "location": "Riviera Beach, FL",
         "posted_date": "Thu 22-Jan-2026",
-        "updated_date": "Fri 03-Apr-2026",
+        "updated_date": "Sat 04-Apr-2026",
         "url": "https://job-boards.greenhouse.io/lucidmotors/jobs/5032268007",
         "hiring_manger": "Patrick Stephenson; patrickstephenson@lucidmotors.com"
     },
@@ -5329,12 +5331,12 @@
         "internal_job_id": 4564143007,
         "job_name": "Part-Time Brand Ambassador - Corner",
         "source": "lucidmotors",
+        "job_board": "greenhouse",
         "location": "McLean, VA",
         "posted_date": "Mon 01-Dec-2025",
-        "updated_date": "Mon 30-Mar-2026",
+        "updated_date": "Sat 04-Apr-2026",
         "url": "https://job-boards.greenhouse.io/lucidmotors/jobs/4992150007",
-        "hiring_manger": "Spencer Caldwell; spencercaldwell@lucidmotors.com",
-        "job_board": "greenhouse"
+        "hiring_manger": "Spencer Caldwell; spencercaldwell@lucidmotors.com"
     },
     "d6846cbdad": {
         "job_id": 4759229007,
@@ -5393,9 +5395,9 @@
         "job_board": "greenhouse",
         "location": "King Abdullah Economic City, 02",
         "posted_date": "Tue 02-Dec-2025",
-        "updated_date": "Fri 03-Apr-2026",
+        "updated_date": "Sat 04-Apr-2026",
         "url": "https://job-boards.greenhouse.io/lucidmotors/jobs/4980119007",
-        "hiring_manger": "Sophie Zhang; sophiezhang@lucidmotors.com"
+        "hiring_manger": "Patrick Stephenson; patrickstephenson@lucidmotors.com"
     },
     "57751918ff": {
         "job_id": 4980124007,
@@ -5405,9 +5407,9 @@
         "job_board": "greenhouse",
         "location": "King Abdullah Economic City, 02",
         "posted_date": "Fri 21-Nov-2025",
-        "updated_date": "Fri 03-Apr-2026",
+        "updated_date": "Sat 04-Apr-2026",
         "url": "https://job-boards.greenhouse.io/lucidmotors/jobs/4980124007",
-        "hiring_manger": "Sophie Zhang; sophiezhang@lucidmotors.com"
+        "hiring_manger": "Patrick Stephenson; patrickstephenson@lucidmotors.com"
     },
     "b0731df6db": {
         "job_id": 5004477007,
@@ -5417,9 +5419,9 @@
         "job_board": "greenhouse",
         "location": "King Abdullah Economic City, 02",
         "posted_date": "Tue 20-Jan-2026",
-        "updated_date": "Fri 03-Apr-2026",
+        "updated_date": "Sat 04-Apr-2026",
         "url": "https://job-boards.greenhouse.io/lucidmotors/jobs/5004477007",
-        "hiring_manger": "Sophie Zhang; sophiezhang@lucidmotors.com"
+        "hiring_manger": "Patrick Stephenson; patrickstephenson@lucidmotors.com"
     },
     "66ea17836d": {
         "job_id": 4851313007,
@@ -5597,7 +5599,7 @@
         "job_board": "greenhouse",
         "location": "Casa Grande, AZ",
         "posted_date": "Mon 27-Jan-2025",
-        "updated_date": "Fri 03-Apr-2026",
+        "updated_date": "Sat 04-Apr-2026",
         "url": "https://job-boards.greenhouse.io/lucidmotors/jobs/4626104007",
         "hiring_manger": "Michael Crimmins; michaelcrimmins@lucidmotors.com"
     },
@@ -5635,7 +5637,8 @@
         "updated_date": "Wed 25-Mar-2026",
         "url": "https://job-boards.greenhouse.io/lucidmotors/jobs/5065842007",
         "hiring_manger": "Patrick Stephenson; patrickstephenson@lucidmotors.com",
-        "job_board": "greenhouse"
+        "job_board": "greenhouse",
+        "filled_date": "Sat 04-Apr-2026"
     },
     "4582315a46": {
         "job_id": 4950996007,
@@ -5679,12 +5682,12 @@
         "internal_job_id": 4476643007,
         "job_name": "Senior Software Engineer \u2013 Power State Management & Performance (Infotainment)",
         "source": "lucidmotors",
+        "job_board": "greenhouse",
         "location": "Toulouse, 31",
         "posted_date": "Mon 01-Dec-2025",
-        "updated_date": "Wed 25-Mar-2026",
+        "updated_date": "Sat 04-Apr-2026",
         "url": "https://job-boards.greenhouse.io/lucidmotors/jobs/4993431007",
-        "hiring_manger": "Franziska Schropp; franziskaschropp@lucidmotors.com",
-        "job_board": "greenhouse"
+        "hiring_manger": "Franziska Schropp; franziskaschropp@lucidmotors.com"
     },
     "959fbb2322": {
         "job_id": 4848093007,
@@ -5715,12 +5718,12 @@
         "internal_job_id": 4392942007,
         "job_name": "Serviceability Technician - ( Service Procedure Development Specialist)",
         "source": "lucidmotors",
+        "job_board": "greenhouse",
         "location": "Fremont, CA",
         "posted_date": "Mon 02-Feb-2026",
-        "updated_date": "Wed 25-Mar-2026",
+        "updated_date": "Sat 04-Apr-2026",
         "url": "https://job-boards.greenhouse.io/lucidmotors/jobs/4667045007",
-        "hiring_manger": "Patrick Stephenson; patrickstephenson@lucidmotors.com",
-        "job_board": "greenhouse"
+        "hiring_manger": "Patrick Stephenson; patrickstephenson@lucidmotors.com"
     },
     "f4491448e7": {
         "job_id": 5002638007,
@@ -5767,7 +5770,7 @@
         "job_board": "greenhouse",
         "location": "Torrance, CA",
         "posted_date": "Thu 05-Feb-2026",
-        "updated_date": "Fri 03-Apr-2026",
+        "updated_date": "Sat 04-Apr-2026",
         "url": "https://job-boards.greenhouse.io/lucidmotors/jobs/5043667007",
         "hiring_manger": "Patrick Stephenson; patrickstephenson@lucidmotors.com"
     },
@@ -5864,7 +5867,7 @@
         "job_board": "greenhouse",
         "location": "King of Prussia, PA",
         "posted_date": "Wed 10-Dec-2025",
-        "updated_date": "Fri 03-Apr-2026",
+        "updated_date": "Sat 04-Apr-2026",
         "url": "https://job-boards.greenhouse.io/lucidmotors/jobs/5002621007",
         "hiring_manger": "Patrick Stephenson; patrickstephenson@lucidmotors.com"
     },
@@ -5900,7 +5903,7 @@
         "job_board": "greenhouse",
         "location": "Torrance, CA",
         "posted_date": "Mon 23-Feb-2026",
-        "updated_date": "Fri 03-Apr-2026",
+        "updated_date": "Sat 04-Apr-2026",
         "url": "https://job-boards.greenhouse.io/lucidmotors/jobs/5056233007",
         "hiring_manger": "Patrick Stephenson; patrickstephenson@lucidmotors.com"
     },
@@ -5909,12 +5912,12 @@
         "internal_job_id": 4597962007,
         "job_name": "Service Parts Advisor, Costa Mesa",
         "source": "lucidmotors",
+        "job_board": "greenhouse",
         "location": "Costa Mesa, CA",
         "posted_date": "Thu 26-Feb-2026",
-        "updated_date": "Tue 31-Mar-2026",
+        "updated_date": "Sat 04-Apr-2026",
         "url": "https://job-boards.greenhouse.io/lucidmotors/jobs/5063436007",
-        "hiring_manger": "Patrick Stephenson; patrickstephenson@lucidmotors.com",
-        "job_board": "greenhouse"
+        "hiring_manger": "Patrick Stephenson; patrickstephenson@lucidmotors.com"
     },
     "cd0cbcb224": {
         "job_id": 5050532007,
@@ -5958,12 +5961,12 @@
         "internal_job_id": 4478825007,
         "job_name": "Service Technician, King of Prussia, PA",
         "source": "lucidmotors",
+        "job_board": "greenhouse",
         "location": "King of Prussia, PA",
         "posted_date": "Thu 19-Feb-2026",
-        "updated_date": "Wed 01-Apr-2026",
+        "updated_date": "Sat 04-Apr-2026",
         "url": "https://job-boards.greenhouse.io/lucidmotors/jobs/4837354007",
-        "hiring_manger": "Patrick Stephenson; patrickstephenson@lucidmotors.com",
-        "job_board": "greenhouse"
+        "hiring_manger": "Patrick Stephenson; patrickstephenson@lucidmotors.com"
     },
     "2718d6c054": {
         "job_id": 5009027007,
@@ -6009,7 +6012,7 @@
         "job_board": "greenhouse",
         "location": "Plainview, NY",
         "posted_date": "Fri 27-Feb-2026",
-        "updated_date": "Fri 03-Apr-2026",
+        "updated_date": "Sat 04-Apr-2026",
         "url": "https://job-boards.greenhouse.io/lucidmotors/jobs/5043665007",
         "hiring_manger": "Patrick Stephenson; patrickstephenson@lucidmotors.com"
     },
@@ -6175,36 +6178,36 @@
         "internal_job_id": 4567747007,
         "job_name": "Sr. Compensation Manager",
         "source": "lucidmotors",
+        "job_board": "greenhouse",
         "location": "Southfield, MI",
         "posted_date": "Tue 09-Dec-2025",
-        "updated_date": "Wed 25-Mar-2026",
+        "updated_date": "Sat 04-Apr-2026",
         "url": "https://job-boards.greenhouse.io/lucidmotors/jobs/5001103007",
-        "hiring_manger": "Imari Henderson; imarihenderson@lucidmotors.com",
-        "job_board": "greenhouse"
+        "hiring_manger": "Imari Henderson; imarihenderson@lucidmotors.com"
     },
     "543012fb19": {
         "job_id": 5001108007,
         "internal_job_id": 4567747007,
         "job_name": "Sr. Compensation Manager",
         "source": "lucidmotors",
+        "job_board": "greenhouse",
         "location": "Newark, CA",
         "posted_date": "Tue 09-Dec-2025",
-        "updated_date": "Wed 25-Mar-2026",
+        "updated_date": "Sat 04-Apr-2026",
         "url": "https://job-boards.greenhouse.io/lucidmotors/jobs/5001108007",
-        "hiring_manger": "Imari Henderson; imarihenderson@lucidmotors.com",
-        "job_board": "greenhouse"
+        "hiring_manger": "Imari Henderson; imarihenderson@lucidmotors.com"
     },
     "6e9a37036d": {
         "job_id": 5000243007,
         "internal_job_id": 4567747007,
         "job_name": "Sr. Compensation Manager",
         "source": "lucidmotors",
+        "job_board": "greenhouse",
         "location": "Phoenix, AZ",
         "posted_date": "Tue 09-Dec-2025",
-        "updated_date": "Wed 25-Mar-2026",
+        "updated_date": "Sat 04-Apr-2026",
         "url": "https://job-boards.greenhouse.io/lucidmotors/jobs/5000243007",
-        "hiring_manger": "Imari Henderson; imarihenderson@lucidmotors.com",
-        "job_board": "greenhouse"
+        "hiring_manger": "Imari Henderson; imarihenderson@lucidmotors.com"
     },
     "8bcf080530": {
         "job_id": 4996930007,
@@ -6235,12 +6238,12 @@
         "internal_job_id": 4575331007,
         "job_name": "Sr. EHS Specialist, Data Analysis and Management System",
         "source": "lucidmotors",
+        "job_board": "greenhouse",
         "location": "Phoenix, AZ",
         "posted_date": "Wed 07-Jan-2026",
-        "updated_date": "Wed 25-Mar-2026",
+        "updated_date": "Sat 04-Apr-2026",
         "url": "https://job-boards.greenhouse.io/lucidmotors/jobs/5015840007",
-        "hiring_manger": "Imari Henderson; imarihenderson@lucidmotors.com",
-        "job_board": "greenhouse"
+        "hiring_manger": "Imari Henderson; imarihenderson@lucidmotors.com"
     },
     "5b9a5a52cb": {
         "job_id": 4767839007,
@@ -6307,24 +6310,24 @@
         "internal_job_id": 4561613007,
         "job_name": "Sr. Finance Manager (Manufacturing)",
         "source": "lucidmotors",
+        "job_board": "greenhouse",
         "location": "King Abdullah Economic City, 02",
         "posted_date": "Mon 26-Jan-2026",
-        "updated_date": "Tue 24-Mar-2026",
+        "updated_date": "Sat 04-Apr-2026",
         "url": "https://job-boards.greenhouse.io/lucidmotors/jobs/4987056007",
-        "hiring_manger": "Abdullah Murshid; abdullahmurshid@lucidmotors.com",
-        "job_board": "greenhouse"
+        "hiring_manger": "Abdullah Murshid; abdullahmurshid@lucidmotors.com"
     },
     "a54f908cd6": {
         "job_id": 5024304007,
         "internal_job_id": 4579578007,
         "job_name": "Sr. Fire Protection Engineer",
         "source": "lucidmotors",
+        "job_board": "greenhouse",
         "location": "Casa Grande, AZ",
         "posted_date": "Wed 14-Jan-2026",
-        "updated_date": "Wed 01-Apr-2026",
+        "updated_date": "Sat 04-Apr-2026",
         "url": "https://job-boards.greenhouse.io/lucidmotors/jobs/5024304007",
-        "hiring_manger": "Imari Henderson; imarihenderson@lucidmotors.com",
-        "job_board": "greenhouse"
+        "hiring_manger": "Imari Henderson; imarihenderson@lucidmotors.com"
     },
     "17b35b2a37": {
         "job_id": 4993339007,
@@ -6393,12 +6396,12 @@
         "internal_job_id": 4488044007,
         "job_name": "Sr. Instrumentation Technician, Vehicle Test",
         "source": "lucidmotors",
+        "job_board": "greenhouse",
         "location": "Newark, CA",
         "posted_date": "Thu 18-Sep-2025",
-        "updated_date": "Thu 26-Mar-2026",
+        "updated_date": "Sat 04-Apr-2026",
         "url": "https://job-boards.greenhouse.io/lucidmotors/jobs/4854454007",
-        "hiring_manger": "Adam Dazell; adamdazell@lucidmotors.com",
-        "job_board": "greenhouse"
+        "hiring_manger": "Adam Dazell; adamdazell@lucidmotors.com"
     },
     "c334652d05": {
         "job_id": 4871559007,
@@ -6626,7 +6629,7 @@
         "job_board": "greenhouse",
         "location": "Hayward, CA",
         "posted_date": "Tue 16-Sep-2025",
-        "updated_date": "Fri 03-Apr-2026",
+        "updated_date": "Sat 04-Apr-2026",
         "url": "https://job-boards.greenhouse.io/lucidmotors/jobs/4875418007",
         "hiring_manger": "Patrick Stephenson; patrickstephenson@lucidmotors.com"
     },
@@ -6822,7 +6825,7 @@
         "job_board": "greenhouse",
         "location": "Newark, CA",
         "posted_date": "Thu 30-Jan-2025",
-        "updated_date": "Fri 03-Apr-2026",
+        "updated_date": "Sat 04-Apr-2026",
         "url": "https://job-boards.greenhouse.io/lucidmotors/jobs/4620390007",
         "hiring_manger": "Aysha Raja; aysharaja@lucidmotors.com"
     },
@@ -6903,12 +6906,12 @@
         "internal_job_id": 4426243007,
         "job_name": "Steering Systems Calibration Senior Engineer",
         "source": "lucidmotors",
+        "job_board": "greenhouse",
         "location": "Southfield, MI",
         "posted_date": "Wed 16-Jul-2025",
-        "updated_date": "Sat 21-Mar-2026",
+        "updated_date": "Sat 04-Apr-2026",
         "url": "https://job-boards.greenhouse.io/lucidmotors/jobs/4735600007",
-        "hiring_manger": "Judy Kyono; judykyono@lucidmotors.com",
-        "job_board": "greenhouse"
+        "hiring_manger": "Judy Kyono; judykyono@lucidmotors.com"
     },
     "d342e5ec47": {
         "job_id": 5047014007,
@@ -7016,7 +7019,7 @@
         "job_board": "greenhouse",
         "location": "King Abdullah Economic City, 02",
         "posted_date": "Wed 12-Nov-2025",
-        "updated_date": "Fri 03-Apr-2026",
+        "updated_date": "Sat 04-Apr-2026",
         "url": "https://job-boards.greenhouse.io/lucidmotors/jobs/4974953007",
         "hiring_manger": "Abdullah Murshid; abdullahmurshid@lucidmotors.com"
     },
@@ -7085,12 +7088,12 @@
         "internal_job_id": 4455235007,
         "job_name": "Vehicle Operations Assistant",
         "source": "lucidmotors",
+        "job_board": "greenhouse",
         "location": "King of Prussia, PA",
         "posted_date": "Wed 16-Jul-2025",
-        "updated_date": "Tue 31-Mar-2026",
+        "updated_date": "Sat 04-Apr-2026",
         "url": "https://job-boards.greenhouse.io/lucidmotors/jobs/4790580007",
-        "hiring_manger": "Spencer Caldwell; spencercaldwell@lucidmotors.com",
-        "job_board": "greenhouse"
+        "hiring_manger": "Spencer Caldwell; spencercaldwell@lucidmotors.com"
     },
     "3cf1d4a404": {
         "job_id": 5026268007,
@@ -7100,7 +7103,7 @@
         "job_board": "greenhouse",
         "location": "Riyadh, Saudi Arabia",
         "posted_date": "Sun 18-Jan-2026",
-        "updated_date": "Fri 03-Apr-2026",
+        "updated_date": "Sat 04-Apr-2026",
         "url": "https://job-boards.greenhouse.io/lucidmotors/jobs/5026268007",
         "hiring_manger": "Nawar Alsubaihin; nawaralsubaihin@lucidmotors.com"
     },
@@ -7436,7 +7439,8 @@
         "posted_date": "Thu 08-May-2025",
         "updated_date": "Fri 27-Mar-2026",
         "url": "https://boards.greenhouse.io/appliedintuition/jobs/4561217005?gh_jid=4561217005",
-        "job_board": "greenhouse"
+        "job_board": "greenhouse",
+        "filled_date": "Sat 04-Apr-2026"
     },
     "d6ee5f6581": {
         "job_id": 4659522005,
@@ -10267,7 +10271,8 @@
         "posted_date": "Mon 17-Nov-2025",
         "updated_date": "Wed 25-Mar-2026",
         "url": "https://nuro.ai/careersitem?gh_jid=7400443",
-        "job_board": "greenhouse"
+        "job_board": "greenhouse",
+        "filled_date": "Sat 04-Apr-2026"
     },
     "5c4df28bce": {
         "job_id": 7439020,
@@ -10865,7 +10870,8 @@
         "posted_date": "Fri 14-Nov-2025",
         "updated_date": "Fri 20-Mar-2026",
         "url": "https://nuro.ai/careersitem?gh_jid=7396390",
-        "job_board": "greenhouse"
+        "job_board": "greenhouse",
+        "filled_date": "Sat 04-Apr-2026"
     },
     "ba86dd4b42": {
         "job_id": 7351061,
@@ -12036,24 +12042,24 @@
         "internal_job_id": 4599040007,
         "job_name": "Mobile Service Technician, Detroit",
         "source": "lucidmotors",
+        "job_board": "greenhouse",
         "location": "Southfield, MI",
         "posted_date": "Fri 06-Mar-2026",
-        "updated_date": "Wed 25-Mar-2026",
+        "updated_date": "Sat 04-Apr-2026",
         "url": "https://job-boards.greenhouse.io/lucidmotors/jobs/5072644007",
-        "hiring_manger": "Patrick Stephenson; patrickstephenson@lucidmotors.com",
-        "job_board": "greenhouse"
+        "hiring_manger": "Patrick Stephenson; patrickstephenson@lucidmotors.com"
     },
     "716a4f3eed": {
         "job_id": 5072630007,
         "internal_job_id": 4499241007,
         "job_name": "Mobile Service Technician, Plainview",
         "source": "lucidmotors",
+        "job_board": "greenhouse",
         "location": "Plainview, NY",
         "posted_date": "Fri 06-Mar-2026",
-        "updated_date": "Tue 31-Mar-2026",
+        "updated_date": "Sat 04-Apr-2026",
         "url": "https://job-boards.greenhouse.io/lucidmotors/jobs/5072630007",
-        "hiring_manger": "Patrick Stephenson; patrickstephenson@lucidmotors.com",
-        "job_board": "greenhouse"
+        "hiring_manger": "Patrick Stephenson; patrickstephenson@lucidmotors.com"
     },
     "05f5e09098": {
         "job_id": 5072638007,
@@ -13138,7 +13144,8 @@
         "location": "Foster City, CA",
         "posted_date": "Wed 12-Nov-2025",
         "url": "https://jobs.lever.co/zoox/d355532c-5e18-4eaf-9da1-0571c2cbbc96",
-        "job_board": "lever"
+        "job_board": "lever",
+        "filled_date": "Sat 04-Apr-2026"
     },
     "cab82bdb59": {
         "job_id": "cc9a3550-2a36-4b78-8914-872c26bb94da",
@@ -14167,11 +14174,11 @@
         "job_id": "00bede24-f74d-4447-ace1-48638965382e",
         "job_name": "Senior/Staff Software Engineer - Motion Planning",
         "source": "zoox",
+        "job_board": "lever",
         "work_policy": "hybrid",
-        "location": "Boston, MA",
+        "location": "Foster City, CA; Boston, MA",
         "posted_date": "Wed 05-Nov-2025",
-        "url": "https://jobs.lever.co/zoox/00bede24-f74d-4447-ace1-48638965382e",
-        "job_board": "lever"
+        "url": "https://jobs.lever.co/zoox/00bede24-f74d-4447-ace1-48638965382e"
     },
     "33ca55583f": {
         "job_id": "b6799ed0-252b-4535-a908-af77eb130415",
@@ -15700,12 +15707,12 @@
         "internal_job_id": 4602720007,
         "job_name": "Marketing Specialist - East",
         "source": "lucidmotors",
+        "job_board": "greenhouse",
         "location": "Southfield, MI",
         "posted_date": "Mon 09-Mar-2026",
-        "updated_date": "Thu 26-Mar-2026",
+        "updated_date": "Sat 04-Apr-2026",
         "url": "https://job-boards.greenhouse.io/lucidmotors/jobs/5073895007",
-        "hiring_manger": "Kyle Lo; kylelo@lucidmotors.com",
-        "job_board": "greenhouse"
+        "hiring_manger": "Hamad Almosa; hamadalmosa@lucidmotors.com"
     },
     "101c465f99": {
         "job_id": 5073598007,
@@ -16342,7 +16349,7 @@
         "job_board": "greenhouse",
         "location": "Newark, CA",
         "posted_date": "Tue 10-Mar-2026",
-        "updated_date": "Fri 03-Apr-2026",
+        "updated_date": "Sat 04-Apr-2026",
         "url": "https://job-boards.greenhouse.io/lucidmotors/jobs/5072853007",
         "hiring_manger": "Patrick Stephenson; patrickstephenson@lucidmotors.com"
     },
@@ -16398,7 +16405,8 @@
         "job_board": "myworkday",
         "location": "Burlington, Ontario",
         "posted_date": "Thu 02-Apr-2026",
-        "url": "https://cat.wd5.myworkdayjobs.com/en-US/CaterpillarCareers/job/Burlington-Ontario/Senior-Compliance-Risk-Consultant-AML-Officer_R0000354982-1"
+        "url": "https://cat.wd5.myworkdayjobs.com/en-US/CaterpillarCareers/job/Burlington-Ontario/Senior-Compliance-Risk-Consultant-AML-Officer_R0000354982-1",
+        "filled_date": "Sat 04-Apr-2026"
     },
     "d5d858b468": {
         "job_id": "R0000355584",
@@ -17051,7 +17059,7 @@
         "job_board": "greenhouse",
         "location": "Newark, CA",
         "posted_date": "Wed 11-Mar-2026",
-        "updated_date": "Fri 03-Apr-2026",
+        "updated_date": "Sat 04-Apr-2026",
         "url": "https://job-boards.greenhouse.io/lucidmotors/jobs/5076614007",
         "hiring_manger": "Adam Dazell; adamdazell@lucidmotors.com"
     },
@@ -17063,7 +17071,7 @@
         "job_board": "greenhouse",
         "location": "Southfield, MI",
         "posted_date": "Fri 05-Sep-2025",
-        "updated_date": "Fri 03-Apr-2026",
+        "updated_date": "Sat 04-Apr-2026",
         "url": "https://job-boards.greenhouse.io/lucidmotors/jobs/4859193007",
         "hiring_manger": "Adam Dazell; adamdazell@lucidmotors.com"
     },
@@ -17829,12 +17837,12 @@
         "internal_job_id": 4601753007,
         "job_name": "Managing Counsel \u2013 EU Sales, Marketing and Financial Services ",
         "source": "lucidmotors",
+        "job_board": "greenhouse",
         "location": "Amsterdam, NH",
         "posted_date": "Thu 12-Mar-2026",
-        "updated_date": "Tue 31-Mar-2026",
+        "updated_date": "Sat 04-Apr-2026",
         "url": "https://job-boards.greenhouse.io/lucidmotors/jobs/5071759007",
-        "hiring_manger": "Anneke Dirksen; annekedirksen@lucidmotors.com",
-        "job_board": "greenhouse"
+        "hiring_manger": "Anneke Dirksen; annekedirksen@lucidmotors.com"
     },
     "825516256f": {
         "job_id": 4839208007,
@@ -18040,7 +18048,8 @@
         "location": "Guelph, ON, Canada",
         "posted_date": "Thu 12-Mar-2026",
         "url": "https://fa-epmd-saasfaprod1.fa.ocs.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1/job/12894",
-        "job_board": "oraclecloud"
+        "job_board": "oraclecloud",
+        "filled_date": "Sat 04-Apr-2026"
     },
     "f627eded3e": {
         "job_id": 7707921,
@@ -20898,7 +20907,7 @@
         "job_board": "greenhouse",
         "location": "Millbrae, CA",
         "posted_date": "Tue 17-Mar-2026",
-        "updated_date": "Fri 03-Apr-2026",
+        "updated_date": "Sat 04-Apr-2026",
         "url": "https://job-boards.greenhouse.io/lucidmotors/jobs/5081993007",
         "hiring_manger": "Patrick Stephenson; patrickstephenson@lucidmotors.com"
     },
@@ -21323,12 +21332,12 @@
         "internal_job_id": 4605225007,
         "job_name": "Service Assistant",
         "source": "lucidmotors",
+        "job_board": "greenhouse",
         "location": "Rutherford, NJ",
         "posted_date": "Mon 16-Mar-2026",
-        "updated_date": "Wed 25-Mar-2026",
+        "updated_date": "Sat 04-Apr-2026",
         "url": "https://job-boards.greenhouse.io/lucidmotors/jobs/5079461007",
-        "hiring_manger": "Patrick Stephenson; patrickstephenson@lucidmotors.com",
-        "job_board": "greenhouse"
+        "hiring_manger": "Patrick Stephenson; patrickstephenson@lucidmotors.com"
     },
     "43024bdbd3": {
         "job_id": "60747",
@@ -21962,7 +21971,8 @@
         "updated_date": "Wed 01-Apr-2026",
         "url": "https://job-boards.greenhouse.io/lucidmotors/jobs/5082242007",
         "hiring_manger": "Kyle Lo; kylelo@lucidmotors.com",
-        "job_board": "greenhouse"
+        "job_board": "greenhouse",
+        "filled_date": "Sat 04-Apr-2026"
     },
     "85646a3331": {
         "job_id": 4671850005,
@@ -22064,12 +22074,12 @@
         "internal_job_id": 4606157007,
         "job_name": "Sr. CRM Specialist ",
         "source": "lucidmotors",
+        "job_board": "greenhouse",
         "location": "Amsterdam, NH",
         "posted_date": "Wed 18-Mar-2026",
-        "updated_date": "Tue 31-Mar-2026",
+        "updated_date": "Sat 04-Apr-2026",
         "url": "https://job-boards.greenhouse.io/lucidmotors/jobs/5081602007",
-        "hiring_manger": "Anneke Dirksen; annekedirksen@lucidmotors.com",
-        "job_board": "greenhouse"
+        "hiring_manger": "Anneke Dirksen; annekedirksen@lucidmotors.com"
     },
     "26b1845294": {
         "job_id": "12643",
@@ -22104,12 +22114,12 @@
         "internal_job_id": 4606159007,
         "job_name": "Sales Associate, Geneva",
         "source": "lucidmotors",
+        "job_board": "greenhouse",
         "location": "Geneva, GE",
         "posted_date": "Wed 18-Mar-2026",
-        "updated_date": "Tue 31-Mar-2026",
+        "updated_date": "Sat 04-Apr-2026",
         "url": "https://job-boards.greenhouse.io/lucidmotors/jobs/5081606007",
-        "hiring_manger": "Franziska Schropp; franziskaschropp@lucidmotors.com",
-        "job_board": "greenhouse"
+        "hiring_manger": "Franziska Schropp; franziskaschropp@lucidmotors.com"
     },
     "6a80e7605d": {
         "job_id": "12889",
@@ -22199,12 +22209,12 @@
         "internal_job_id": 4592050007,
         "job_name": "Sr. Material Flow Engineer  ",
         "source": "lucidmotors",
+        "job_board": "greenhouse",
         "location": "King Abdullah Economic City, 02",
         "posted_date": "Wed 18-Mar-2026",
-        "updated_date": "Wed 01-Apr-2026",
+        "updated_date": "Sat 04-Apr-2026",
         "url": "https://job-boards.greenhouse.io/lucidmotors/jobs/5050855007",
-        "hiring_manger": "Kholoud AlShamrani; kholoudalshamrani@lucidmotors.com",
-        "job_board": "greenhouse"
+        "hiring_manger": "Kholoud AlShamrani; kholoudalshamrani@lucidmotors.com"
     },
     "16128197d5": {
         "job_id": "R00233552",
@@ -22224,7 +22234,7 @@
         "job_board": "greenhouse",
         "location": "King Abdullah Economic City, 02",
         "posted_date": "Wed 18-Mar-2026",
-        "updated_date": "Fri 03-Apr-2026",
+        "updated_date": "Sat 04-Apr-2026",
         "url": "https://job-boards.greenhouse.io/lucidmotors/jobs/5043627007",
         "hiring_manger": "Kholoud AlShamrani; kholoudalshamrani@lucidmotors.com"
     },
@@ -22491,12 +22501,12 @@
         "internal_job_id": 4605714007,
         "job_name": "Material Planner",
         "source": "lucidmotors",
+        "job_board": "greenhouse",
         "location": "Amsterdam, NH",
         "posted_date": "Thu 19-Mar-2026",
-        "updated_date": "Tue 31-Mar-2026",
+        "updated_date": "Sat 04-Apr-2026",
         "url": "https://job-boards.greenhouse.io/lucidmotors/jobs/5080526007",
-        "hiring_manger": "Anneke Dirksen; annekedirksen@lucidmotors.com",
-        "job_board": "greenhouse"
+        "hiring_manger": "Anneke Dirksen; annekedirksen@lucidmotors.com"
     },
     "06d6a0e259": {
         "job_id": "R00234432",
@@ -22704,7 +22714,8 @@
         "job_board": "myworkday",
         "location": "Burlington, Ontario",
         "posted_date": "Fri 20-Mar-2026",
-        "url": "https://cat.wd5.myworkdayjobs.com/en-US/CaterpillarCareers/job/Burlington-Ontario/Bilingual-Sales-Support-Representative_R0000357803-1"
+        "url": "https://cat.wd5.myworkdayjobs.com/en-US/CaterpillarCareers/job/Burlington-Ontario/Bilingual-Sales-Support-Representative_R0000357803-1",
+        "filled_date": "Sat 04-Apr-2026"
     },
     "288056ddb8": {
         "job_id": 5083369007,
@@ -22884,7 +22895,8 @@
         "location": "Canada",
         "posted_date": "Fri 20-Mar-2026",
         "url": "https://ehtc.fa.ca2.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1/job/115482",
-        "job_board": "oraclecloud"
+        "job_board": "oraclecloud",
+        "filled_date": "Sat 04-Apr-2026"
     },
     "90bd5ff042": {
         "job_id": "b5908722-a9c4-4463-ad53-df07b678c64e",
@@ -24951,7 +24963,8 @@
         "work_policy": "Onsite",
         "location": "Woodstock, Ontario, Canada",
         "posted_date": "Mon 23-Mar-2026",
-        "url": "https://generalmotors.wd5.myworkdayjobs.com/en-US/Careers_GM/job/Woodstock-Ontario-Canada/Temporary-Part-Time-Warehouse-Associate_JR-202606413"
+        "url": "https://generalmotors.wd5.myworkdayjobs.com/en-US/Careers_GM/job/Woodstock-Ontario-Canada/Temporary-Part-Time-Warehouse-Associate_JR-202606413",
+        "filled_date": "Sat 04-Apr-2026"
     },
     "6eeac43225": {
         "job_id": "bce6bbeb-fa36-492e-b618-cfe9c5daa3d1",
@@ -25052,12 +25065,12 @@
         "internal_job_id": 4532211007,
         "job_name": "Sr. Mobile Service Technician, San Diego",
         "source": "lucidmotors",
+        "job_board": "greenhouse",
         "location": "San Diego, CA",
         "posted_date": "Mon 23-Mar-2026",
-        "updated_date": "Wed 01-Apr-2026",
+        "updated_date": "Sat 04-Apr-2026",
         "url": "https://job-boards.greenhouse.io/lucidmotors/jobs/5087207007",
-        "hiring_manger": "Patrick Stephenson; patrickstephenson@lucidmotors.com",
-        "job_board": "greenhouse"
+        "hiring_manger": "Patrick Stephenson; patrickstephenson@lucidmotors.com"
     },
     "b1faef9cb8": {
         "job_id": "JR-202605571",
@@ -25067,7 +25080,8 @@
         "work_policy": "Onsite",
         "location": "St. Catharines, Ontario, Canada",
         "posted_date": "Mon 23-Mar-2026",
-        "url": "https://generalmotors.wd5.myworkdayjobs.com/en-US/Careers_GM/job/St-Catharines-Ontario-Canada/Business-Manager_JR-202605571"
+        "url": "https://generalmotors.wd5.myworkdayjobs.com/en-US/Careers_GM/job/St-Catharines-Ontario-Canada/Business-Manager_JR-202605571",
+        "filled_date": "Sat 04-Apr-2026"
     },
     "7a487f79bd": {
         "job_id": 5085558007,
@@ -25077,7 +25091,7 @@
         "job_board": "greenhouse",
         "location": "Houston, TX",
         "posted_date": "Mon 23-Mar-2026",
-        "updated_date": "Fri 03-Apr-2026",
+        "updated_date": "Sat 04-Apr-2026",
         "url": "https://job-boards.greenhouse.io/lucidmotors/jobs/5085558007",
         "hiring_manger": "Spencer Caldwell; spencercaldwell@lucidmotors.com"
     },
@@ -25118,7 +25132,8 @@
         "work_policy": "Onsite",
         "location": "St. Catharines, Ontario, Canada",
         "posted_date": "Mon 23-Mar-2026",
-        "url": "https://generalmotors.wd5.myworkdayjobs.com/en-US/Careers_GM/job/St-Catharines-Ontario-Canada/Area-Manager_JR-202605562"
+        "url": "https://generalmotors.wd5.myworkdayjobs.com/en-US/Careers_GM/job/St-Catharines-Ontario-Canada/Area-Manager_JR-202605562",
+        "filled_date": "Sat 04-Apr-2026"
     },
     "91a2a232be": {
         "job_id": "115669",
@@ -25399,8 +25414,7 @@
         "job_board": "myworkday",
         "location": "Montreal Area",
         "posted_date": "Thu 01-Jan-2026",
-        "url": "https://ag.wd3.myworkdayjobs.com/en-US/Airbus/job/Montreal-Area/Mcanicien-de-prvol---Preflight-Mechanic_JR10307971-1",
-        "filled_date": "Fri 03-Apr-2026"
+        "url": "https://ag.wd3.myworkdayjobs.com/en-US/Airbus/job/Montreal-Area/Mcanicien-de-prvol---Preflight-Mechanic_JR10307971-1"
     },
     "8c360b9a0e": {
         "job_id": "R0033414",
@@ -25701,8 +25715,7 @@
         "job_board": "myworkday",
         "location": "Montreal Area",
         "posted_date": "Tue 24-Mar-2026",
-        "url": "https://ag.wd3.myworkdayjobs.com/en-US/Airbus/job/Montreal-Area/Assembleur---Global-8000--Soir-4x10h-_JR10402184",
-        "filled_date": "Fri 03-Apr-2026"
+        "url": "https://ag.wd3.myworkdayjobs.com/en-US/Airbus/job/Montreal-Area/Assembleur---Global-8000--Soir-4x10h-_JR10402184"
     },
     "8fb4b5a82a": {
         "job_id": 8463936002,
@@ -26206,13 +26219,13 @@
     "1fcf3af3dd": {
         "job_id": 8406966002,
         "internal_job_id": 6356132002,
-        "job_name": "Staff Business Process Manager - Supply Chain",
+        "job_name": "Supply Chain Process & Analytics Manager",
         "source": "aurorainnovation",
+        "job_board": "greenhouse",
         "location": "Mountain View, California",
         "posted_date": "Fri 20-Mar-2026",
-        "updated_date": "Thu 26-Mar-2026",
-        "url": "https://aurora.tech/jobs/8406966002?gh_jid=8406966002",
-        "job_board": "greenhouse"
+        "updated_date": "Sat 04-Apr-2026",
+        "url": "https://aurora.tech/jobs/8406966002?gh_jid=8406966002"
     },
     "8e403b7b44": {
         "job_id": "R0036223",
@@ -26599,7 +26612,8 @@
         "posted_date": "Sat 10-Jan-2026",
         "updated_date": "Fri 06-Mar-2026",
         "url": "https://aurora.tech/jobs/8369655002?gh_jid=8369655002",
-        "job_board": "greenhouse"
+        "job_board": "greenhouse",
+        "filled_date": "Sat 04-Apr-2026"
     },
     "c5fd5f42cf": {
         "job_id": 8140170002,
@@ -27148,7 +27162,8 @@
         "posted_date": "Sat 10-Jan-2026",
         "updated_date": "Fri 06-Mar-2026",
         "url": "https://aurora.tech/jobs/8359479002?gh_jid=8359479002",
-        "job_board": "greenhouse"
+        "job_board": "greenhouse",
+        "filled_date": "Sat 04-Apr-2026"
     },
     "6c701416fa": {
         "job_id": 8464272002,
@@ -27617,13 +27632,13 @@
     "b52d49268d": {
         "job_id": 8472242002,
         "internal_job_id": 6356132002,
-        "job_name": "Staff Business Process Manager - Supply Chain",
+        "job_name": "Supply Chain Process & Analytics Manager",
         "source": "aurorainnovation",
+        "job_board": "greenhouse",
         "location": "San Francisco, California",
         "posted_date": "Fri 20-Mar-2026",
-        "updated_date": "Thu 26-Mar-2026",
-        "url": "https://aurora.tech/jobs/8472242002?gh_jid=8472242002",
-        "job_board": "greenhouse"
+        "updated_date": "Sat 04-Apr-2026",
+        "url": "https://aurora.tech/jobs/8472242002?gh_jid=8472242002"
     },
     "3d7deb7e57": {
         "job_id": "JR10392833",
@@ -27930,12 +27945,12 @@
     "0238de8b03": {
         "job_id": 8448771002,
         "internal_job_id": 6374944002,
-        "job_name": "Truck Operations & Maintenance Specialist ",
+        "job_name": "CDL A Truck Operations & Maintenance Specialist ",
         "source": "aurorainnovation",
         "job_board": "greenhouse",
         "location": "Laredo, Texas",
         "posted_date": "Mon 16-Mar-2026",
-        "updated_date": "Thu 02-Apr-2026",
+        "updated_date": "Fri 03-Apr-2026",
         "url": "https://aurora.tech/jobs/8448771002?gh_jid=8448771002"
     },
     "7ec6c0d4ac": {
@@ -28249,7 +28264,8 @@
         "source": "weir",
         "location": "Halifax",
         "url": "https://weir.wd3.myworkdayjobs.com/en-US/Weir_External_Careers/job/Halifax/Naval-Systems-Specialist---NETE_R0028307",
-        "job_board": "myworkday"
+        "job_board": "myworkday",
+        "filled_date": "Sat 04-Apr-2026"
     },
     "a909770447": {
         "job_id": 8184520002,
@@ -28630,7 +28646,8 @@
         "posted_date": "Sat 10-Jan-2026",
         "updated_date": "Fri 06-Mar-2026",
         "url": "https://aurora.tech/jobs/8369657002?gh_jid=8369657002",
-        "job_board": "greenhouse"
+        "job_board": "greenhouse",
+        "filled_date": "Sat 04-Apr-2026"
     },
     "a3ec623fa5": {
         "job_id": "JR10376667",
@@ -29444,8 +29461,7 @@
         "job_board": "myworkday",
         "location": "Montreal Area",
         "posted_date": "Fri 13-Mar-2026",
-        "url": "https://ag.wd3.myworkdayjobs.com/en-US/Airbus/job/Montreal-Area/Spcialiste-en-ingnierie-calcul-de-contraintes---Composites---Airframe-Stress-Engineering-specialist---Composite_JR10390812",
-        "filled_date": "Fri 03-Apr-2026"
+        "url": "https://ag.wd3.myworkdayjobs.com/en-US/Airbus/job/Montreal-Area/Spcialiste-en-ingnierie-calcul-de-contraintes---Composites---Airframe-Stress-Engineering-specialist---Composite_JR10390812"
     },
     "6c8c3ad48f": {
         "job_id": 8403217002,
@@ -29456,7 +29472,8 @@
         "posted_date": "Wed 04-Feb-2026",
         "updated_date": "Fri 06-Mar-2026",
         "url": "https://aurora.tech/jobs/8403217002?gh_jid=8403217002",
-        "job_board": "greenhouse"
+        "job_board": "greenhouse",
+        "filled_date": "Sat 04-Apr-2026"
     },
     "2d250fecc2": {
         "job_id": "JR10389713",
@@ -30610,11 +30627,11 @@
         "internal_job_id": 3297908,
         "job_name": "Mission Operations Coordinator, Santa Clara, CA (Day Shift)",
         "source": "nuro",
+        "job_board": "greenhouse",
         "location": "California - Santa Clara",
         "posted_date": "Wed 25-Mar-2026",
-        "updated_date": "Wed 25-Mar-2026",
-        "url": "https://nuro.ai/careersitem?gh_jid=7752003",
-        "job_board": "greenhouse"
+        "updated_date": "Fri 03-Apr-2026",
+        "url": "https://nuro.ai/careersitem?gh_jid=7752003"
     },
     "7165ce61ca": {
         "job_id": 8466422002,
@@ -30690,12 +30707,12 @@
         "internal_job_id": 4605648007,
         "job_name": "Senior Power Electronics Controls Engineer",
         "source": "lucidmotors",
+        "job_board": "greenhouse",
         "location": "Newark, CA",
         "posted_date": "Wed 25-Mar-2026",
-        "updated_date": "Tue 31-Mar-2026",
+        "updated_date": "Sat 04-Apr-2026",
         "url": "https://job-boards.greenhouse.io/lucidmotors/jobs/5080395007",
-        "hiring_manger": "Judy Kyono; judykyono@lucidmotors.com",
-        "job_board": "greenhouse"
+        "hiring_manger": "Judy Kyono; judykyono@lucidmotors.com"
     },
     "881648ccc1": {
         "job_id": "4f75dce0-9960-4d95-883f-ae8c2745a38c",
@@ -31242,9 +31259,9 @@
         "job_board": "greenhouse",
         "location": "Phoenix, AZ",
         "posted_date": "Thu 26-Mar-2026",
-        "updated_date": "Fri 03-Apr-2026",
+        "updated_date": "Sat 04-Apr-2026",
         "url": "https://job-boards.greenhouse.io/lucidmotors/jobs/5089487007",
-        "hiring_manger": "Kyle Lo; kylelo@lucidmotors.com"
+        "hiring_manger": "Aysha Raja; aysharaja@lucidmotors.com"
     },
     "9597e00242": {
         "job_id": "12c40987-656a-4ec3-9fc0-3c0801c74238",
@@ -31398,7 +31415,7 @@
         "job_board": "greenhouse",
         "location": "Chicago, IL",
         "posted_date": "Thu 26-Mar-2026",
-        "updated_date": "Fri 03-Apr-2026",
+        "updated_date": "Sat 04-Apr-2026",
         "url": "https://job-boards.greenhouse.io/lucidmotors/jobs/5089493007",
         "hiring_manger": "Patrick Stephenson; patrickstephenson@lucidmotors.com"
     },
@@ -31455,12 +31472,12 @@
         "internal_job_id": 4602720007,
         "job_name": "Marketing Specialist - East",
         "source": "lucidmotors",
+        "job_board": "greenhouse",
         "location": "New York, United States",
         "posted_date": "Thu 26-Mar-2026",
-        "updated_date": "Thu 26-Mar-2026",
+        "updated_date": "Sat 04-Apr-2026",
         "url": "https://job-boards.greenhouse.io/lucidmotors/jobs/5091412007",
-        "hiring_manger": "Kyle Lo; kylelo@lucidmotors.com",
-        "job_board": "greenhouse"
+        "hiring_manger": "Hamad Almosa; hamadalmosa@lucidmotors.com"
     },
     "63f39af76b": {
         "job_id": 5085462007,
@@ -31470,7 +31487,7 @@
         "job_board": "greenhouse",
         "location": "Phoenix, AZ",
         "posted_date": "Thu 26-Mar-2026",
-        "updated_date": "Fri 03-Apr-2026",
+        "updated_date": "Sat 04-Apr-2026",
         "url": "https://job-boards.greenhouse.io/lucidmotors/jobs/5085462007",
         "hiring_manger": "Chris Pauly; chrispauly@lucidmotors.com"
     },
@@ -31497,12 +31514,12 @@
         "internal_job_id": 4602720007,
         "job_name": "Marketing Specialist - East",
         "source": "lucidmotors",
+        "job_board": "greenhouse",
         "location": "New Jersey, United States",
         "posted_date": "Thu 26-Mar-2026",
-        "updated_date": "Thu 26-Mar-2026",
+        "updated_date": "Sat 04-Apr-2026",
         "url": "https://job-boards.greenhouse.io/lucidmotors/jobs/5091413007",
-        "hiring_manger": "Kyle Lo; kylelo@lucidmotors.com",
-        "job_board": "greenhouse"
+        "hiring_manger": "Hamad Almosa; hamadalmosa@lucidmotors.com"
     },
     "7d5412d068": {
         "job_id": "R00236494",
@@ -31610,7 +31627,7 @@
         "job_board": "greenhouse",
         "location": "Dusseldorf, NW",
         "posted_date": "Fri 27-Mar-2026",
-        "updated_date": "Fri 03-Apr-2026",
+        "updated_date": "Sat 04-Apr-2026",
         "url": "https://job-boards.greenhouse.io/lucidmotors/jobs/5090618007",
         "hiring_manger": "Franziska Schropp; franziskaschropp@lucidmotors.com"
     },
@@ -31698,7 +31715,7 @@
         "job_board": "greenhouse",
         "location": "Frankfurt, HE",
         "posted_date": "Fri 27-Mar-2026",
-        "updated_date": "Fri 03-Apr-2026",
+        "updated_date": "Sat 04-Apr-2026",
         "url": "https://job-boards.greenhouse.io/lucidmotors/jobs/5090589007",
         "hiring_manger": "Franziska Schropp; franziskaschropp@lucidmotors.com"
     },
@@ -31817,7 +31834,7 @@
         "job_board": "greenhouse",
         "location": "Amsterdam, NH",
         "posted_date": "Fri 27-Mar-2026",
-        "updated_date": "Fri 03-Apr-2026",
+        "updated_date": "Sat 04-Apr-2026",
         "url": "https://job-boards.greenhouse.io/lucidmotors/jobs/5087859007",
         "hiring_manger": "Anneke Dirksen; annekedirksen@lucidmotors.com"
     },
@@ -31869,7 +31886,7 @@
         "job_board": "greenhouse",
         "location": "Boston, MA",
         "posted_date": "Fri 27-Mar-2026",
-        "updated_date": "Fri 03-Apr-2026",
+        "updated_date": "Sat 04-Apr-2026",
         "url": "https://job-boards.greenhouse.io/lucidmotors/jobs/5092275007",
         "hiring_manger": "Spencer Caldwell; spencercaldwell@lucidmotors.com"
     },
@@ -31910,7 +31927,8 @@
         "posted_date": "Fri 27-Mar-2026",
         "updated_date": "Fri 27-Mar-2026",
         "url": "https://job-boards.greenhouse.io/lucidmotors/jobs/5092493007",
-        "hiring_manger": "Kyle Lo; kylelo@lucidmotors.com"
+        "hiring_manger": "Kyle Lo; kylelo@lucidmotors.com",
+        "filled_date": "Sat 04-Apr-2026"
     },
     "3da25804e4": {
         "job_id": "d763de1c-079a-4f0a-b903-0ec1f21a2da0",
@@ -31951,7 +31969,8 @@
         "posted_date": "Fri 27-Mar-2026",
         "updated_date": "Fri 27-Mar-2026",
         "url": "https://job-boards.greenhouse.io/lucidmotors/jobs/4918023007",
-        "hiring_manger": "Hamad Almosa; hamadalmosa@lucidmotors.com"
+        "hiring_manger": "Hamad Almosa; hamadalmosa@lucidmotors.com",
+        "filled_date": "Sat 04-Apr-2026"
     },
     "048b473a51": {
         "job_id": "JR10402635",
@@ -32025,7 +32044,8 @@
         "posted_date": "Fri 27-Mar-2026",
         "updated_date": "Mon 30-Mar-2026",
         "url": "https://job-boards.greenhouse.io/lucidmotors/jobs/5092486007",
-        "hiring_manger": "Kyle Lo; kylelo@lucidmotors.com"
+        "hiring_manger": "Kyle Lo; kylelo@lucidmotors.com",
+        "filled_date": "Sat 04-Apr-2026"
     },
     "1648c4d409": {
         "job_id": "919",
@@ -32087,7 +32107,7 @@
         "job_board": "greenhouse",
         "location": "Casa Grande, AZ",
         "posted_date": "Fri 27-Mar-2026",
-        "updated_date": "Fri 03-Apr-2026",
+        "updated_date": "Sat 04-Apr-2026",
         "url": "https://job-boards.greenhouse.io/lucidmotors/jobs/5091975007",
         "hiring_manger": "Ruben Gonzalez; rubengonzalezjr@lucidmotors.com"
     },
@@ -32169,7 +32189,7 @@
         "job_board": "greenhouse",
         "location": "Southfield, MI",
         "posted_date": "Fri 27-Mar-2026",
-        "updated_date": "Fri 03-Apr-2026",
+        "updated_date": "Sat 04-Apr-2026",
         "url": "https://job-boards.greenhouse.io/lucidmotors/jobs/5090211007",
         "hiring_manger": "Michael Crimmins; michaelcrimmins@lucidmotors.com"
     },
@@ -32200,7 +32220,7 @@
         "job_board": "greenhouse",
         "location": "Southfield, MI",
         "posted_date": "Fri 27-Mar-2026",
-        "updated_date": "Fri 03-Apr-2026",
+        "updated_date": "Sat 04-Apr-2026",
         "url": "https://job-boards.greenhouse.io/lucidmotors/jobs/5090216007",
         "hiring_manger": "Michael Crimmins; michaelcrimmins@lucidmotors.com"
     },
@@ -32349,7 +32369,7 @@
         "job_board": "greenhouse",
         "location": "Dusseldorf, NW",
         "posted_date": "Mon 30-Mar-2026",
-        "updated_date": "Fri 03-Apr-2026",
+        "updated_date": "Sat 04-Apr-2026",
         "url": "https://job-boards.greenhouse.io/lucidmotors/jobs/5091716007",
         "hiring_manger": "Franziska Schropp; franziskaschropp@lucidmotors.com"
     },
@@ -32440,7 +32460,7 @@
         "job_board": "greenhouse",
         "location": "Toulouse, 31",
         "posted_date": "Mon 30-Mar-2026",
-        "updated_date": "Wed 01-Apr-2026",
+        "updated_date": "Sat 04-Apr-2026",
         "url": "https://job-boards.greenhouse.io/lucidmotors/jobs/5092715007",
         "hiring_manger": "Franziska Schropp; franziskaschropp@lucidmotors.com"
     },
@@ -32462,7 +32482,8 @@
         "location": "Mississauga, Ontario, CAN, L5N 5N1; Kingston, Ontario, CAN, K7K 6A9; Kitchener, Ontario, CAN, N2C 2M3; Ottawa, Ontario, CAN, K1B 5N2; Whitby, Ontario, CAN, L1N 9X1",
         "creation_date": "Mon 23-Mar-2026",
         "posted_date": "Wed 25-Mar-2026",
-        "url": "https://eaton.eightfold.ai/careers/job/687235794129"
+        "url": "https://eaton.eightfold.ai/careers/job/687235794129",
+        "filled_date": "Sat 04-Apr-2026"
     },
     "e6f0fe013e": {
         "job_id": "JR102892",
@@ -32518,7 +32539,7 @@
         "job_board": "greenhouse",
         "location": "Costa Mesa, CA",
         "posted_date": "Mon 30-Mar-2026",
-        "updated_date": "Fri 03-Apr-2026",
+        "updated_date": "Sat 04-Apr-2026",
         "url": "https://job-boards.greenhouse.io/lucidmotors/jobs/5053150007",
         "hiring_manger": "Patrick Stephenson; patrickstephenson@lucidmotors.com"
     },
@@ -32530,7 +32551,7 @@
         "job_board": "greenhouse",
         "location": "Amsterdam, NH",
         "posted_date": "Mon 30-Mar-2026",
-        "updated_date": "Fri 03-Apr-2026",
+        "updated_date": "Sat 04-Apr-2026",
         "url": "https://job-boards.greenhouse.io/lucidmotors/jobs/5089279007",
         "hiring_manger": "Anneke Dirksen; annekedirksen@lucidmotors.com"
     },
@@ -32894,7 +32915,7 @@
         "job_board": "greenhouse",
         "location": "King Abdullah Economic City, 02",
         "posted_date": "Mon 22-Sep-2025",
-        "updated_date": "Wed 01-Apr-2026",
+        "updated_date": "Sat 04-Apr-2026",
         "url": "https://job-boards.greenhouse.io/lucidmotors/jobs/4839119007",
         "hiring_manger": "Abdullah Murshid; abdullahmurshid@lucidmotors.com"
     },
@@ -32906,7 +32927,7 @@
         "job_board": "greenhouse",
         "location": "Newark, CA",
         "posted_date": "Tue 31-Mar-2026",
-        "updated_date": "Fri 03-Apr-2026",
+        "updated_date": "Sat 04-Apr-2026",
         "url": "https://job-boards.greenhouse.io/lucidmotors/jobs/5093717007",
         "hiring_manger": "Veronica Bruner; veronicabruner@lucidmotors.com"
     },
@@ -32978,12 +32999,12 @@
     "31b3c241a9": {
         "job_id": 8336063002,
         "internal_job_id": 6329085002,
-        "job_name": "Software Engineer, Behavior Planning ML Platform",
+        "job_name": "Software Engineer II, Behavior Planning ML Platform",
         "source": "aurorainnovation",
         "job_board": "greenhouse",
         "location": "Pittsburgh, Pennsylvania",
         "posted_date": "Tue 31-Mar-2026",
-        "updated_date": "Tue 31-Mar-2026",
+        "updated_date": "Fri 03-Apr-2026",
         "url": "https://aurora.tech/jobs/8336063002?gh_jid=8336063002"
     },
     "5206b307ef": {
@@ -33180,7 +33201,8 @@
         "posted_date": "Tue 31-Mar-2026",
         "updated_date": "Fri 03-Apr-2026",
         "url": "https://job-boards.greenhouse.io/lucidmotors/jobs/5091374007",
-        "hiring_manger": "Ruben Gonzalez; rubengonzalezjr@lucidmotors.com"
+        "hiring_manger": "Ruben Gonzalez; rubengonzalezjr@lucidmotors.com",
+        "filled_date": "Sat 04-Apr-2026"
     },
     "f81b3bad48": {
         "job_id": "JR10402841",
@@ -33358,7 +33380,7 @@
         "job_board": "greenhouse",
         "location": "Newark, CA",
         "posted_date": "Tue 31-Mar-2026",
-        "updated_date": "Fri 03-Apr-2026",
+        "updated_date": "Sat 04-Apr-2026",
         "url": "https://job-boards.greenhouse.io/lucidmotors/jobs/4955192007",
         "hiring_manger": "Adam Dazell; adamdazell@lucidmotors.com"
     },
@@ -33478,7 +33500,7 @@
         "job_board": "greenhouse",
         "location": "Montreal, QC",
         "posted_date": "Tue 31-Mar-2026",
-        "updated_date": "Tue 31-Mar-2026",
+        "updated_date": "Sat 04-Apr-2026",
         "url": "https://job-boards.greenhouse.io/lucidmotors/jobs/5095165007",
         "hiring_manger": "Spencer Caldwell; spencercaldwell@lucidmotors.com"
     },
@@ -33551,7 +33573,7 @@
         "job_board": "greenhouse",
         "location": "Newark, CA",
         "posted_date": "Wed 01-Apr-2026",
-        "updated_date": "Fri 03-Apr-2026",
+        "updated_date": "Sat 04-Apr-2026",
         "url": "https://job-boards.greenhouse.io/lucidmotors/jobs/5093681007",
         "hiring_manger": "Veronica Bruner; veronicabruner@lucidmotors.com"
     },
@@ -33593,7 +33615,7 @@
         "job_board": "greenhouse",
         "location": "Casa Grande, AZ",
         "posted_date": "Tue 31-Mar-2026",
-        "updated_date": "Fri 03-Apr-2026",
+        "updated_date": "Sat 04-Apr-2026",
         "url": "https://job-boards.greenhouse.io/lucidmotors/jobs/5091313007",
         "hiring_manger": "Anya Mirzoyan; anyamirzoyan@lucidmotors.com"
     },
@@ -33654,7 +33676,7 @@
         "job_board": "greenhouse",
         "location": "King Abdullah Economic City, 02",
         "posted_date": "Tue 31-Mar-2026",
-        "updated_date": "Fri 03-Apr-2026",
+        "updated_date": "Sat 04-Apr-2026",
         "url": "https://job-boards.greenhouse.io/lucidmotors/jobs/5092970007",
         "hiring_manger": "Kholoud AlShamrani; kholoudalshamrani@lucidmotors.com"
     },
@@ -34674,8 +34696,7 @@
         "location": "Kitchener, Ontario, CAN, N2C 2M3",
         "creation_date": "Mon 23-Mar-2026",
         "posted_date": "Tue 31-Mar-2026",
-        "url": "https://eaton.eightfold.ai/careers/job/687235794813",
-        "filled_date": "Fri 03-Apr-2026"
+        "url": "https://eaton.eightfold.ai/careers/job/687235794813"
     },
     "905715412a": {
         "job_id": "8b81178b-56e2-4cf8-868c-923158fd2213",
@@ -34716,5 +34737,169 @@
         "location": "Foster City, CA; Fremont, CA",
         "posted_date": "Fri 03-Apr-2026",
         "url": "https://jobs.lever.co/zoox/6440d17a-a678-4ac1-ba2f-6345a05bdfb3"
+    },
+    "69d41de4de": {
+        "job_id": 4679398005,
+        "internal_job_id": 4427878005,
+        "job_name": "Technical Lead, Mining Autonomy Platform ",
+        "source": "appliedintuition",
+        "job_board": "greenhouse",
+        "location": "Sunnyvale, California, United States",
+        "posted_date": "Fri 03-Apr-2026",
+        "updated_date": "Fri 03-Apr-2026",
+        "url": "https://boards.greenhouse.io/appliedintuition/jobs/4679398005?gh_jid=4679398005"
+    },
+    "37e3b0ffd7": {
+        "job_id": "a1782b8d-4a93-432e-bc13-9f6e9b96878e",
+        "job_name": "Staff Mechanical Engineer ",
+        "source": "bedrock robotics",
+        "job_board": "ashbyhq",
+        "work_policy": "FullTime",
+        "location": "San Francisco, CA",
+        "url": "https://jobs.ashbyhq.com/bedrock-robotics/a1782b8d-4a93-432e-bc13-9f6e9b96878e"
+    },
+    "baa4e9e8cf": {
+        "job_id": 4208827009,
+        "internal_job_id": 4122226009,
+        "job_name": "Class A Driver",
+        "source": "kodiak",
+        "job_board": "greenhouse",
+        "location": "Lancaster, TX",
+        "posted_date": "Fri 03-Apr-2026",
+        "updated_date": "Fri 03-Apr-2026",
+        "url": "https://job-boards.greenhouse.io/kodiak/jobs/4208827009",
+        "hiring_manger": "Nathan Franco; nathan@kodiak.ai"
+    },
+    "4f9d5c92ee": {
+        "job_id": "5c3366a4-a6a6-4d12-8f7d-a06e0dd7621a",
+        "job_name": "Asset Management - Commercial Lead",
+        "source": "intersect",
+        "job_board": "lever",
+        "work_policy": "remote",
+        "location": "United States",
+        "posted_date": "Fri 03-Apr-2026",
+        "url": "https://jobs.lever.co/intersect/5c3366a4-a6a6-4d12-8f7d-a06e0dd7621a"
+    },
+    "cd1998489d": {
+        "job_id": "7bec2849-7009-4da6-bf47-aaf5ec725a63",
+        "job_name": "Master Production Scheduler, Advanced Hardware Manufacturing",
+        "source": "zoox",
+        "job_board": "lever",
+        "work_policy": "onsite",
+        "location": "Foster City, CA",
+        "posted_date": "Fri 03-Apr-2026",
+        "url": "https://jobs.lever.co/zoox/7bec2849-7009-4da6-bf47-aaf5ec725a63"
+    },
+    "690c4016bc": {
+        "job_id": "ca67aa9c-d647-41d5-a45b-38d94304344a",
+        "job_name": "Senior / Staff Software Engineer, Localization",
+        "source": "waabi",
+        "job_board": "lever",
+        "work_policy": "hybrid",
+        "location": "San Francisco, CA; Pittsburgh, PA; Remote Canada; Remote US; Toronto, ON",
+        "posted_date": "Fri 03-Apr-2026",
+        "url": "https://jobs.lever.co/waabi/ca67aa9c-d647-41d5-a45b-38d94304344a"
+    },
+    "1c2cf40952": {
+        "job_id": "0e0ba69c-ea22-4bff-ac40-8e3e5674ff90",
+        "job_name": "Senior / Staff Software Engineer, Mapping",
+        "source": "waabi",
+        "job_board": "lever",
+        "work_policy": "hybrid",
+        "location": "San Francisco, CA; Pittsburgh, PA; Remote Canada; Remote US; Toronto, ON",
+        "posted_date": "Fri 03-Apr-2026",
+        "url": "https://jobs.lever.co/waabi/0e0ba69c-ea22-4bff-ac40-8e3e5674ff90"
+    },
+    "8342134126": {
+        "job_id": 5096630007,
+        "internal_job_id": 4612875007,
+        "job_name": "Logistics Area Manager",
+        "source": "lucidmotors",
+        "job_board": "greenhouse",
+        "location": "Casa Grande, AZ",
+        "posted_date": "Fri 03-Apr-2026",
+        "updated_date": "Sat 04-Apr-2026",
+        "url": "https://job-boards.greenhouse.io/lucidmotors/jobs/5096630007",
+        "hiring_manger": "Ruben Gonzalez; rubengonzalezjr@lucidmotors.com"
+    },
+    "65affea781": {
+        "job_id": 5099678007,
+        "internal_job_id": 4564147007,
+        "job_name": "Part Time Brand Ambassador",
+        "source": "lucidmotors",
+        "job_board": "greenhouse",
+        "location": "Santa Clara, CA",
+        "posted_date": "Fri 03-Apr-2026",
+        "updated_date": "Fri 03-Apr-2026",
+        "url": "https://job-boards.greenhouse.io/lucidmotors/jobs/5099678007",
+        "hiring_manger": "Kyle Lo; kylelo@lucidmotors.com"
+    },
+    "b648c73bdc": {
+        "job_id": 5099677007,
+        "internal_job_id": 4591908007,
+        "job_name": "Sales Specialist",
+        "source": "lucidmotors",
+        "job_board": "greenhouse",
+        "location": "Denver, CO",
+        "posted_date": "Fri 03-Apr-2026",
+        "updated_date": "Sat 04-Apr-2026",
+        "url": "https://job-boards.greenhouse.io/lucidmotors/jobs/5099677007",
+        "hiring_manger": "Anya Mirzoyan; anyamirzoyan@lucidmotors.com"
+    },
+    "b7c84243b8": {
+        "job_id": 5099673007,
+        "internal_job_id": 4521438007,
+        "job_name": "Sales Specialist",
+        "source": "lucidmotors",
+        "job_board": "greenhouse",
+        "location": "San Diego, CA",
+        "posted_date": "Fri 03-Apr-2026",
+        "updated_date": "Fri 03-Apr-2026",
+        "url": "https://job-boards.greenhouse.io/lucidmotors/jobs/5099673007",
+        "hiring_manger": "Hamad Almosa; hamadalmosa@lucidmotors.com"
+    },
+    "83436c39a4": {
+        "job_id": 5099674007,
+        "internal_job_id": 4523876007,
+        "job_name": "Sales Specialist",
+        "source": "lucidmotors",
+        "job_board": "greenhouse",
+        "location": "Torrance, CA",
+        "posted_date": "Fri 03-Apr-2026",
+        "updated_date": "Fri 03-Apr-2026",
+        "url": "https://job-boards.greenhouse.io/lucidmotors/jobs/5099674007",
+        "hiring_manger": "Kyle Lo; kylelo@lucidmotors.com"
+    },
+    "3df055c045": {
+        "job_id": 5097551007,
+        "internal_job_id": 4613309007,
+        "job_name": "Studio Manager ",
+        "source": "lucidmotors",
+        "job_board": "greenhouse",
+        "location": "Denver, CO",
+        "posted_date": "Fri 03-Apr-2026",
+        "updated_date": "Fri 03-Apr-2026",
+        "url": "https://job-boards.greenhouse.io/lucidmotors/jobs/5097551007",
+        "hiring_manger": "None; None"
+    },
+    "2c7dee26f4": {
+        "job_id": 8488151002,
+        "internal_job_id": 6390524002,
+        "job_name": "Director, Technical Program Management",
+        "source": "torcrobotics",
+        "job_board": "greenhouse",
+        "location": "Ann Arbor, MI, Remote - US",
+        "posted_date": "Fri 03-Apr-2026",
+        "updated_date": "Fri 03-Apr-2026",
+        "url": "https://job-boards.greenhouse.io/torcrobotics/jobs/8488151002"
+    },
+    "bbf6531932": {
+        "job_id": "R0036531",
+        "job_name": "Head of Quality and Transformation",
+        "source": "weir",
+        "job_board": "myworkday",
+        "work_policy": "No",
+        "location": "West Valley City",
+        "url": "https://weir.wd3.myworkdayjobs.com/en-US/Weir_External_Careers/job/West-Valley-City/Head-of-Quality-and-Transformation_R0036531"
     }
 }

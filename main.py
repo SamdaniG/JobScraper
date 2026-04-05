@@ -105,6 +105,10 @@ def main(args, scrapers_to_run, logger= None):
     db = updating_db(db, all_scraped_jobs, new_jobs, updated_jobs, logger)
     # notify(db, scrapers_to_run, filled_jobs, new_jobs, logger, EMAIL_ACTIVE)
 
+    # if len(new_jobs)>10:
+    # send_individual_new_job = False if len(new_jobs)>10 else True
+    send_individual_new_job = len(new_jobs)<= 10
+
     if EMAIL_ACTIVE:
         # from emailer import send_email
         from notifications.emailer import send_email
@@ -189,13 +193,15 @@ def main(args, scrapers_to_run, logger= None):
                 <a href="{job['url']}">{job["job_name"]}</a>
                 </p>
                 """
-                html_body = html_link + f"""
-                <pre>
-                {jd_content}
-                </pre>
-                """
 
-                send_email(job["job_name"], text_body, html_body, job["source"])
+                if send_individual_new_job:
+                    html_body = html_link + f"""
+                    <pre>
+                    {jd_content}
+                    </pre>
+                    """
+
+                    send_email(job["job_name"], text_body, html_body, job["source"])
                 filled_email_composing += html_link + "\n"
         except Exception as e:
             logger.error(f"The following error occurred: {e}")
