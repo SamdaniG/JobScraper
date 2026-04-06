@@ -1,7 +1,8 @@
 from scrapers.__base import ApiJobBoardScraper
 import argparse
 # from log_starter import set_logger
-
+from storage import get_connection
+import json
 def format_job_board_registry():
     lines = []
     lines.append("\t\t\tAVAILABLE JOB BOARDS ")
@@ -22,23 +23,28 @@ def cli_main():
         formatter_class=argparse.RawTextHelpFormatter
     )
     parser.add_argument(
-        "--source",
+        "--source","-s",
         default="manual",
         help="Who triggered the script (manual, scheduler, api, ci, etc.)"
     )
     parser.add_argument(
-        "--company",
+        "--company","-c",
         nargs="+",
         help="Run specific company scrapers"
     )
     parser.add_argument(
-        "--jobboard",
+        "--jobboard","-j",
         help="Run all scrapers under a specific job board"
     )
     parser.add_argument(
-        "--list",
+        "--list","-l",
         action="store_true",
         help="List all job boards and their companies"
+    )
+    parser.add_argument(
+        "--query", "-q",
+        type=str,
+        help="Run SQL query on jobs database"
     )
     args = parser.parse_args()
     if args.list:
@@ -82,6 +88,26 @@ def cli_main():
     #     len(scrapers_to_run),
     #     "company" if args.company else "jobboard" if args.jobboard else "all"
     # )
+
+    if args.query:
+        conn = get_connection()
+
+        # Make output readable
+        conn.row_factory = lambda cursor, row: {
+            col[0]: row[idx] for idx, col in enumerate(cursor.description)
+        }
+
+        cursor = conn.cursor()
+
+        try:
+            cursor.execute(args.query)
+            rows = cursor.fetchall()
+            print(json.dumps(rows, indent=4))
+        except Exception as e:
+            print("❌ SQL Error:", e)
+
+        conn.close()
+        exit(0)
 
     return args, scrapers_to_run
 

@@ -85,7 +85,7 @@ class Job(BaseModel):
     filled_date: Optional[str] = None
     url: str
     comp : Optional[str] = None
-    hiring_manger: Optional[str] = None
+    hiring_manager: Optional[str] = None
 
 
 '''

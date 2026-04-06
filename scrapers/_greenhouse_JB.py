@@ -54,7 +54,7 @@ class GreenhouseScraper(ApiJobBoardScraper):
                 posted_date=    datetime.strptime(job['first_published'],FMT).strftime(DATE_FMT),
                 updated_date =  datetime.strptime(job['updated_at'],FMT).strftime(DATE_FMT),
                 url=            job['absolute_url'],
-                hiring_manger=  hm_details,
+                hiring_manager=  hm_details,
                 job_board=      self.jobBoard
 
             )

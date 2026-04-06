@@ -1,6 +1,6 @@
 import time
 from diff import diff_jobs, updating_db
-from storage import load_db, save_db
+from storage import load_db, save_db, init_db
 from log_starter import set_logger
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from functools import wraps
@@ -244,6 +244,8 @@ def main(args, scrapers_to_run, logger= None):
     save_db(db)
 
 if __name__=='__main__':
+    init_db()
+
     args, scrapers_to_run = cli_main()
     logger = set_logger(args)
 
