@@ -23,8 +23,9 @@ class FordScraper(OracleCloudScraper):
 
 if __name__=='__main__':
     test=FordScraper()
-    yo,yl=test.scrape_jobs()
+    yo=test.scrape_jobs()
     print(yo)
+    print(test.scrape_jd(yo["6819358f55"]))
 
 
 

@@ -5,5 +5,6 @@ class ZooxScraper(LeverBase):
 
 if __name__=='__main__':
     test=ZooxScraper()
-    yo,yol=test.scrape_jobs()
-    print(yo)
+    yo=test.scrape_jobs()
+    # print(yo)
+    print(test.scrape_jd(yo['af75c2302a']))

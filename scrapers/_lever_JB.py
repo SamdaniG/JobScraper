@@ -1,3 +1,5 @@
+import json
+
 from scrapers.__base import ApiJobBoardScraper, Job
 import requests as rq
 from utils import sha256_hex
@@ -59,6 +61,7 @@ class LeverBase(ApiJobBoardScraper):
         resp.raise_for_status()
 
         data = resp.json()
+        # print(json.dumps(data,indent=4))
         sections = []
 
         # Main description (HTML)

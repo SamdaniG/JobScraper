@@ -1,12 +1,12 @@
 from scrapers._greenhouse_JB import GreenhouseScraper
 import json
 
-class AppliedIntuitionScraper(GreenhouseScraper):
-    name= 'appliedintuition'
+class BotAutoScraper(GreenhouseScraper):
+    name= 'botauto'
 
 
 if __name__=='__main__':
-    test=AppliedIntuitionScraper()
+    test=BotAutoScraper()
     yol=test.scrape_jobs()
-    # print(yo)
+    print(yol)
     # print(test.scrape_jd(yol['9568969768']))

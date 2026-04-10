@@ -28,6 +28,7 @@ class GreenhouseScraper(ApiJobBoardScraper):
         dat=resp.json()
         # print(json.dumps(dat,indent=4))
         jobs_list=dat['jobs']
+        # print(json.dumps(jobs_list[0],indent=4))
 
         for job in jobs_list:
             job_id=         job['id']
