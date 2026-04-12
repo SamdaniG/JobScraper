@@ -136,7 +136,7 @@ def cli_main():
             if id not in db_keys:
                 print(f"{id} is an incorrect hash_id!")
             elif db[id].get("filled_date", None) is not None:
-                print(f"{id} this job has been closed, can't display the jd")
+                print(f"{id}: {db[id]["job_name"]} - This job has been closed!")
             else:
                 source_name=db[id]["source"]
                 scraper=ApiJobBoardScraper.registry[source_name]()

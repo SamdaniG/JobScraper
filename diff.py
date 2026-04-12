@@ -68,7 +68,6 @@ def updating_db(db,all_scraped_jobs, new_jobs, updated_jobs, logger):
             new["posted_date"] = old_date
 
         changes = dict_changes(old, new)#, ignore={"filled_date"})
-
         if changes:
             for field, (old_val, new_val) in changes.items():
                 logger.updated(
