@@ -67,6 +67,8 @@ class LeverBase(ApiJobBoardScraper):
         # Main description (HTML)
         if data.get("description"):
             sections.append(data["description"])
+        if data.get("additional"):
+            sections.append(data["additional"])
 
         # Structured blocks
         for block in data.get("lists", []):

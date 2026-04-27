@@ -2,6 +2,7 @@ from scrapers.__base import ApiJobBoardScraper, Job
 import requests as rq
 from utils import sha256_hex
 from datetime import datetime
+import json
 
 FMT='%Y-%m-%d'
 DATE_FMT = "%a %d-%b-%Y"
@@ -71,11 +72,13 @@ class OracleCloudScraper(ApiJobBoardScraper):
             return ""
 
         item=dat['items'][0]
+        # print(json.dumps(item, indent=4))
         fields = [
-            "ExternalQualificationsStr",
+            # "ExternalQualificationsStr",
             "InternalQualificationsStr",
             "InternalResponsibilitiesStr",
             "ExternalDescriptionStr",
+            "InternalDescriptionStr"
         ]
 
         raw_info = "\n\n".join(item.get(field, "") for field in fields)

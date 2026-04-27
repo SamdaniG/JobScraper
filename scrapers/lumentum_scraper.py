@@ -15,12 +15,12 @@ class LumentumScraper(MyworkdayBase):
          "searchText":""
     }
 
-    jd_url = base_domain + 'wday/cxs/lumentum/LITE/job/'
+    jd_url = base_domain + 'wday/cxs/lumentum/job/'
     url_lang ='LITE'
 
 if __name__=='__main__':
     test=LumentumScraper()
-    yolo, yolo_data=test.scrape_jobs()
+    yolo_data=test.scrape_jobs()
     # print(yolo)
     print(json.dumps(yolo_data,indent=4))
     print(test.scrape_jd(yolo_data['bbf5ed1cb0']))

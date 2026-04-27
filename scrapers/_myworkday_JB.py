@@ -74,7 +74,7 @@ class MyworkdayBase(ApiJobBoardScraper):
         resp=self.session.get(final, timeout=30)
         # print(resp)
         dat=resp.json()
-        # print(json.dumps(dat,indent=4))
+        print(json.dumps(dat,indent=4))
         jd=dat.get('jobPostingInfo',{}).get('jobDescription',"")
         jd=self.clean_html(jd)
 

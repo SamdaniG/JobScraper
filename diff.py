@@ -1,6 +1,6 @@
 # diff.py
 from datetime import timedelta
-from datetime import date
+from datetime import date, datetime
 DATE_FMT = "%a %d-%b-%Y"
 DEFAULT_DATE = "Thu 01-Jan-2026"
 
@@ -60,18 +60,41 @@ def updating_db(db,all_scraped_jobs, new_jobs, updated_jobs, logger):
         old = db[job_id]
         new = all_scraped_jobs[job_id].copy()
 
-        old_date = old.get("posted_date",None)
-        new_date = new.get("posted_date",None)
+        old_date = old.get("posted_date")
+        new_date = new.get("posted_date")
 
-        # ✅ Fix bad API date BEFORE updating
-        if new_date == DEFAULT_DATE and old_date is not None:
+        # ✅ Case 1: API default → keep old
+        if new_date == DEFAULT_DATE and old_date:
             new["posted_date"] = old_date
+
+        elif old_date == DEFAULT_DATE and new_date:
+            new["posted_date"] = new_date
+
+        # ✅ Case 2: compare only if both exist and differ
+        elif old_date and new_date and new_date != old_date:
+            try:
+                old_dt = datetime.strptime(old_date, DATE_FMT)
+                new_dt = datetime.strptime(new_date, DATE_FMT)
+
+                diff_days = abs((new_dt - old_dt).days)
+
+                # small drift → accept new
+                if diff_days == 1:
+                    new["posted_date"] = new_date
+
+                # large drift → reject new
+                elif diff_days > 1:
+                    new["posted_date"] = old_date
+
+            except Exception:
+                # fallback: if parsing fails, just keep old
+                new["posted_date"] = old_date
 
         changes = dict_changes(old, new)#, ignore={"filled_date"})
         if changes:
             for field, (old_val, new_val) in changes.items():
                 logger.updated(
-                    f'{old["source"]} - {job_id} - {old["job_name"]} updated:'
+                    f'{old["source"]} - {job_id:.10s} - {old["job_name"]} updated:'
                     f"\n\t\t\t\t\t\t {field}: {old_val} -> {new_val}",
                     extra=
                     {
