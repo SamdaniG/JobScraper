@@ -8,7 +8,7 @@ from storage import load_db
 
 def format_job_board_registry():
     lines = []
-    lines.append("\t\t\tAVAILABLE JOB BOARDS ")
+    lines.append(f"\t\t\tAVAILABLE JOB BOARDS {len(ApiJobBoardScraper.registry)}")
     lines.append("=" * 80)
 
     for board, scrapers in ApiJobBoardScraper.job_board_registry.items():

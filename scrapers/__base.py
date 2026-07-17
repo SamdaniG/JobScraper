@@ -14,6 +14,8 @@ class ApiJobBoardScraper(ABC):
     registry={}
     jobBoard=''
     job_board_registry={}
+    base_active = True
+    company_active = True
 
     def __init__(self):
         self.session=requests.Session()
@@ -26,10 +28,10 @@ class ApiJobBoardScraper(ABC):
         super().__init_subclass__(**kwargs)
 
         # Don't register abstract base classes
-        if cls.name and cls.name != "base":
+        if cls.name and cls.name != "base" and cls.base_active == True and cls.company_active == True:
             ApiJobBoardScraper.registry[cls.name] = cls
 
-        if cls.jobBoard and cls.name != 'base':
+        if cls.jobBoard and cls.name != 'base' and cls.base_active == True and cls.company_active == True:
             ApiJobBoardScraper.job_board_registry.setdefault(
                 cls.jobBoard, []
             ).append(cls)

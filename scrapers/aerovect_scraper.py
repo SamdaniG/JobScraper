@@ -31,7 +31,7 @@ if __name__=='__main__':
     test=AerovectScraper()
     yol=test.scrape_jobs()
     print(yol)
-    print(test.scrape_jd(yol['c5e20fd8a6']))
+    # print(test.scrape_jd(yol['e109b97206']))
 
 
 '''Sample skeleton

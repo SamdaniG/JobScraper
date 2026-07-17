@@ -12,6 +12,8 @@ class GreenhouseScraper(ApiJobBoardScraper):
     base_domain = 'https://boards-api.greenhouse.io/v1/boards/'
     # url = base_domain+ f'{name}/jobs'
     jobBoard = 'greenhouse'
+    base_active = True
+    company_active = True
 
     @property
     def url(self):

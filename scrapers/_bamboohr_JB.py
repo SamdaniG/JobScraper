@@ -12,6 +12,8 @@ DATE_FMT = "%a %d-%b-%Y"
 class BambooHRBase(ApiJobBoardScraper):
     name = 'base'
     jobBoard = 'bamboohr'
+    base_active = True
+    company_active = True
 
     @property
     def base_domain(self):

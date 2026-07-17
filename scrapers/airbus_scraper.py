@@ -23,4 +23,4 @@ if __name__=='__main__':
     yol=test.scrape_jobs()
     # print(yo)
     # print(yol)
-    print(test.scrape_jd(yol['a581445407']))
+    print(test.scrape_jd(yol['ccc41cce97']))

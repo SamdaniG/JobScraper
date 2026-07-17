@@ -13,6 +13,9 @@ class ADPBase(ApiJobBoardScraper):
     base_domain = 'https://workforcenow.adp.com/mascsr/default'
     url = base_domain + '/careercenter/public/events/staffing/v1/job-requisitions'
     params={}
+    base_active = True
+    company_active = True
+
     @property
     def apply_url(self):
         return (self.base_domain +

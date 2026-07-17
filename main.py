@@ -7,42 +7,46 @@ from functools import wraps
 from cli.main import cli_main
 EMAIL_DELAY_SECONDS = 0
 
-
 def time_taken(func):
     """This is a python decorator to calculate the time taken to run every function, gives us a useful metric to keep track"""
     @wraps(func)
     def wrapper(*args, **kwargs):
         logger = kwargs.get("logger")
         start = time.perf_counter()
-        # print(f"Started the timer!")
+        output = None
         name = func.__name__
-        output = func(*args, **kwargs)
-        scraper_count = None
-        job_board = None
-        if isinstance(output, tuple) and len(output) == 3:
-            name, result, error = output
-            job_board = args[0]().jobBoard
-            # scraper_count = None
-        else:
-            scrapers_to_run = args[1]
-            scraper_count= len(scrapers_to_run)
+        try:
+            output = func(*args, **kwargs)
+            return output
 
-        end = time.perf_counter()
+        finally:
+            scraper_count = None
+            job_board = None
 
-        extra_data = {
-            "source": name,
-            "timer": end - start
+            if isinstance(output, tuple) and len(output) == 3:
+                name, _, _ = output
+                job_board = args[0]().jobBoard
+
+            elif len(args) > 1:
+                scrapers_to_run = args[1]
+                scraper_count = len(scrapers_to_run)
+
+            end = time.perf_counter()
+
+            extra_data = {
+                "source": name,
+                "timer": end - start,
             }
 
-        if scraper_count is not None:
-            extra_data["scraper_count"] = scraper_count
-        if job_board is not None:
-            extra_data['jobBoard'] = job_board
-        logger.timer(f"Time taken to run the {name}: {end - start:.4f}s",
-                     extra=extra_data)
-        return output
+            if scraper_count is not None:
+                extra_data["scraper_count"] = scraper_count
+            if job_board is not None:
+                extra_data["jobBoard"] = job_board
+            logger.timer(
+                f"Time taken to run {name}: {end - start:.4f}s",
+                extra=extra_data
+            )
     return wrapper
-
 
 @time_taken
 def run_scraper(Scraper, logger= None):
@@ -62,7 +66,7 @@ def main(args, scrapers_to_run, logger= None):
     )
 
     ####Activating Email
-    EMAIL_ACTIVE = False
+    EMAIL_ACTIVE = True
     if args.source == 'scheduler':
         EMAIL_ACTIVE = True
 
@@ -124,7 +128,7 @@ def main(args, scrapers_to_run, logger= None):
                 job = db[j]
                 logger.filled(
                     f'{job["source"]} - '
-                    f'{job.get("job_id", ""):.10s} - '
+                    f'{str(job.get("job_id", "")):.10s} - '
                     f'{job["job_name"]}',
                     extra={
                         "job_name": job["job_name"],
@@ -152,7 +156,7 @@ def main(args, scrapers_to_run, logger= None):
             text_body = "\n".join(lines)
             html_body = "<br>".join(html_lines)
 
-            send_email("Filled Positions", text_body, html_body, "System")
+            send_email(f"Filled Positions ({len(filled_jobs)})", text_body, html_body, "System")
             # if len(new_jobs) > 1:
             #     time.sleep(EMAIL_DELAY_SECONDS)
 
@@ -181,9 +185,9 @@ def main(args, scrapers_to_run, logger= None):
                     })
 
                 try:
-                    jd_content = scraper.scrape_jd(job)
+                    jd_content = scraper.scrape_jd(job) if send_individual_new_job else ""
                 except Exception as e:
-                    logger.error(f'This error popped up: {e}')
+                    logger.error(f'This error popped up: {e} for {job}')
                     continue
                 text_body = job['url'] + '\n'
                 text_body += jd_content
@@ -207,7 +211,7 @@ def main(args, scrapers_to_run, logger= None):
             logger.error(f"The following error occurred: {e}")
 
         if new_jobs:
-            send_email("New Jobs List", html_body=filled_email_composing, body="", source='new')
+            send_email(f"New Jobs List ({len(new_jobs)})", html_body=filled_email_composing, body="", source='new')
 
     else:
         if filled_jobs:
@@ -216,7 +220,7 @@ def main(args, scrapers_to_run, logger= None):
                 job = db[j]
                 logger.filled(
                     f'{job["source"]} - '
-                    f'{job.get("job_id", ""):.10s} - '
+                    f'{str(job.get("job_id", "")):.10s} - '
                     f'{job["job_name"]}',
                     extra={
                         "job_name": job["job_name"],

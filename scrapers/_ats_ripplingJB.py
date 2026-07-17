@@ -9,6 +9,8 @@ class ATSRippling(ApiJobBoardScraper):
     base_domain = 'https://ats.rippling.com/api/v2/board/'
     jobBoardSlug = ''
     jobBoard = 'atsrippling'
+    base_active = True
+    company_active = True
 
     @property
     def url(self):

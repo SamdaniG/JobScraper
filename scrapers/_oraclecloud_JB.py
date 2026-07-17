@@ -12,6 +12,8 @@ class OracleCloudScraper(ApiJobBoardScraper):
     base_domain = ''
     params = {}
     jobBoard = 'oraclecloud'
+    base_active = True
+    company_active = True
 
     @property
     def url(self):

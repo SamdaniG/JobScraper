@@ -10,6 +10,8 @@ class AshbyhqBase(ApiJobBoardScraper):
     base_domain = 'https://jobs.ashbyhq.com/'
     url = base_domain + 'api/non-user-graphql'
     jobBoard = 'ashbyhq'
+    base_active = True
+    company_active = True
 
     url_params={
         'op': 'ApiJobBoardWithTeams'
@@ -77,8 +79,8 @@ class AshbyhqBase(ApiJobBoardScraper):
                         json=       self.jd_payload, timeout=30)
         # print(resp.raise_for_status())
         dat=resp.json()
-        # print(dat)
-        jd=dat['data']['jobPosting']['descriptionHtml']
+        # print(json.dumps(dat,indent=4))
+        jd=dat['data'].get('jobPosting',{}).get('descriptionHtml',"Not Available")
 
         return self.clean_html(jd)
 

@@ -9,6 +9,9 @@ DATE_FMT = "%a %d-%b-%Y"
 class EightfoldaiBase(ApiJobBoardScraper):
     name='base'
     jobBoard = 'eightfoldai'
+    base_active = True
+    company_active = True
+
     @property
     def base_domain(self):
         return f"https://{self.name}.eightfold.ai"

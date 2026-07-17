@@ -12,6 +12,8 @@ class MyworkdayBase(ApiJobBoardScraper):
     jd_url = ''
     url_lang=''
     jobBoard = 'myworkday'
+    base_active = True
+    company_active = True
 
     def scrape_jobs(self):
         # current_jobs_id=[]
@@ -71,6 +73,7 @@ class MyworkdayBase(ApiJobBoardScraper):
         # final=source['url'].split('/LITE/job/')[-1]
         # print(f'{final=}')
         final = self.jd_url + source['url'].split(self.url_lang)[1]
+        print(final)
         resp=self.session.get(final, timeout=30)
         # print(resp)
         dat=resp.json()

@@ -10,6 +10,8 @@ DATE_FMT = "%a %d-%b-%Y"
 class LeverBase(ApiJobBoardScraper):
     name='base'
     jobBoard = 'lever'
+    base_active = True
+    company_active = True
 
     @property
     def base_domain(self):
