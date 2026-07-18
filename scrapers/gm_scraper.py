@@ -31,9 +31,9 @@ if __name__=='__main__':
     print(json.dumps(yolo_data,indent=4))
     # job_names=[yolo_data[job]['job_name'] for job in yolo_data]
     # print(json.dumps(job_names,indent=4))
-    a=dict()
+    # a=dict()
 
-    # print(test.scrape_jd(source=yolo_data["093ebd0ddc"]))
+    # print(test.scrape_jd(source=yolo_data["5b09294d40"]))
 
 
 '''Sample Skeleton

@@ -73,11 +73,11 @@ class MyworkdayBase(ApiJobBoardScraper):
         # final=source['url'].split('/LITE/job/')[-1]
         # print(f'{final=}')
         final = self.jd_url + source['url'].split(self.url_lang)[1]
-        print(final)
+        # print(final)
         resp=self.session.get(final, timeout=30)
         # print(resp)
         dat=resp.json()
-        print(json.dumps(dat,indent=4))
+        # print(json.dumps(dat,indent=4))
         jd=dat.get('jobPostingInfo',{}).get('jobDescription',"")
         jd=self.clean_html(jd)
 
