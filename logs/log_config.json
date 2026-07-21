@@ -58,12 +58,17 @@
             "filename": "INSERT JSON PATH",
             "maxBytes": 500000,
             "backupCount": 3
+        },
+        "sqlite_timer": {
+            "()": "log_starter.SQLiteHandler",
+            "level": "DEBUG",
+            "filters": ["timer_only"]
         }
     },
     "loggers": {
         "scraper": {
             "level": "DEBUG",
-            "handlers": ["stdout", "file","json_file", "timer_file"],
+            "handlers": ["stdout", "file","json_file", "timer_file","sqlite_timer"],
             "propagate": false
         }
     }

@@ -3,6 +3,7 @@ import  logging.config
 import json
 import logging
 from datetime import datetime
+from logs_db import initialize, get_connection
 
 NEW_LEVEL = 25
 UPDATED_LEVEL = 26
@@ -34,7 +35,7 @@ def set_logger(args):
 
     timer_log_file = logs_dir / "timer.jsonl"
     logging_config["handlers"]["timer_file"]["filename"] = str(timer_log_file)
-
+    initialize()
     logging.config.dictConfig(config=logging_config)
     #logger = logging.getLogger("scraper")
     # logger = logging.LoggerAdapter(
@@ -121,3 +122,35 @@ class TimerOnlyFilter(logging.Filter):
 class NoTimerFilter(logging.Filter):
     def filter(self, record):
         return record.levelno != TIMER_LEVEL
+
+
+class SQLiteHandler(logging.Handler):
+    def __init__(self):
+        super().__init__()
+
+    def emit(self, record):
+        try:
+            with get_connection() as conn:
+                conn.execute(
+                    """
+                    INSERT INTO timers (
+                        timestamp,
+                        source,
+                        job_board,
+                        executor,
+                        time_taken,
+                        scraper_count
+                    )
+                    VALUES (?,?,?,?,?,?)
+                    """,
+                    (
+                        datetime.utcfromtimestamp(record.created).isoformat(),
+                        getattr(record, "source", None),
+                        getattr(record, "jobBoard", None),
+                        getattr(record, "executor", None),
+                        getattr(record, "timer", None),
+                        getattr(record, "scraper_count", None),
+                    )
+                )
+        except Exception as e:
+            self.handleError(record)
