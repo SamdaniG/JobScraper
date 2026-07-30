@@ -8,5 +8,5 @@ class ScoutMotorsScraper(GreenhouseScraper):
 if __name__=='__main__':
     test=ScoutMotorsScraper()
     yol=test.scrape_jobs()
-    print(yol)
-    # print(test.scrape_jd(yol['9568969768']))
+    # print(yol)
+    print(test.scrape_jd(yol['99a087144b']))

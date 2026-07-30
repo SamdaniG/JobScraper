@@ -66,6 +66,7 @@ class ADPBase(ApiJobBoardScraper):
         # print(url)
         resp = self.session.get(url=url,params=self.params, timeout=30)
         dat = resp.json()
+        # print(set(dat))
         # print(json.dumps(dat,indent=4))
         jd = dat.get("requisitionDescription", "")
 

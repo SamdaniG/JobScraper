@@ -13,8 +13,8 @@ class GAStopsSraper(ADPBase):
 
 if __name__=='__main__':
     test=GAStopsSraper()
-    yo,yol=test.scrape_jobs()
+    yol=test.scrape_jobs()
     # print(yo)
     # print(yol)
     # print(json.dumps(yol,indent=4))
-    print(test.scrape_jd(yol['063d6f9f42']))
+    print(test.scrape_jd(yol['ee197dabeb']))

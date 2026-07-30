@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-
+import html
 import requests
 from bs4 import BeautifulSoup
 import re
@@ -45,6 +45,7 @@ class ApiJobBoardScraper(ABC):
         raise NotImplementedError
 
     def clean_html(self, raw_html: str) -> str:
+        raw_html = html.unescape(raw_html)
         soup = BeautifulSoup(raw_html, "html.parser")
 
         for tag in soup(["script", "style"]):

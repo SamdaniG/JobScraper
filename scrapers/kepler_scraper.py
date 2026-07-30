@@ -11,12 +11,12 @@ class KeplerScraper(LeverBase):
 
 if __name__=='__main__':
     test=KeplerScraper()
-    yo,yol = test.scrape_jobs()
+    yol = test.scrape_jobs()
     # print(yo)
-    print(json.dumps(yol,indent=4))
+    # print(json.dumps(yol,indent=4))
 
-    # jd_test=test.scrape_jd(source=yol['4caa328e28'])
-    # print(jd_test)
+    jd_test=test.scrape_jd(source=yol['0527cc8f5c'])
+    print(jd_test)
 
 
 

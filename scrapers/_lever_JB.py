@@ -38,6 +38,17 @@ class LeverBase(ApiJobBoardScraper):
             url = job['hostedUrl']
             hash_id=sha256_hex(url)
             # current_jobs_id.append(hash_id)
+            salary = job.get("salaryRange")
+
+            if salary:
+                comp_internal = (
+                    f"{salary.get('min', '')}-"
+                    f"{salary.get('max', '')} "
+                    f"{salary.get('currency', '')} "
+                    f"{salary.get('interval', '')}"
+                )
+            else:
+                comp_internal = None
 
             job_deets=Job(
                 job_id=         job_id,
@@ -47,12 +58,20 @@ class LeverBase(ApiJobBoardScraper):
                 posted_date=    (datetime.fromtimestamp(job['createdAt'] / 1000)).strftime(DATE_FMT),
                 url=            url,
                 work_policy=    job["workplaceType"],
-                job_board=      self.jobBoard
+                job_board=      self.jobBoard,
+                comp=           comp_internal
             )
             job_data[hash_id]=job_deets.to_dict()
 
         return job_data
-
+    '''
+    "salaryRange": {
+        "currency": "USD",
+        "interval": "per-year-salary",
+        "min": 208000,
+        "max": 218000
+    },
+    '''
     def scrape_jd(self, source:dict=None):
         job_id = source['job_id']
 
@@ -63,22 +82,30 @@ class LeverBase(ApiJobBoardScraper):
         resp.raise_for_status()
 
         data = resp.json()
+        # print(list(data))
         # print(json.dumps(data,indent=4))
+
         sections = []
 
-        # Main description (HTML)
-        if data.get("description"):
-            sections.append(data["description"])
-        if data.get("additional"):
-            sections.append(data["additional"])
+        if data.get("descriptionPlain"):
+            sections.append(data["descriptionPlain"])
+        else:
+            if data.get("openingPlain"):
+                sections.append(data["openingPlain"])
+
+            if data.get("descriptionBodyPlain"):
+                sections.append(data["descriptionBodyPlain"])
+
+        if data.get("additionalPlain"):
+            sections.append(data["additionalPlain"])
 
         # Structured blocks
         for block in data.get("lists", []):
             if block.get("text"):
-                sections.append(block["text"])
+                sections.append(f"{block['text']}\n")
             if block.get("content"):
-                sections.append(block["content"])
+                sections.append(f"{block['content']}\n")
 
-        jd = "\n".join(sections)
+        jd = "\n\n".join(sections)
 
         return self.clean_html(jd)

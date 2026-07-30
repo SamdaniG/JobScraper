@@ -6,14 +6,21 @@ class WaabiScraper(LeverBase):
 
 if __name__=='__main__':
     test=WaabiScraper()
-    yo,yol = test.scrape_jobs()
+    yol = test.scrape_jobs()
     # print(yo)
-    print(json.dumps(yol,indent=4))
+    # print(json.dumps(yol,indent=4))
     # print(json.dumps(yol['236263088d'],indent=4))
 
-    jd_test=test.scrape_jd(source=yol['236263088d'])
-    # print(jd_test)
+    jd_test=test.scrape_jd(source=yol['cc5637c475'])
+    print(jd_test)
 
+'''
+['additionalPlain', 'additional', 'categories', 
+'createdAt', 'descriptionPlain', 'description', 
+'id', 'lists', 'text', 'country', 'workplaceType', 
+'opening', 'openingPlain', 'descriptionBody', 
+'descriptionBodyPlain', 'hostedUrl', 'applyUrl']
+'''
 
 '''Sample Skeleton
 {
@@ -47,3 +54,6 @@ if __name__=='__main__':
 }
 
 '''
+# descriptionBodyPlain
+# openingPlain
+# descriptionPlain

@@ -7,9 +7,9 @@ class DexterityScraper(LeverBase):
 if __name__=='__main__':
     test=DexterityScraper()
     yol = test.scrape_jobs()
-    print(yol)
+    # print(yol)
     # print(json.dumps(yol,indent=4))
-    # print(json.dumps(yol['236263088d'],indent=4))
+    # print(json.dumps(yol['e688f67be8'],indent=4))
 
-    # jd_test=test.scrape_jd(source=yol['236263088d'])
-    # print(jd_test)
+    jd_test=test.scrape_jd(source=yol['e688f67be8'])
+    print(jd_test)

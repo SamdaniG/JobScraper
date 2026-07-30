@@ -18,6 +18,6 @@ if __name__=='__main__':
     test=MinthNASraper()
     yol=test.scrape_jobs()
     # print(yo)
-    print(yol)
+    # print(yol)
     # print(json.dumps(yol,indent=4))
-    # print(test.scrape_jd(yol['063d6f9f42']))
+    # print(test.scrape_jd(yol['cfd0a1d5cf']))

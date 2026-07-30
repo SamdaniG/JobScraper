@@ -11,10 +11,10 @@ class NextStarSraper(ADPBase):
     }
 if __name__=='__main__':
     test=NextStarSraper()
-    yo,yol=test.scrape_jobs()
+    yol=test.scrape_jobs()
     # print(yo)
     # print(json.dumps(yol,indent=4))
-    print(test.scrape_jd(yol['4344f9563f']))
+    print(test.scrape_jd(yol['4c49c31bfb']))
 
 
 

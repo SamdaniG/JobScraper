@@ -7,9 +7,9 @@ class PromiseRoboticsScraper(LeverBase):
 if __name__=='__main__':
     test=PromiseRoboticsScraper()
     yol = test.scrape_jobs()
-    print(yol)
+    # print(yol)
     # print(json.dumps(yol,indent=4))
     # print(json.dumps(yol['236263088d'],indent=4))
 
-    # jd_test=test.scrape_jd(source=yol['236263088d'])
-    # print(jd_test)
+    # jd_test=
+    print(test.scrape_jd(source=yol['fea61a8b89']))

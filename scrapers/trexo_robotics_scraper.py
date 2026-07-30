@@ -1,3 +1,5 @@
+import json
+
 from scrapers._ashbyhq_JB import AshbyhqBase
 
 class TrexoRoboticsScraper(AshbyhqBase):
@@ -24,6 +26,7 @@ class TrexoRoboticsScraper(AshbyhqBase):
 if __name__=='__main__':
     test=TrexoRoboticsScraper()
     yol=test.scrape_jobs()
-    print(set(yol))
-    print(yol)
-    print(test.scrape_jd(yol['e07ccf9b42']))
+    # print(set(yol))
+    # print(yol)
+    print(json.dumps(yol,indent=4))
+    print(test.scrape_jd(yol['0b2e7ebdfd']))

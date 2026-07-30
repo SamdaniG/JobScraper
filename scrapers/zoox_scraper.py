@@ -1,3 +1,5 @@
+import json
+
 from scrapers._lever_JB import LeverBase
 
 class ZooxScraper(LeverBase):

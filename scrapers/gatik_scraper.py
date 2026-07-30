@@ -7,8 +7,8 @@ class GatikScraper(GreenhouseScraper):
 
 if __name__=='__main__':
     test=GatikScraper()
-    yo,yol=test.scrape_jobs()
+    yol=test.scrape_jobs()
 
     # print(yo)
-    print(json.dumps(yol,indent=4))
-    # print(test.scrape_jd(yol['e6650ab1f2']))
+    # print(json.dumps(yol,indent=4))
+    print(test.scrape_jd(yol['bd93680389']))

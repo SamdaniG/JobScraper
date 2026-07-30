@@ -7,5 +7,6 @@ class PlusAiScraper(LeverBase):
 if __name__=='__main__':
     test=PlusAiScraper()
     yol=test.scrape_jobs()
-    print(set(yol))
-    print(test.scrape_jd(yol['fea61a8b89']))
+    # print(set(yol))
+    # print(json.dumps(yol,indent=4))
+    print(test.scrape_jd(yol['60bbe7589e']))
