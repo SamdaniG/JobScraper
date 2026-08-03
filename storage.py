@@ -25,11 +25,11 @@ def to_utc(date_str):
         return None  # or keep original if you prefer
 
 
-def get_connection():
-    return sqlite3.connect(DB_NAME)
+def get_jobs_connection(db=DB_NAME):
+    return sqlite3.connect(db)
 
 def init_db():
-    conn = get_connection()
+    conn = get_jobs_connection()
     cursor = conn.cursor()
 
     cursor.execute("""
@@ -94,7 +94,7 @@ def save_db(db: dict):
         raise
 
     # 2️⃣ Save to SQL
-    conn = get_connection()
+    conn = get_jobs_connection()
     cursor = conn.cursor()
     i=1
     for hash,job in db.items():

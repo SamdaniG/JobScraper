@@ -3,7 +3,7 @@ import  logging.config
 import json
 import logging
 from datetime import datetime
-from logs_db import initialize, get_connection
+from logs_db import initialize, get_logs_connection
 from utils import RunContext
 
 LOG_DB = Path(__file__).resolve().parent / "logs" / "logs.db"
@@ -131,7 +131,7 @@ class TimerSQLHandler(logging.Handler):
 
     def emit(self, record):
         try:
-            with get_connection(LOG_DB) as conn:
+            with get_logs_connection(LOG_DB) as conn:
                 conn.execute(
                     """
                     INSERT INTO timers (
@@ -164,7 +164,7 @@ class HistorySQLHandler(logging.Handler):
 
     def emit(self, record):
         try:
-            with get_connection(LOG_DB) as conn:
+            with get_logs_connection(LOG_DB) as conn:
                 conn.execute(
                     """
                     INSERT INTO history (

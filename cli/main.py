@@ -1,10 +1,11 @@
 from scrapers.__base import ApiJobBoardScraper
 import argparse
 # from log_starter import set_logger
-from storage import get_connection
+from storage import get_jobs_connection
 import json
 from tabulate import tabulate
 from storage import load_db
+from logs_db import get_logs_connection
 
 def format_job_board_registry():
     lines = []
@@ -66,6 +67,11 @@ def cli_main():
         nargs= "+",
         help="Get the job description from a valid hash_id!"
     )
+    parser.add_argument(
+        "--logs-query","-lq",
+        type=str,
+        help="Run SQL query on the logs database"
+    )
 
     args = parser.parse_args()
     if args.list:
@@ -103,7 +109,7 @@ def cli_main():
         scrapers_to_run = list(ApiJobBoardScraper.registry.values())
 
     if args.query:
-        conn = get_connection()
+        conn = get_jobs_connection()
 
         # Make output readable
         conn.row_factory = lambda cursor, row: {
@@ -114,6 +120,30 @@ def cli_main():
 
         try:
             cursor.execute(args.query)
+            rows = cursor.fetchall()
+            if args.pretty:
+                print(tabulate(rows, headers="keys", tablefmt=args.format))
+            else:
+                print(json.dumps(rows, indent=4))
+        except Exception as e:
+            print("❌ SQL Error:", e)
+
+        conn.close()
+        exit(0)
+
+    if args.logs_query:
+        # LOG_DB = Path(__file__).resolve().parent / "logs" / "logs.db"
+        conn = get_logs_connection()
+
+        # Make output readable
+        conn.row_factory = lambda cursor, row: {
+            col[0]: row[idx] for idx, col in enumerate(cursor.description)
+        }
+
+        cursor = conn.cursor()
+
+        try:
+            cursor.execute(args.logs_query)
             rows = cursor.fetchall()
             if args.pretty:
                 print(tabulate(rows, headers="keys", tablefmt=args.format))
