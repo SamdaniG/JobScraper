@@ -134,7 +134,7 @@ def main(args, scrapers_to_run, logger= None):
                 extra={
                     "job_name": job["job_name"],
                     "source": job["source"],
-                    "job_id": job.get("job_id", ""),
+                    "hash_id": j,
                     "location": job.get("location", "")
                 }
             )
@@ -179,7 +179,7 @@ def main(args, scrapers_to_run, logger= None):
                 extra={
                     "job_name": job["job_name"],
                     "source": job["source"],
-                    "job_id": job.get("job_id", ""),
+                    "hash_id": job_id,
                     "location": job.get("location", "")
                 }
             )

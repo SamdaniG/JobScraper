@@ -22,6 +22,9 @@
         },
         "no_timer": {
           "()": "log_starter.NoTimerFilter"
+        },
+        "logs_timer": {
+          "()": "log_starter.LogsFilter"
         }
     },
     "handlers": {
@@ -63,12 +66,17 @@
             "()": "log_starter.SQLiteHandler",
             "level": "DEBUG",
             "filters": ["timer_only"]
+        },
+        "history_sql": {
+            "()": "log_starter.HistorySQLHandler",
+            "level": "DEBUG",
+            "filters": ["logs_timer"]
         }
     },
     "loggers": {
         "scraper": {
             "level": "DEBUG",
-            "handlers": ["stdout", "file","json_file", "timer_file","sqlite_timer"],
+            "handlers": ["stdout", "file","json_file", "timer_file","sqlite_timer","history_sql"],
             "propagate": false
         }
     }

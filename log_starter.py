@@ -5,6 +5,8 @@ import logging
 from datetime import datetime
 from logs_db import initialize, get_connection
 
+LOG_DB = Path(__file__).resolve().parent / "logs" / "logs.db"
+
 NEW_LEVEL = 25
 UPDATED_LEVEL = 26
 FILLED_LEVEL = 27
@@ -14,6 +16,7 @@ logging.addLevelName(NEW_LEVEL, "NEW")
 logging.addLevelName(UPDATED_LEVEL, "UPDATED")
 logging.addLevelName(FILLED_LEVEL, "FILLED")
 logging.addLevelName(TIMER_LEVEL, "TIMER")
+
 def set_logger(args):
     """This sets up the logging module!"""
     parent_dir=Path(__file__).resolve().parent
@@ -75,7 +78,7 @@ class JsonFormatter(logging.Formatter):
     def format(self, record):
         log_record = {
             "event":            record.levelname,  # or use record.event if you prefer
-            "job_id":           getattr(record, "job_id", None),
+            "hash_id":           getattr(record, "hash_id", None),
             "job_name":         getattr(record, "job_name", None),
             "location":         getattr(record, "location", None),
             "source":           getattr(record, "source", None),
@@ -123,6 +126,10 @@ class NoTimerFilter(logging.Filter):
     def filter(self, record):
         return record.levelno != TIMER_LEVEL
 
+class LogsFilter(logging.Filter):
+    def filter(self, record):
+        return record.levelno in {25, 26, 27}
+
 
 class SQLiteHandler(logging.Handler):
     def __init__(self):
@@ -130,7 +137,7 @@ class SQLiteHandler(logging.Handler):
 
     def emit(self, record):
         try:
-            with get_connection() as conn:
+            with get_connection(LOG_DB) as conn:
                 conn.execute(
                     """
                     INSERT INTO timers (
@@ -150,6 +157,47 @@ class SQLiteHandler(logging.Handler):
                         getattr(record, "executor", None),
                         getattr(record, "timer", None),
                         getattr(record, "scraper_count", None),
+                    )
+                )
+        except Exception as e:
+            self.handleError(record)
+
+class HistorySQLHandler(logging.Handler):
+    def __init__(self):
+        super().__init__()
+
+    def emit(self, record):
+        try:
+            with get_connection(LOG_DB) as conn:
+                conn.execute(
+                    """
+                    INSERT INTO history (
+                        hash_id,
+                        job_name,
+                        
+                        source,
+                        event,
+                        
+                        field,
+                        old_val,
+                        
+                        new_val,       
+                        timestamp
+                    )
+                    VALUES (?,?,?,?,?,?,?,?)
+                    """,
+                    (
+                        getattr(record, "hash_id", None),
+                        getattr(record, "job_name", None),
+
+                        getattr(record, "source", None),
+                        getattr(record, "levelname", None),
+
+                        getattr(record, "field", None),
+                        getattr(record, "old_val", None),
+
+                        getattr(record, "new_val", None),
+                        datetime.utcfromtimestamp(record.created).isoformat()
                     )
                 )
         except Exception as e:

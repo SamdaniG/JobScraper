@@ -5,3 +5,4 @@
 3. Tag v0.3 Added the normalization function to the diff and main
 4. Tag v0.4 Optimized the main logic to make things more readable and simpler at the same time
 5. Tag v0.5 Prevent silent database resets on corrupted JSON
+6. Tag v1.0 Implemented job history tracking database

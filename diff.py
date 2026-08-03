@@ -116,7 +116,7 @@ def updating_db(db, all_scraped_jobs, new_jobs, updated_jobs, logger):
                     extra={
                         "job_name": old["job_name"],
                         "source": old["source"],
-                        "job_id": job_id,
+                        "hash_id": job_id,
                         "field": field,
                         "old_val": old_val,
                         "new_val": new_val,
