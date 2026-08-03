@@ -1,5 +1,5 @@
 import time
-from diff import diff_jobs, updating_db
+from diff import diff_jobs, updating_db, normalize_job
 from storage import load_db, save_db, init_db
 from log_starter import set_logger
 from concurrent.futures import ThreadPoolExecutor, as_completed
@@ -75,6 +75,7 @@ def main(args, scrapers_to_run, logger= None):
     # all_current_job_ids = set()
     all_scraped_jobs = {}
     successful_scrapers = set()
+    normalized_jobs = {}
 
     i = 1
     with ThreadPoolExecutor(max_workers=min(15, len(scrapers_to_run))) as executor:
@@ -97,8 +98,16 @@ def main(args, scrapers_to_run, logger= None):
             all_scraped_jobs.update(scraped_jobs_db)
             i += 1
 
+    for job_id, scraped_job in all_scraped_jobs.items():
+        old_job = db.get(job_id)
+
+        normalized_jobs[job_id] = normalize_job(
+            old_job,
+            scraped_job
+        )
+
     logger.info(f"Checking the new/old jobs created.")
-    new_jobs, filled_jobs, updated_jobs = diff_jobs(db, all_scraped_jobs, successful_scrapers, )
+    new_jobs, filled_jobs, updated_jobs = diff_jobs(db, normalized_jobs, successful_scrapers, )
     logger.info(
         "Diff complete | new_jobs=%d filled_jobs=%d updated_jobs=%d",
         len(new_jobs),
@@ -106,7 +115,7 @@ def main(args, scrapers_to_run, logger= None):
         len(updated_jobs)
     )
 
-    db = updating_db(db, all_scraped_jobs, new_jobs, updated_jobs, logger)
+    db = updating_db(db, normalized_jobs, new_jobs, updated_jobs, logger)
     # notify(db, scrapers_to_run, filled_jobs, new_jobs, logger, EMAIL_ACTIVE)
 
     # if len(new_jobs)>10:
@@ -246,7 +255,7 @@ def main(args, scrapers_to_run, logger= None):
 
     # logger.info(f"Writing data to my database!\n-------------------")
     logger.info(
-        "Writing data to my database | new_jobs=%d filled_jobs=%d updated_jobs=%d",
+        "Writing data to my database (N%d F%d U%d)",
         len(new_jobs),
         len(filled_jobs),
         len(updated_jobs)

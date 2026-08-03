@@ -4,6 +4,51 @@ from datetime import date, datetime
 DATE_FMT = "%a %d-%b-%Y"
 DEFAULT_DATE = "Thu 01-Jan-2026"
 
+def normalize_job(old: dict | None, scraped: dict) -> dict:
+    """
+    Returns a normalized version of the scraped job.
+    Does NOT modify either input dictionary.
+    """
+
+    new = scraped.copy()
+
+    # New jobs don't need normalization
+    if old is None:
+        new.pop("filled_date", None)
+        return new
+
+    old_date = old.get("posted_date")
+    new_date = new.get("posted_date")
+
+    # API default -> keep old
+    if new_date == DEFAULT_DATE and old_date:
+        new["posted_date"] = old_date
+
+    # old had default, scraper has actual
+    elif old_date == DEFAULT_DATE and new_date:
+        new["posted_date"] = new_date
+
+    # compare dates
+    elif old_date and new_date and old_date != new_date:
+        try:
+            old_dt = datetime.strptime(old_date, DATE_FMT)
+            new_dt = datetime.strptime(new_date, DATE_FMT)
+
+            diff_days = abs((new_dt - old_dt).days)
+
+            if diff_days == 1:
+                new["posted_date"] = new_date
+
+            elif diff_days > 1:
+                new["posted_date"] = old_date
+
+        except Exception:
+            new["posted_date"] = old_date
+
+    new.pop("filled_date", None)
+
+    return new
+
 def diff_jobs(db: dict, current_jobs_db: dict, successful_sources: set):
     today = date.today().strftime(DATE_FMT)
     current_jobs_id=set(current_jobs_db)
@@ -51,66 +96,34 @@ def dict_changes(old: dict, new: dict, ignore=None):
 
     return changes
 
-def updating_db(db,all_scraped_jobs, new_jobs, updated_jobs, logger):
+def updating_db(db, all_scraped_jobs, new_jobs, updated_jobs, logger):
+
     for job_id in new_jobs:
-        db[job_id]=all_scraped_jobs[job_id]
+        db[job_id] = all_scraped_jobs[job_id]
 
     for job_id in updated_jobs:
-        # from diff import dict_changes
+
         old = db[job_id]
-        new = all_scraped_jobs[job_id].copy()
+        new = all_scraped_jobs[job_id]
 
-        old_date = old.get("posted_date")
-        new_date = new.get("posted_date")
+        changes = dict_changes(old, new)
 
-        # ✅ Case 1: API default → keep old
-        if new_date == DEFAULT_DATE and old_date:
-            new["posted_date"] = old_date
-
-        elif old_date == DEFAULT_DATE and new_date:
-            new["posted_date"] = new_date
-
-        # ✅ Case 2: compare only if both exist and differ
-        elif old_date and new_date and new_date != old_date:
-            try:
-                old_dt = datetime.strptime(old_date, DATE_FMT)
-                new_dt = datetime.strptime(new_date, DATE_FMT)
-
-                diff_days = abs((new_dt - old_dt).days)
-
-                # small drift → accept new
-                if diff_days == 1:
-                    new["posted_date"] = new_date
-
-                # large drift → reject new
-                elif diff_days > 1:
-                    new["posted_date"] = old_date
-
-            except Exception:
-                # fallback: if parsing fails, just keep old
-                new["posted_date"] = old_date
-
-        changes = dict_changes(old, new)#, ignore={"filled_date"})
         if changes:
             for field, (old_val, new_val) in changes.items():
                 logger.updated(
                     f'{old["source"]} - {job_id:.10s} - {old["job_name"]} updated:'
                     f"\n\t\t\t\t\t\t {field}: {old_val} -> {new_val}",
-                    extra=
-                    {
-                       "job_name" : old["job_name"],
-                       "source" : old["source"],
-                       "job_id" : job_id,
-                       "field" : field,
-                       "old_val": old_val,
-                       "new_val": new_val,
-                       "location": old['location']
-                    })
-        db[job_id].clear()
-        db[job_id].update(new)
-        db[job_id].pop("filled_date", None)
-        #
-        # if new_date is not None and new_date == "Thu 01-Jan-2026":
-        #     db[job_id]["posted_date"]=old_date
+                    extra={
+                        "job_name": old["job_name"],
+                        "source": old["source"],
+                        "job_id": job_id,
+                        "field": field,
+                        "old_val": old_val,
+                        "new_val": new_val,
+                        "location": old["location"],
+                    },
+                )
+
+        db[job_id] = new
 
     return db
