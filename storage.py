@@ -4,10 +4,15 @@ from json import JSONDecodeError
 import sqlite3
 from datetime import datetime
 from zoneinfo import ZoneInfo
+from pathlib import Path
+
+BASE_DIR = Path(__file__).resolve().parent
+DB_JSON_PATH = BASE_DIR / "db.json"
+
 
 DATE_FMT = "%a %d-%b-%Y"
 UTC_FMT = "%Y-%m-%dT%H:%M:%SZ"
-DB_NAME = "jobs.db"
+DB_NAME = BASE_DIR / "jobs.db"
 
 def to_utc(date_str):
     if not date_str:
@@ -51,22 +56,42 @@ def init_db():
     conn.commit()
     conn.close()
 
-def load_db(path="db.json"):
+def load_db(path=DB_JSON_PATH):
     try:
         with open(path, "r") as f:
             return json.load(f)
-    except (FileNotFoundError, JSONDecodeError):
-        return {}
+
+    except FileNotFoundError:
+        raise FileNotFoundError(
+            f"Missing database: {path}"
+        )
+
+    except JSONDecodeError as e:
+        raise RuntimeError(
+            f"Corrupted database: {path}"
+        ) from e
+
+
 #
 # def save_db(db: dict, path="db.json"):
 #     with open(path, "w") as f:
 #         json.dump(db, f, indent=4)
 #
 #
-def save_db(db: dict, path="db.json"):
-    # 1️⃣ Save JSON (unchanged)
-    with open(path, "w") as f:
-        json.dump(db, f, indent=4)
+def save_db(db: dict):
+
+    temp_path = DB_JSON_PATH.with_suffix(".tmp")
+
+    try:
+        with open(temp_path, "w", encoding="utf-8") as f:
+            json.dump(db, f, indent=4)
+
+        temp_path.replace(DB_JSON_PATH)
+
+    except Exception:
+        if temp_path.exists():
+            temp_path.unlink()
+        raise
 
     # 2️⃣ Save to SQL
     conn = get_connection()
