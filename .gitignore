@@ -9,3 +9,5 @@ logs/*
 !logs/.gitkeep
 
 local_backups/*
+
+old_files/*
