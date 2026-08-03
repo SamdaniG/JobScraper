@@ -111,7 +111,7 @@ def main(args, scrapers_to_run, logger= None):
 
     # if len(new_jobs)>10:
     # send_individual_new_job = False if len(new_jobs)>10 else True
-    send_individual_new_job = len(new_jobs)<= 10
+    send_individual_new_job = len(new_jobs)<= -1
 
     if EMAIL_ACTIVE:
         # from emailer import send_email
@@ -244,7 +244,13 @@ def main(args, scrapers_to_run, logger= None):
 
                 )
 
-    logger.info(f"Writing data to my database!\n-------------------")
+    # logger.info(f"Writing data to my database!\n-------------------")
+    logger.info(
+        "Writing data to my database | new_jobs=%d filled_jobs=%d updated_jobs=%d",
+        len(new_jobs),
+        len(filled_jobs),
+        len(updated_jobs)
+    )
     save_db(db)
 
 if __name__=='__main__':
