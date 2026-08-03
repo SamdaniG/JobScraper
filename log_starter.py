@@ -4,6 +4,7 @@ import json
 import logging
 from datetime import datetime
 from logs_db import initialize, get_connection
+from utils import RunContext
 
 LOG_DB = Path(__file__).resolve().parent / "logs" / "logs.db"
 
@@ -33,26 +34,31 @@ def set_logger(args):
     with open(config_file, "r") as f:
         logging_config = json.load(f)
     json_log_file = logs_dir / "event_logs.jsonl"
+    timer_log_file = logs_dir / "timer.jsonl"
+
     logging_config["handlers"]["file"]["filename"] = str(log_file)
     logging_config["handlers"]["json_file"]["filename"] = str(json_log_file)
-
-    timer_log_file = logs_dir / "timer.jsonl"
     logging_config["handlers"]["timer_file"]["filename"] = str(timer_log_file)
+
     initialize()
+    context = RunContext()
+
     logging.config.dictConfig(config=logging_config)
-    #logger = logging.getLogger("scraper")
-    # logger = logging.LoggerAdapter(
-    #     logging.getLogger("scraper"),
-    #     {"executor": args.source}
-    # )
+
     logger = CustomLoggerAdapter(
         logging.getLogger("scraper"),
-        {"executor": args.source}
+        {"executor": args.source},
+        context
     )
     #logger.info("Script started")
     return logger
 
 class CustomLoggerAdapter(logging.LoggerAdapter):
+
+    def __init__(self, logger, extra, context):
+        super().__init__(logger, extra)
+        self.context = context
+
     def new(self, msg, *args, **kwargs):
         self.log(NEW_LEVEL, msg, *args, **kwargs)
 
@@ -70,7 +76,10 @@ class CustomLoggerAdapter(logging.LoggerAdapter):
         extra = kwargs.get("extra", {})
 
         # merge with adapter-level extra
-        kwargs["extra"] = {**self.extra, **extra}
+        kwargs["extra"] = {
+            **self.extra,
+            "run_uuid": self.context.run_uuid,
+            **extra}
 
         return msg, kwargs
 
@@ -83,7 +92,8 @@ class JsonFormatter(logging.Formatter):
             "location":         getattr(record, "location", None),
             "source":           getattr(record, "source", None),
             "executor":         getattr(record, "executor", None),
-            "timestamp": datetime.utcnow().isoformat()
+            "timestamp": datetime.utcnow().isoformat(),
+            "run_uuid": getattr(record, "run_uuid", None),
         }
 
         # Only for UPDATED
@@ -101,7 +111,8 @@ class JsonTimerFormatter(logging.Formatter):
         timer_record = {
             "source":           getattr(record, "source", None),
             "time_taken":       getattr(record, "timer", None),
-            "timestamp":        datetime.utcfromtimestamp(record.created).isoformat()
+            "timestamp":        datetime.utcfromtimestamp(record.created).isoformat(),
+            "run_uuid":         getattr(record, "run_uuid", None),
         }
         if hasattr(record, "jobBoard"):
             timer_record["job_board"] = record.jobBoard
@@ -114,24 +125,7 @@ class JsonTimerFormatter(logging.Formatter):
 
         return json.dumps(timer_record)
 
-class EventOnlyFilter(logging.Filter):
-    def filter(self, record):
-        return record.levelno in {25, 27}
-
-class TimerOnlyFilter(logging.Filter):
-    def filter(self, record):
-        return record.levelno in {28}
-
-class NoTimerFilter(logging.Filter):
-    def filter(self, record):
-        return record.levelno != TIMER_LEVEL
-
-class LogsFilter(logging.Filter):
-    def filter(self, record):
-        return record.levelno in {25, 26, 27}
-
-
-class SQLiteHandler(logging.Handler):
+class TimerSQLHandler(logging.Handler):
     def __init__(self):
         super().__init__()
 
@@ -146,9 +140,10 @@ class SQLiteHandler(logging.Handler):
                         job_board,
                         executor,
                         time_taken,
-                        scraper_count
+                        scraper_count,
+                        run_uuid
                     )
-                    VALUES (?,?,?,?,?,?)
+                    VALUES (?,?,?,?,?,?,?)
                     """,
                     (
                         datetime.utcfromtimestamp(record.created).isoformat(),
@@ -157,6 +152,7 @@ class SQLiteHandler(logging.Handler):
                         getattr(record, "executor", None),
                         getattr(record, "timer", None),
                         getattr(record, "scraper_count", None),
+                        getattr(record, "run_uuid", None)
                     )
                 )
         except Exception as e:
@@ -182,9 +178,11 @@ class HistorySQLHandler(logging.Handler):
                         old_val,
                         
                         new_val,       
-                        timestamp
+                        timestamp,
+                        
+                        run_uuid
                     )
-                    VALUES (?,?,?,?,?,?,?,?)
+                    VALUES (?,?,?,?,?,?,?,?,?)
                     """,
                     (
                         getattr(record, "hash_id", None),
@@ -197,8 +195,25 @@ class HistorySQLHandler(logging.Handler):
                         getattr(record, "old_val", None),
 
                         getattr(record, "new_val", None),
-                        datetime.utcfromtimestamp(record.created).isoformat()
+                        datetime.utcfromtimestamp(record.created).isoformat(),
+                        getattr(record, "run_uuid", None)
                     )
                 )
         except Exception as e:
             self.handleError(record)
+
+class EventOnlyFilter(logging.Filter):
+    def filter(self, record):
+        return record.levelno in {25, 27}
+
+class TimerOnlyFilter(logging.Filter):
+    def filter(self, record):
+        return record.levelno in {28}
+
+class NoTimerFilter(logging.Filter):
+    def filter(self, record):
+        return record.levelno != TIMER_LEVEL
+
+class LogsFilter(logging.Filter):
+    def filter(self, record):
+        return record.levelno in {25, 26, 27}

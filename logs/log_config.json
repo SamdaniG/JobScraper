@@ -63,7 +63,7 @@
             "backupCount": 3
         },
         "sqlite_timer": {
-            "()": "log_starter.SQLiteHandler",
+            "()": "log_starter.TimerSQLHandler",
             "level": "DEBUG",
             "filters": ["timer_only"]
         },

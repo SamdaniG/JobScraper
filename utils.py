@@ -1,8 +1,14 @@
 # utils.py
 import hashlib
 from datetime import timedelta, date
+from dataclasses import dataclass, field
+from uuid import uuid4
 
 DATE_FMT = "%a %d-%b-%Y"
+
+@dataclass
+class RunContext:
+    run_uuid: str = field(default_factory=lambda: str(uuid4()))
 
 def sha256_hex(s: str, length: int = 10) -> str:
     return hashlib.sha256(s.encode("utf-8")).hexdigest()[:length]

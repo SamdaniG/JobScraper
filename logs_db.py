@@ -6,7 +6,36 @@ LOG_DB = Path(__file__).resolve().parent / "logs" / "logs.db"
 def get_connection(db):
     return sqlite3.connect(db)
 
+def migrate():
+    with sqlite3.connect(LOG_DB) as conn:
+
+        # check timers table
+        columns = [
+            row[1] for row in conn.execute(
+                "PRAGMA table_info(timers)"
+            )
+        ]
+
+        if "run_uuid" not in columns:
+            conn.execute(
+                "ALTER TABLE timers ADD COLUMN run_uuid TEXT"
+            )
+
+
+        # check history table
+        columns = [
+            row[1] for row in conn.execute(
+                "PRAGMA table_info(history)"
+            )
+        ]
+
+        if "run_uuid" not in columns:
+            conn.execute(
+                "ALTER TABLE history ADD COLUMN run_uuid TEXT"
+            )
+
 def initialize():
+
     with sqlite3.connect(LOG_DB) as conn:
         conn.execute("PRAGMA journal_mode=WAL;")
         conn.execute("""
@@ -19,7 +48,8 @@ def initialize():
                 executor TEXT,
     
                 time_taken REAL,
-                scraper_count INTEGER
+                scraper_count INTEGER,
+                run_uuid TEXT
             );
         """)
 
@@ -35,7 +65,10 @@ def initialize():
                 field TEXT DEFAULT NULL,
                 old_val TEXT DEFAULT NULL,
                 new_val TEXT DEFAULT NULL,
-                timestamp TEXT NOT NULL
+                timestamp TEXT NOT NULL,
+                run_uuid TEXT
             );
         """)
+
+    migrate()
 

@@ -6,3 +6,4 @@
 4. Tag v0.4 Optimized the main logic to make things more readable and simpler at the same time
 5. Tag v0.5 Prevent silent database resets on corrupted JSON
 6. Tag v1.0 Implemented job history tracking database
+7. Tag v1.1 Added the Universally Unique ID (UUID) to the jsonls, timer db and history db

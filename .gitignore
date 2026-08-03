@@ -7,3 +7,5 @@ email_info.py
 
 logs/*
 !logs/.gitkeep
+
+local_backups/*
