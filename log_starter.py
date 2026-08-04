@@ -78,7 +78,7 @@ class CustomLoggerAdapter(logging.LoggerAdapter):
         # merge with adapter-level extra
         kwargs["extra"] = {
             **self.extra,
-            "run_uuid": self.context.run_uuid,
+            "uuid": self.context.uuid,
             **extra}
 
         return msg, kwargs
@@ -93,7 +93,7 @@ class JsonFormatter(logging.Formatter):
             "source":           getattr(record, "source", None),
             "executor":         getattr(record, "executor", None),
             "timestamp": datetime.utcnow().isoformat(),
-            "run_uuid": getattr(record, "run_uuid", None),
+            "uuid": getattr(record, "uuid", None),
         }
 
         # Only for UPDATED
@@ -112,7 +112,7 @@ class JsonTimerFormatter(logging.Formatter):
             "source":           getattr(record, "source", None),
             "time_taken":       getattr(record, "timer", None),
             "timestamp":        datetime.utcfromtimestamp(record.created).isoformat(),
-            "run_uuid":         getattr(record, "run_uuid", None),
+            "uuid":         getattr(record, "uuid", None),
         }
         if hasattr(record, "jobBoard"):
             timer_record["job_board"] = record.jobBoard
@@ -141,7 +141,7 @@ class TimerSQLHandler(logging.Handler):
                         executor,
                         time_taken,
                         scraper_count,
-                        run_uuid
+                        uuid
                     )
                     VALUES (?,?,?,?,?,?,?)
                     """,
@@ -152,7 +152,7 @@ class TimerSQLHandler(logging.Handler):
                         getattr(record, "executor", None),
                         getattr(record, "timer", None),
                         getattr(record, "scraper_count", None),
-                        getattr(record, "run_uuid", None)
+                        getattr(record, "uuid", None)
                     )
                 )
         except Exception as e:
@@ -180,7 +180,7 @@ class HistorySQLHandler(logging.Handler):
                         new_val,       
                         timestamp,
                         
-                        run_uuid
+                        uuid
                     )
                     VALUES (?,?,?,?,?,?,?,?,?)
                     """,
@@ -196,7 +196,7 @@ class HistorySQLHandler(logging.Handler):
 
                         getattr(record, "new_val", None),
                         datetime.utcfromtimestamp(record.created).isoformat(),
-                        getattr(record, "run_uuid", None)
+                        getattr(record, "uuid", None)
                     )
                 )
         except Exception as e:

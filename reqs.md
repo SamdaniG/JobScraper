@@ -8,3 +8,4 @@
 6. Tag v1.0 Implemented job history tracking database
 7. Tag v1.1 Added the Universally Unique ID (UUID) to the jsonls, timer db and history db
 8. Tag v1.2 Added the feature to allow querying the logs db from cli
+9. Tag v1.3 Renamed "run_uuid" to uuid

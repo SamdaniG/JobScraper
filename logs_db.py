@@ -9,29 +9,29 @@ def get_logs_connection(db=LOG_DB):
 def migrate():
     with sqlite3.connect(LOG_DB) as conn:
 
-        # check timers table
+        # timers
         columns = [
             row[1] for row in conn.execute(
                 "PRAGMA table_info(timers)"
             )
         ]
 
-        if "run_uuid" not in columns:
+        if "uuid" not in columns and "run_uuid" in columns:
             conn.execute(
-                "ALTER TABLE timers ADD COLUMN run_uuid TEXT"
+                "ALTER TABLE timers RENAME COLUMN run_uuid TO uuid"
             )
 
 
-        # check history table
+        # history
         columns = [
             row[1] for row in conn.execute(
                 "PRAGMA table_info(history)"
             )
         ]
 
-        if "run_uuid" not in columns:
+        if "uuid" not in columns and "run_uuid" in columns:
             conn.execute(
-                "ALTER TABLE history ADD COLUMN run_uuid TEXT"
+                "ALTER TABLE history RENAME COLUMN run_uuid TO uuid"
             )
 
 def initialize():
@@ -49,7 +49,7 @@ def initialize():
     
                 time_taken REAL,
                 scraper_count INTEGER,
-                run_uuid TEXT
+                uuid TEXT
             );
         """)
 
@@ -66,7 +66,7 @@ def initialize():
                 old_val TEXT DEFAULT NULL,
                 new_val TEXT DEFAULT NULL,
                 timestamp TEXT NOT NULL,
-                run_uuid TEXT
+                uuid TEXT
             );
         """)
 
