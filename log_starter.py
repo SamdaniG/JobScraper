@@ -10,11 +10,13 @@ NEW_LEVEL = 25
 UPDATED_LEVEL = 26
 FILLED_LEVEL = 27
 TIMER_LEVEL = 28
+COMPLETED_LEVEL = 29
 
 logging.addLevelName(NEW_LEVEL, "NEW")
 logging.addLevelName(UPDATED_LEVEL, "UPDATED")
 logging.addLevelName(FILLED_LEVEL, "FILLED")
 logging.addLevelName(TIMER_LEVEL, "TIMER")
+logging.addLevelName(COMPLETED_LEVEL,"COMPLETED")
 
 def set_logger(args):
     """This sets up the logging module!"""
@@ -69,6 +71,9 @@ class CustomLoggerAdapter(logging.LoggerAdapter):
 
     def timer(self, msg, *args, **kwargs):
         self.log(TIMER_LEVEL, msg, *args, **kwargs)
+
+    def completed(self, msg, *args, **kwargs):
+        self.log(COMPLETED_LEVEL, msg, *args, **kwargs)
 
     def process(self, msg, kwargs):
         # get extra passed in log call
@@ -266,3 +271,7 @@ class LogsFilter(logging.Filter):
 class QFilter(logging.Filter):
     def filter(self, record):
         return record.levelno in {25, 26}
+
+class EmailFilter(logging.Filter):
+    def filter(self, record):
+        return record.levelno in {25, 27, 29}

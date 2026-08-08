@@ -10,3 +10,4 @@
 8. Tag v1.2 Added the feature to allow querying the logs db from cli
 9. Tag v1.3 Renamed "run_uuid" to uuid
 10. Tag v1.4 Added the Q initializer and created the architecture for the jd workers
+11. Tag v1.5 Cleaned up main, and added an email handler via the logging system

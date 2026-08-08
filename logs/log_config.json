@@ -28,6 +28,9 @@
         },
         "q_filter": {
           "()": "log_starter.QFilter"
+        },
+        "email_filter": {
+          "()": "log_starter.EmailFilter"
         }
     },
     "handlers": {
@@ -79,12 +82,17 @@
             "()": "log_starter.QSQLHandler",
             "level": "DEBUG",
             "filters": ["q_filter"]
+        },
+        "email": {
+            "()": "notifications.email_handler.EmailHandler",
+            "level": "DEBUG",
+            "filters": ["email_filter"]
         }
     },
     "loggers": {
         "scraper": {
             "level": "DEBUG",
-            "handlers": ["stdout", "file","json_file", "timer_file","timer_sql","history_sql","q_sql"],
+            "handlers": ["stdout", "file","json_file", "timer_file","timer_sql","history_sql","q_sql","email"],
             "propagate": false
         }
     }
