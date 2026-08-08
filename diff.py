@@ -1,8 +1,15 @@
 # diff.py
 from datetime import timedelta
 from datetime import date, datetime
+import json
+
 DATE_FMT = "%a %d-%b-%Y"
 DEFAULT_DATE = "Thu 01-Jan-2026"
+
+ENRICHED_FIELDS = {
+    "salary_extractor",
+    "jd"
+}
 
 def normalize_job(old: dict | None, scraped: dict) -> dict:
     """
@@ -16,6 +23,11 @@ def normalize_job(old: dict | None, scraped: dict) -> dict:
     if old is None:
         new.pop("filled_date", None)
         return new
+
+    # preserve enrichment fields
+    for field in ENRICHED_FIELDS:
+        if field in old:
+            new[field] = old[field]
 
     old_date = old.get("posted_date")
     new_date = new.get("posted_date")
@@ -76,9 +88,9 @@ def diff_jobs(db: dict, current_jobs_db: dict, successful_sources: set):
     return new_jobs, filled_jobs, update_jobs
 
 def dict_changes(old: dict, new: dict, ignore=None):
-    ignore = {"filled_date"}
+    # ignore = {"filled_date"}
     if ignore is None:
-        ignore = set()
+        ignore = {"filled_date"}
 
     changes = {}
 
@@ -121,6 +133,7 @@ def updating_db(db, all_scraped_jobs, new_jobs, updated_jobs, logger):
                         "old_val": old_val,
                         "new_val": new_val,
                         "location": old["location"],
+                        "info": json.dumps(new)
                     },
                 )
 

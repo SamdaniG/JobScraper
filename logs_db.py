@@ -2,8 +2,12 @@ from pathlib import Path
 import sqlite3
 
 LOG_DB = Path(__file__).resolve().parent / "logs" / "logs.db"
+Q_DB = Path(__file__).resolve().parent / "logs" / "q.db"
 
 def get_logs_connection(db=LOG_DB):
+    return sqlite3.connect(db)
+
+def get_q_connection(db=Q_DB):
     return sqlite3.connect(db)
 
 def migrate():
@@ -34,9 +38,9 @@ def migrate():
                 "ALTER TABLE history RENAME COLUMN run_uuid TO uuid"
             )
 
-def initialize():
+def logs_initialize(db=LOG_DB):
 
-    with sqlite3.connect(LOG_DB) as conn:
+    with sqlite3.connect(db) as conn:
         conn.execute("PRAGMA journal_mode=WAL;")
         conn.execute("""
             CREATE TABLE IF NOT EXISTS timers (
@@ -72,3 +76,125 @@ def initialize():
 
     migrate()
 
+def q_initialize(db=Q_DB):
+    with sqlite3.connect(db) as conn:
+        conn.execute("PRAGMA journal_mode=WAL;")
+
+        conn.execute("""
+            CREATE TABLE IF NOT EXISTS q (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+
+                hash_id TEXT NOT NULL,
+                info TEXT,
+
+                event TEXT NOT NULL,
+
+                status TEXT DEFAULT 'pending',
+                task TEXT NOT NULL,
+                retry_count INTEGER DEFAULT 0,
+
+                created_at TEXT NOT NULL,
+                processed_at TEXT NULL,
+                error TEXT DEFAULT NULL,
+
+                uuid TEXT
+            );
+        """)
+
+def q_migrate(db=Q_DB):
+    with sqlite3.connect(db) as conn:
+
+        # Check existing columns
+        columns = {
+            row[1]
+            for row in conn.execute("PRAGMA table_info(q)")
+        }
+
+        # Already migrated
+        if "info" in columns:
+            return
+
+        conn.execute("BEGIN")
+
+        # Add new column
+        conn.execute("""
+            ALTER TABLE q
+            ADD COLUMN info TEXT
+        """)
+
+        # Populate info JSON from existing columns
+        conn.execute("""
+            UPDATE q
+            SET info = json_object(
+                'job_name', job_name,
+                'source', source
+            )
+        """)
+
+        # Create new table
+        conn.execute("""
+            CREATE TABLE q_new (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+
+                hash_id TEXT NOT NULL,
+                info TEXT,
+
+                event TEXT NOT NULL,
+
+                status TEXT DEFAULT 'pending',
+                task TEXT NOT NULL,
+                retry_count INTEGER DEFAULT 0,
+
+                created_at TEXT NOT NULL,
+                processed_at TEXT,
+                error TEXT DEFAULT NULL,
+
+                uuid TEXT
+            );
+        """)
+
+        # Copy data
+        conn.execute("""
+            INSERT INTO q_new (
+                id,
+                hash_id,
+                info,
+                event,
+                status,
+                task,
+                retry_count,
+                created_at,
+                processed_at,
+                error,
+                uuid
+            )
+            SELECT
+                id,
+                hash_id,
+                info,
+                event,
+                status,
+                task,
+                retry_count,
+                created_at,
+                processed_at,
+                error,
+                uuid
+            FROM q;
+        """)
+
+        # Remove old table
+        conn.execute("""
+            DROP TABLE q;
+        """)
+
+        # Rename
+        conn.execute("""
+            ALTER TABLE q_new
+            RENAME TO q;
+        """)
+
+        conn.commit()
+
+if __name__=='__main__':
+    q_migrate()

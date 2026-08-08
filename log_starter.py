@@ -3,10 +3,8 @@ import  logging.config
 import json
 import logging
 from datetime import datetime
-from logs_db import initialize, get_logs_connection
+from logs_db import logs_initialize, get_logs_connection, get_q_connection, q_initialize
 from utils import RunContext
-
-LOG_DB = Path(__file__).resolve().parent / "logs" / "logs.db"
 
 NEW_LEVEL = 25
 UPDATED_LEVEL = 26
@@ -40,7 +38,8 @@ def set_logger(args):
     logging_config["handlers"]["json_file"]["filename"] = str(json_log_file)
     logging_config["handlers"]["timer_file"]["filename"] = str(timer_log_file)
 
-    initialize()
+    logs_initialize()
+    q_initialize()
     context = RunContext()
 
     logging.config.dictConfig(config=logging_config)
@@ -131,7 +130,7 @@ class TimerSQLHandler(logging.Handler):
 
     def emit(self, record):
         try:
-            with get_logs_connection(LOG_DB) as conn:
+            with get_logs_connection() as conn:
                 conn.execute(
                     """
                     INSERT INTO timers (
@@ -164,7 +163,7 @@ class HistorySQLHandler(logging.Handler):
 
     def emit(self, record):
         try:
-            with get_logs_connection(LOG_DB) as conn:
+            with get_logs_connection() as conn:
                 conn.execute(
                     """
                     INSERT INTO history (
@@ -202,6 +201,52 @@ class HistorySQLHandler(logging.Handler):
         except Exception as e:
             self.handleError(record)
 
+
+class QSQLHandler(logging.Handler):
+    def __init__(self):
+        super().__init__()
+
+    def emit(self, record):
+        if record.levelno == NEW_LEVEL:
+            task_field = "extract_jd"
+
+        elif record.levelno == UPDATED_LEVEL:
+            task_field = "update_jd"
+
+        try:
+            with get_q_connection() as conn:
+                conn.execute(
+                    """
+                    INSERT INTO q (
+                        hash_id,
+                        info,
+                        
+                        
+                        event,
+                        
+                        task,
+                        
+                        created_at,
+                        uuid
+                    )
+                    VALUES (?,?,?,?,?,?)
+                    """,
+                    (
+                        getattr(record, "hash_id", None),
+                        getattr(record, "info", None),
+
+
+                        getattr(record, "levelname", None),
+
+                        task_field,
+
+                        datetime.utcfromtimestamp(record.created).isoformat(),
+                        getattr(record, "uuid", None)
+                    )
+                )
+        except Exception as e:
+            self.handleError(record)
+
 class EventOnlyFilter(logging.Filter):
     def filter(self, record):
         return record.levelno in {25, 27}
@@ -217,3 +262,7 @@ class NoTimerFilter(logging.Filter):
 class LogsFilter(logging.Filter):
     def filter(self, record):
         return record.levelno in {25, 26, 27}
+
+class QFilter(logging.Filter):
+    def filter(self, record):
+        return record.levelno in {25, 26}

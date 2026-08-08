@@ -148,3 +148,30 @@ def save_db(db: dict):
 
     conn.commit()
     conn.close()
+
+def migrate_jobs(db=None):
+    conn = get_jobs_connection(db) if db else get_jobs_connection()
+    cursor = conn.cursor()
+
+    columns = {
+        row[1]
+        for row in cursor.execute("PRAGMA table_info(jobs)")
+    }
+
+    if "jd" not in columns:
+        cursor.execute("""
+            ALTER TABLE jobs
+            ADD COLUMN jd TEXT DEFAULT 'NA'
+        """)
+
+    if "salary_extractor" not in columns:
+        cursor.execute("""
+            ALTER TABLE jobs
+            ADD COLUMN salary_extractor TEXT DEFAULT 'NO    '
+        """)
+
+    conn.commit()
+    conn.close()
+
+if __name__=='__main__':
+    migrate_jobs()

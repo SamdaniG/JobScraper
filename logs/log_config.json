@@ -25,6 +25,9 @@
         },
         "logs_timer": {
           "()": "log_starter.LogsFilter"
+        },
+        "q_filter": {
+          "()": "log_starter.QFilter"
         }
     },
     "handlers": {
@@ -62,7 +65,7 @@
             "maxBytes": 500000,
             "backupCount": 3
         },
-        "sqlite_timer": {
+        "timer_sql": {
             "()": "log_starter.TimerSQLHandler",
             "level": "DEBUG",
             "filters": ["timer_only"]
@@ -71,12 +74,17 @@
             "()": "log_starter.HistorySQLHandler",
             "level": "DEBUG",
             "filters": ["logs_timer"]
+        },
+        "q_sql": {
+            "()": "log_starter.QSQLHandler",
+            "level": "DEBUG",
+            "filters": ["q_filter"]
         }
     },
     "loggers": {
         "scraper": {
             "level": "DEBUG",
-            "handlers": ["stdout", "file","json_file", "timer_file","sqlite_timer","history_sql"],
+            "handlers": ["stdout", "file","json_file", "timer_file","timer_sql","history_sql","q_sql"],
             "propagate": false
         }
     }

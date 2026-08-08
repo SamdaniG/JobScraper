@@ -6,6 +6,7 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 from functools import wraps
 from cli.main import cli_main
 from notifications.emailer import send_email
+import json
 
 def time_taken(func):
     """This is a python decorator to calculate the time taken to run every function, gives us a useful metric to keep track"""
@@ -66,7 +67,7 @@ def main(args, scrapers_to_run, logger= None):
     )
 
     ####Activating Email
-    EMAIL_ACTIVE = True
+    EMAIL_ACTIVE = False
     if args.source == 'scheduler':
         EMAIL_ACTIVE = True
 
@@ -180,7 +181,8 @@ def main(args, scrapers_to_run, logger= None):
                     "job_name": job["job_name"],
                     "source": job["source"],
                     "hash_id": job_id,
-                    "location": job.get("location", "")
+                    "location": job.get("location", ""),
+                    "info": json.dumps(job)
                 }
             )
 
