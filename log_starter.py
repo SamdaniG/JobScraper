@@ -132,11 +132,39 @@ class JsonTimerFormatter(logging.Formatter):
 class TimerSQLHandler(logging.Handler):
     def __init__(self):
         super().__init__()
+        self.events = {}
+        self.flag = False
 
     def emit(self, record):
+        uuid = getattr(record, "uuid", None)
+
+        if not uuid:
+            return
+
+        if uuid not in self.events:
+            self.events[uuid] = []
+
+        if record.levelno == TIMER_LEVEL:
+            self.events[uuid].append(record)
+
+        elif record.levelno == COMPLETED_LEVEL:
+            self._flush(uuid)
+            self.flag = True
+
+        if self.flag:
+            self._flush(uuid)
+
+    def _flush(self, uuid):
+
+        events = self.events.pop(uuid, None)
+
+        if not events:
+            return
+
         try:
             with get_logs_connection() as conn:
-                conn.execute(
+
+                conn.executemany(
                     """
                     INSERT INTO timers (
                         timestamp,
@@ -149,116 +177,171 @@ class TimerSQLHandler(logging.Handler):
                     )
                     VALUES (?,?,?,?,?,?,?)
                     """,
-                    (
-                        datetime.utcfromtimestamp(record.created).isoformat(),
-                        getattr(record, "source", None),
-                        getattr(record, "jobBoard", None),
-                        getattr(record, "executor", None),
-                        getattr(record, "timer", None),
-                        getattr(record, "scraper_count", None),
-                        getattr(record, "uuid", None)
-                    )
+                    [
+                        (
+                            datetime.utcfromtimestamp(record.created).isoformat(),
+                            getattr(record, "source", None),
+                            getattr(record, "jobBoard", None),
+                            getattr(record, "executor", None),
+                            getattr(record, "timer", None),
+                            getattr(record, "scraper_count", None),
+                            getattr(record, "uuid", None)
+                        )
+                        for record in events
+                    ]
                 )
-        except Exception as e:
-            self.handleError(record)
+
+        except Exception:
+            self.handleError(events[-1])
 
 class HistorySQLHandler(logging.Handler):
+
     def __init__(self):
         super().__init__()
+        self.events = {}
 
     def emit(self, record):
+
+        uuid = getattr(record, "uuid", None)
+
+        if not uuid:
+            return
+
+        if uuid not in self.events:
+            self.events[uuid] = []
+
+        if record.levelno in {
+            NEW_LEVEL,
+            UPDATED_LEVEL,
+            FILLED_LEVEL
+        }:
+            self.events[uuid].append(record)
+
+        elif record.levelno == COMPLETED_LEVEL:
+            self.flush_events(uuid)
+
+    def flush_events(self, uuid):
+
+        events = self.events.pop(uuid, None)
+
+        if not events:
+            return
+
         try:
             with get_logs_connection() as conn:
-                conn.execute(
+
+                conn.executemany(
                     """
                     INSERT INTO history (
                         hash_id,
                         job_name,
-                        
                         source,
                         event,
-                        
                         field,
                         old_val,
-                        
-                        new_val,       
+                        new_val,
                         timestamp,
-                        
                         uuid
                     )
                     VALUES (?,?,?,?,?,?,?,?,?)
                     """,
-                    (
-                        getattr(record, "hash_id", None),
-                        getattr(record, "job_name", None),
-
-                        getattr(record, "source", None),
-                        getattr(record, "levelname", None),
-
-                        getattr(record, "field", None),
-                        getattr(record, "old_val", None),
-
-                        getattr(record, "new_val", None),
-                        datetime.utcfromtimestamp(record.created).isoformat(),
-                        getattr(record, "uuid", None)
-                    )
+                    [
+                        (
+                            getattr(record, "hash_id", None),
+                            getattr(record, "job_name", None),
+                            getattr(record, "source", None),
+                            getattr(record, "levelname", None),
+                            getattr(record, "field", None),
+                            getattr(record, "old_val", None),
+                            getattr(record, "new_val", None),
+                            datetime.utcfromtimestamp(
+                                record.created
+                            ).isoformat(),
+                            getattr(record, "uuid", None)
+                        )
+                        for record in events
+                    ]
                 )
-        except Exception as e:
-            self.handleError(record)
 
+        except Exception:
+            self.handleError(events[-1])
 
 class QSQLHandler(logging.Handler):
+
     def __init__(self):
         super().__init__()
+        self.events = {}
 
     def emit(self, record):
-        if record.levelno == NEW_LEVEL:
-            task_field = "extract_jd"
 
-        elif record.levelno == UPDATED_LEVEL:
-            task_field = "update_jd"
+        uuid = getattr(record, "uuid", None)
+
+        if not uuid:
+            return
+
+        if uuid not in self.events:
+            self.events[uuid] = []
+
+        if record.levelno in {
+            NEW_LEVEL,
+            UPDATED_LEVEL
+        }:
+            self.events[uuid].append(record)
+
+        elif record.levelno == COMPLETED_LEVEL:
+            self.flush_events(uuid)
+
+    def flush_events(self, uuid):
+
+        events = self.events.pop(uuid, None)
+
+        if not events:
+            return
 
         try:
             with get_q_connection() as conn:
-                conn.execute(
+
+                conn.executemany(
                     """
                     INSERT INTO q (
                         hash_id,
                         info,
-                        
-                        
                         event,
-                        
                         task,
-                        
                         created_at,
                         uuid
                     )
                     VALUES (?,?,?,?,?,?)
                     """,
-                    (
-                        getattr(record, "hash_id", None),
-                        getattr(record, "info", None),
-
-
-                        getattr(record, "levelname", None),
-
-                        task_field,
-
-                        datetime.utcfromtimestamp(record.created).isoformat(),
-                        getattr(record, "uuid", None)
-                    )
+                    [
+                        (
+                            getattr(record, "hash_id", None),
+                            getattr(record, "info", None),
+                            getattr(record, "levelname", None),
+                            (
+                                "extract_jd"
+                                if record.levelno == NEW_LEVEL
+                                else "update_jd"
+                            ),
+                            datetime.utcfromtimestamp(
+                                record.created
+                            ).isoformat(),
+                            getattr(record, "uuid", None)
+                        )
+                        for record in events
+                    ]
                 )
-        except Exception as e:
-            self.handleError(record)
+
+        except Exception:
+            self.handleError(events[-1])
 
 class EventOnlyFilter(logging.Filter):
     def filter(self, record):
-        return record.levelno in {25, 27}
+        return record.levelno in {NEW_LEVEL, FILLED_LEVEL}
 
 class TimerOnlyFilter(logging.Filter):
     def filter(self, record):
-        return record.levelno in {28}
+        return record.levelno in {TIMER_LEVEL, COMPLETED_LEVEL}
 
 class NoTimerFilter(logging.Filter):
     def filter(self, record):
@@ -266,12 +349,12 @@ class NoTimerFilter(logging.Filter):
 
 class LogsFilter(logging.Filter):
     def filter(self, record):
-        return record.levelno in {25, 26, 27}
+        return record.levelno in {NEW_LEVEL, UPDATED_LEVEL, FILLED_LEVEL, COMPLETED_LEVEL}
 
 class QFilter(logging.Filter):
     def filter(self, record):
-        return record.levelno in {25, 26}
+        return record.levelno in {NEW_LEVEL, UPDATED_LEVEL, COMPLETED_LEVEL}
 
 class EmailFilter(logging.Filter):
     def filter(self, record):
-        return record.levelno in {25, 27, 29}
+        return record.levelno in {NEW_LEVEL, FILLED_LEVEL, COMPLETED_LEVEL}

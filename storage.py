@@ -12,7 +12,7 @@ DB_JSON_PATH = BASE_DIR / "db.json"
 
 DATE_FMT = "%a %d-%b-%Y"
 UTC_FMT = "%Y-%m-%dT%H:%M:%SZ"
-DB_NAME = BASE_DIR / "jobs.db"
+DB_NAME = BASE_DIR / "DBs" / "jobs.db"
 
 def to_utc(date_str):
     if not date_str:

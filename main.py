@@ -1,52 +1,11 @@
-import time
 from diff import diff_jobs, updating_db, normalize_job
 from storage import load_db, save_db, init_db
 from log_starter import set_logger
 from concurrent.futures import ThreadPoolExecutor, as_completed
-from functools import wraps
 from cli.main import cli_main
 import json
-
-def time_taken(func):
-    """This is a python decorator to calculate the time taken to run every function, gives us a useful metric to keep track"""
-    @wraps(func)
-    def wrapper(*args, **kwargs):
-        logger = kwargs.get("logger")
-        start = time.perf_counter()
-        output = None
-        name = func.__name__
-        try:
-            output = func(*args, **kwargs)
-            return output
-
-        finally:
-            scraper_count = None
-            job_board = None
-
-            if isinstance(output, tuple) and len(output) == 4:
-                name, _, _, job_board = output
-                # job_board = args[0]().jobBoard
-
-            elif len(args) > 1:
-                scrapers_to_run = args[1]
-                scraper_count = len(scrapers_to_run)
-
-            end = time.perf_counter()
-
-            extra_data = {
-                "source": name,
-                "timer": end - start,
-            }
-
-            if scraper_count is not None:
-                extra_data["scraper_count"] = scraper_count
-            if job_board is not None:
-                extra_data["jobBoard"] = job_board
-            logger.timer(
-                f"Time taken to run {name}: {end - start:.4f}s",
-                extra=extra_data
-            )
-    return wrapper
+from jd_extraction.jd_worker import jd_worker
+from timer_wrapper import time_taken
 
 @time_taken
 def run_scraper(Scraper, logger= None):
@@ -159,7 +118,7 @@ def main(args, scrapers_to_run, logger):
         len(updated_jobs)
     )
     save_db(db)
-    logger.completed("Scraper run completed")
+    # logger.completed("Scraper run completed")
 
 if __name__=='__main__':
     init_db()
@@ -168,3 +127,5 @@ if __name__=='__main__':
     logger = set_logger(args)
 
     main(args, scrapers_to_run, logger=logger)
+    logger.completed("Scraper run completed")
+    jd_worker(logger=logger)

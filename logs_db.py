@@ -1,8 +1,8 @@
 from pathlib import Path
 import sqlite3
 
-LOG_DB = Path(__file__).resolve().parent / "logs" / "logs.db"
-Q_DB = Path(__file__).resolve().parent / "logs" / "q.db"
+LOG_DB = Path(__file__).resolve().parent / "DBs" / "logs.db"
+Q_DB = Path(__file__).resolve().parent / "DBs" / "q.db"
 
 def get_logs_connection(db=LOG_DB):
     return sqlite3.connect(db)
