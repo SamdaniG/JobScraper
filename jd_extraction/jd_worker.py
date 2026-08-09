@@ -67,11 +67,7 @@ def get_pending_tasks(limit=50):
         rows = conn.execute(
             """
             SELECT
-                id,
-                hash_id,
-                info,
-                task,
-                uuid
+                id, hash_id, info, task, uuid
             FROM q
             WHERE status='pending'
             ORDER BY id desc
@@ -219,12 +215,12 @@ def save_jd(
         )
 
 
-@time_taken
-def jd_worker(logger=None):
+# @time_taken
+def jd_worker(logger=None, limit = 200):
     # task = get_pending_tasks()
-    reset_processing_tasks()
+    # reset_processing_tasks()
     jd_initialize()
-    tasks = get_pending_tasks(1000)
+    tasks = get_pending_tasks(limit)
     results=[]
 
     ids = [
@@ -233,9 +229,8 @@ def jd_worker(logger=None):
     ]
 
     mark_processing(ids)
-
+    i = 1
     with ThreadPoolExecutor(max_workers=20) as executor:
-
         futures = [
             executor.submit(scrape_jd_worker, task)
             for task in tasks
@@ -244,6 +239,8 @@ def jd_worker(logger=None):
         for future in as_completed(futures):
             result = future.result()
             results.append(result)
+            print(f'{i:02d}: {result["hash_id"]}')
+            i+=1
 
     for r in results:
 
@@ -274,18 +271,13 @@ def jd_worker(logger=None):
         )
 
         # 2. Update jobs table
-        update_job_jd(
-            hash_id=r["hash_id"],
-            salary=salary
-        )
+        update_job_jd(hash_id=r["hash_id"], salary=salary)
 
         # 3. Remove completed queue task
-        remove_task(
-            r["id"]
-        )
+        remove_task(r["id"])
 
         # print(json.dumps(r, indent=4))
 
 if __name__=='__main__':
-    jd_worker()
+    jd_worker(limit=100)
 

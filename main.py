@@ -127,5 +127,5 @@ if __name__=='__main__':
     logger = set_logger(args)
 
     main(args, scrapers_to_run, logger=logger)
-    logger.completed("Scraper run completed")
+    logger.finish("Scraper run completed")
     jd_worker(logger=logger)

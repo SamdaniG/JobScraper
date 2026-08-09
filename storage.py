@@ -7,7 +7,7 @@ from zoneinfo import ZoneInfo
 from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent
-DB_JSON_PATH = BASE_DIR / "db.json"
+DB_JSON_PATH = BASE_DIR / "DBs" /  "db.json"
 
 
 DATE_FMT = "%a %d-%b-%Y"

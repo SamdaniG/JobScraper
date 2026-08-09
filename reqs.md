@@ -12,3 +12,5 @@
 10. Tag v1.4 Added the Q initializer and created the architecture for the jd workers
 11. Tag v1.5 Cleaned up main, and added an email handler via the logging system
 12. Tag v2.0 Added the JD worker
+13. Tag v2.1 Changes the logger.completed to logger.finish, moved the db.json to DBs, 
+        activated the scheduler clause in notifications, added GM USA, modified RV JD, corrected Aurora  

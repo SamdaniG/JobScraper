@@ -11,8 +11,8 @@ class EmailHandler(logging.Handler):
     def emit(self, record):
 
         executor = getattr(record, "executor", None)
-        # if executor != 'scheduler':
-        #     return
+        if executor != 'scheduler':
+            return
 
         uuid = getattr(record, "uuid", None)
         if not uuid:

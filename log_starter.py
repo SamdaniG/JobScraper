@@ -10,13 +10,13 @@ NEW_LEVEL = 25
 UPDATED_LEVEL = 26
 FILLED_LEVEL = 27
 TIMER_LEVEL = 28
-COMPLETED_LEVEL = 29
+FINISHED_LEVEL = 29
 
 logging.addLevelName(NEW_LEVEL, "NEW")
 logging.addLevelName(UPDATED_LEVEL, "UPDATED")
 logging.addLevelName(FILLED_LEVEL, "FILLED")
 logging.addLevelName(TIMER_LEVEL, "TIMER")
-logging.addLevelName(COMPLETED_LEVEL,"COMPLETED")
+logging.addLevelName(FINISHED_LEVEL, "FINISHED")
 
 def set_logger(args):
     """This sets up the logging module!"""
@@ -72,8 +72,8 @@ class CustomLoggerAdapter(logging.LoggerAdapter):
     def timer(self, msg, *args, **kwargs):
         self.log(TIMER_LEVEL, msg, *args, **kwargs)
 
-    def completed(self, msg, *args, **kwargs):
-        self.log(COMPLETED_LEVEL, msg, *args, **kwargs)
+    def finish(self, msg, *args, **kwargs):
+        self.log(FINISHED_LEVEL, msg, *args, **kwargs)
 
     def process(self, msg, kwargs):
         # get extra passed in log call
@@ -147,7 +147,7 @@ class TimerSQLHandler(logging.Handler):
         if record.levelno == TIMER_LEVEL:
             self.events[uuid].append(record)
 
-        elif record.levelno == COMPLETED_LEVEL:
+        elif record.levelno == FINISHED_LEVEL:
             self._flush(uuid)
             self.flag = True
 
@@ -217,7 +217,7 @@ class HistorySQLHandler(logging.Handler):
         }:
             self.events[uuid].append(record)
 
-        elif record.levelno == COMPLETED_LEVEL:
+        elif record.levelno == FINISHED_LEVEL:
             self.flush_events(uuid)
 
     def flush_events(self, uuid):
@@ -288,7 +288,7 @@ class QSQLHandler(logging.Handler):
         }:
             self.events[uuid].append(record)
 
-        elif record.levelno == COMPLETED_LEVEL:
+        elif record.levelno == FINISHED_LEVEL:
             self.flush_events(uuid)
 
     def flush_events(self, uuid):
@@ -341,7 +341,7 @@ class EventOnlyFilter(logging.Filter):
 
 class TimerOnlyFilter(logging.Filter):
     def filter(self, record):
-        return record.levelno in {TIMER_LEVEL, COMPLETED_LEVEL}
+        return record.levelno in {TIMER_LEVEL, FINISHED_LEVEL}
 
 class NoTimerFilter(logging.Filter):
     def filter(self, record):
@@ -349,12 +349,12 @@ class NoTimerFilter(logging.Filter):
 
 class LogsFilter(logging.Filter):
     def filter(self, record):
-        return record.levelno in {NEW_LEVEL, UPDATED_LEVEL, FILLED_LEVEL, COMPLETED_LEVEL}
+        return record.levelno in {NEW_LEVEL, UPDATED_LEVEL, FILLED_LEVEL, FINISHED_LEVEL}
 
 class QFilter(logging.Filter):
     def filter(self, record):
-        return record.levelno in {NEW_LEVEL, UPDATED_LEVEL, COMPLETED_LEVEL}
+        return record.levelno in {NEW_LEVEL, UPDATED_LEVEL, FINISHED_LEVEL}
 
 class EmailFilter(logging.Filter):
     def filter(self, record):
-        return record.levelno in {NEW_LEVEL, FILLED_LEVEL, COMPLETED_LEVEL}
+        return record.levelno in {NEW_LEVEL, FILLED_LEVEL, FINISHED_LEVEL}
