@@ -1,3 +1,4 @@
+from time import timezone
 from log_starter import get_q_connection
 import sqlite3
 import json
@@ -6,7 +7,7 @@ from scrapers.__base import ApiJobBoardScraper
 from jd_extraction.jd_init import jd_initialize, get_jd_connection
 import re
 import hashlib
-from datetime import  datetime
+from datetime import  datetime, UTC
 from storage import get_jobs_connection
 from timer_wrapper import time_taken
 
@@ -70,7 +71,7 @@ def get_pending_tasks(limit=50):
                 id, hash_id, info, task, uuid
             FROM q
             WHERE status='pending'
-            ORDER BY id desc
+            ORDER BY event asc, id desc
             LIMIT ?
             """,
             (limit,)
@@ -184,7 +185,7 @@ def save_jd(
     jd_hash,
     uuid=None
 ):
-    timestamp = datetime.now().isoformat()
+    timestamp = datetime.now(UTC).isoformat()
 
     with get_jd_connection() as conn:
         conn.execute(
@@ -218,7 +219,7 @@ def save_jd(
 # @time_taken
 def jd_worker(logger=None, limit = 200):
     # task = get_pending_tasks()
-    # reset_processing_tasks()
+    reset_processing_tasks()
     jd_initialize()
     tasks = get_pending_tasks(limit)
     results=[]
@@ -278,6 +279,8 @@ def jd_worker(logger=None, limit = 200):
 
         # print(json.dumps(r, indent=4))
 
+timed_jd_worker = time_taken(jd_worker)
+
 if __name__=='__main__':
-    jd_worker(limit=100)
+    jd_worker(limit=500)
 

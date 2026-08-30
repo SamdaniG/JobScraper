@@ -15,3 +15,4 @@
 13. Tag v2.1 Changes the logger.completed to logger.finish, moved the db.json to DBs, 
         activated the scheduler clause in notifications, added GM USA, modified RV JD, corrected Aurora
 14. Tag v2.2 Added a summary sql table
+15. Tag v2.3 Modified the cli logic to access the jd from the SQL file

@@ -27,6 +27,26 @@ def jd_initialize(db=JD_DB):
             """
         )
 
+def get_jd(hash_id):
+
+    with get_jd_connection() as conn:
+        conn.row_factory = sqlite3.Row
+
+        row = conn.execute(
+            """
+            SELECT
+                hash_id,
+                jd,
+                created_at,
+                updated_at,
+                uuid
+            FROM jd
+            WHERE hash_id=?
+            """,
+            (hash_id,)
+        ).fetchone()
+
+    return dict(row) if row else None
 
 if __name__=='__main__':
     # jd_initialize()

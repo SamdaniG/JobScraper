@@ -6,6 +6,7 @@ import json
 from tabulate import tabulate
 from storage import load_db
 from logs_db import get_logs_connection
+from jd_extraction.jd_init import get_jd
 
 def format_job_board_registry():
     lines = []
@@ -155,32 +156,51 @@ def cli_main():
         conn.close()
         exit(0)
 
+    # if args.jd:
+    #     # print(f"{args.jd= }, {len(args.jd)= }")
+    #     db=load_db()
+    #     db_keys=set(db)
+    #     # print(list(db)[:10])
+    #     # id_set=set(load_db())
+    #     for id in args.jd:
+    #         # print(i)
+    #         if id not in db_keys:
+    #             print(f"{id} is an incorrect hash_id!")
+    #         elif db[id].get("filled_date", None) is not None:
+    #             print(f"{id}: {db[id]["job_name"]} - This job has been closed!")
+    #         else:
+    #             source_name=db[id]["source"]
+    #             scraper=ApiJobBoardScraper.registry[source_name]()
+    #             # yo=scraper.scrape_jobs()
+    #             try:
+    #                 jd = scraper.scrape_jd(db[id])
+    #                 print(f"\n{'=' * 70}")
+    #                 print(f"Hash ID  : {id}")
+    #                 print(f"Company  : {source_name}")
+    #                 print(f"URL      : {db[id]['url']}")
+    #                 print(f"{'=' * 70}\n")
+    #                 print(jd)
+    #             except Exception as e:
+    #                 print(f"{id}: We could not scrape the jd currrently due to: {e}")
+
     if args.jd:
-        # print(f"{args.jd= }, {len(args.jd)= }")
-        db=load_db()
-        db_keys=set(db)
-        # print(list(db)[:10])
-        # id_set=set(load_db())
-        for id in args.jd:
-            # print(i)
-            if id not in db_keys:
-                print(f"{id} is an incorrect hash_id!")
-            elif db[id].get("filled_date", None) is not None:
-                print(f"{id}: {db[id]["job_name"]} - This job has been closed!")
-            else:
-                source_name=db[id]["source"]
-                scraper=ApiJobBoardScraper.registry[source_name]()
-                # yo=scraper.scrape_jobs()
-                try:
-                    jd = scraper.scrape_jd(db[id])
-                    print(f"\n{'=' * 70}")
-                    print(f"Hash ID  : {id}")
-                    print(f"Company  : {source_name}")
-                    print(f"URL      : {db[id]['url']}")
-                    print(f"{'=' * 70}\n")
-                    print(jd)
-                except Exception as e:
-                    print(f"{id}: We could not scrape the jd currrently due to: {e}")
+
+        for hash_id in args.jd:
+
+            jd_record = get_jd(hash_id)
+
+            if jd_record is None:
+                print(f"{hash_id}: JD not found in jd.db")
+                continue
+
+            print(f"\n{'=' * 70}")
+            print(f"Hash ID : {jd_record['hash_id']}")
+            print(f"Created : {jd_record['created_at']}")
+            print(f"Updated : {jd_record['updated_at']}")
+            print(f"UUID    : {jd_record['uuid']}")
+            print(f"{'=' * 70}\n")
+
+            print(jd_record["jd"])
 
 
         exit(0)
