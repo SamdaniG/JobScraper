@@ -3,6 +3,7 @@ import sqlite3
 
 LOG_DB = Path(__file__).resolve().parent / "DBs" / "logs.db"
 Q_DB = Path(__file__).resolve().parent / "DBs" / "q.db"
+RunSum = Path(__file__).resolve().parent / "DBs" / "summary.db"
 
 def get_logs_connection(db=LOG_DB):
     return sqlite3.connect(db)
@@ -10,33 +11,8 @@ def get_logs_connection(db=LOG_DB):
 def get_q_connection(db=Q_DB):
     return sqlite3.connect(db)
 
-def migrate():
-    with sqlite3.connect(LOG_DB) as conn:
-
-        # timers
-        columns = [
-            row[1] for row in conn.execute(
-                "PRAGMA table_info(timers)"
-            )
-        ]
-
-        if "uuid" not in columns and "run_uuid" in columns:
-            conn.execute(
-                "ALTER TABLE timers RENAME COLUMN run_uuid TO uuid"
-            )
-
-
-        # history
-        columns = [
-            row[1] for row in conn.execute(
-                "PRAGMA table_info(history)"
-            )
-        ]
-
-        if "uuid" not in columns and "run_uuid" in columns:
-            conn.execute(
-                "ALTER TABLE history RENAME COLUMN run_uuid TO uuid"
-            )
+def get_summary_connection(db=RunSum):
+    return sqlite3.connect(db)
 
 def logs_initialize(db=LOG_DB):
 
@@ -100,6 +76,28 @@ def q_initialize(db=Q_DB):
                 uuid TEXT
             );
         """)
+
+def summary_initialize(db=RunSum):
+    with sqlite3.connect(db) as conn:
+        conn.execute("PRAGMA journal_mode=WAL;")
+
+        conn.execute(
+            """
+            CREATE TABLE IF NOT EXISTS run_summary (
+                uuid TEXT PRIMARY KEY,
+
+                executor TEXT NOT NULL,
+
+                new INTEGER DEFAULT 0,
+                filled INTEGER DEFAULT 0,
+                updated INTEGER DEFAULT 0,
+
+                started_at TEXT NOT NULL,
+                finished_at TEXT NOT NULL,
+                runtime REAL NOT NULL
+            );
+            """
+        )
 
 def q_migrate(db=Q_DB):
     with sqlite3.connect(db) as conn:
@@ -195,6 +193,34 @@ def q_migrate(db=Q_DB):
         """)
 
         conn.commit()
+
+def migrate():
+    with sqlite3.connect(LOG_DB) as conn:
+
+        # timers
+        columns = [
+            row[1] for row in conn.execute(
+                "PRAGMA table_info(timers)"
+            )
+        ]
+
+        if "uuid" not in columns and "run_uuid" in columns:
+            conn.execute(
+                "ALTER TABLE timers RENAME COLUMN run_uuid TO uuid"
+            )
+
+
+        # history
+        columns = [
+            row[1] for row in conn.execute(
+                "PRAGMA table_info(history)"
+            )
+        ]
+
+        if "uuid" not in columns and "run_uuid" in columns:
+            conn.execute(
+                "ALTER TABLE history RENAME COLUMN run_uuid TO uuid"
+            )
 
 if __name__=='__main__':
     q_migrate()

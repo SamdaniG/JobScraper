@@ -1,6 +1,6 @@
 # utils.py
 import hashlib
-from datetime import timedelta, date
+from datetime import timedelta, date, datetime, timezone
 from dataclasses import dataclass, field
 from uuid import uuid4
 
@@ -9,6 +9,11 @@ DATE_FMT = "%a %d-%b-%Y"
 @dataclass
 class RunContext:
     uuid: str = field(default_factory=lambda: str(uuid4()))
+    started_at: datetime = field(
+        default_factory=lambda: datetime.now(timezone.utc)
+    )
+    finished_at: datetime | None = None
+    summary: dict = field(default_factory=dict)
 
 def sha256_hex(s: str, length: int = 10) -> str:
     return hashlib.sha256(s.encode("utf-8")).hexdigest()[:length]

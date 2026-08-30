@@ -4,7 +4,7 @@ from log_starter import set_logger
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from cli.main import cli_main
 import json
-from jd_extraction.jd_worker import jd_worker
+from jd_extraction.jd_worker import jd_worker, timed_jd_worker
 from timer_wrapper import time_taken
 
 @time_taken
@@ -81,7 +81,8 @@ def main(args, scrapers_to_run, logger):
 
             logger.filled(
                 f'{job["source"]} - '
-                f'{str(job.get("job_id", ""))[:10]} - '
+                f'{str(j)[:10]}'
+                # f'{str(job.get("job_id", ""))[:10]} - '
                 f'{job["job_name"]}',
                 extra={
                     "job_name": job["job_name"],
@@ -100,7 +101,7 @@ def main(args, scrapers_to_run, logger):
 
             logger.new(
                 f'{job["source"]} - '
-                f'{str(job.get("job_id", ""))[:10]} - '
+                f'{str(job_id)[:10]} - '
                 f'{job["job_name"]}',
                 extra={
                     "job_name": job["job_name"],
@@ -115,7 +116,13 @@ def main(args, scrapers_to_run, logger):
         "Writing data to my database (N%d F%d U%d)",
         len(new_jobs),
         len(filled_jobs),
-        len(updated_jobs)
+        len(updated_jobs),
+        extra={
+            "summary_flag": True,
+            "new_jobs": len(new_jobs),
+            "filled_jobs": len(filled_jobs),
+            "updated_jobs": len(updated_jobs)
+        }
     )
     save_db(db)
     # logger.completed("Scraper run completed")
@@ -128,4 +135,5 @@ if __name__=='__main__':
 
     main(args, scrapers_to_run, logger=logger)
     logger.finish("Scraper run completed")
-    jd_worker(logger=logger)
+    timed_jd_worker(logger=logger, limit= 500)
+    # time_taken(jd_worker(logger=logger, limit= 200))

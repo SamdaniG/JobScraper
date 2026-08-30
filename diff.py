@@ -89,9 +89,9 @@ def diff_jobs(db: dict, current_jobs_db: dict, successful_sources: set):
 
 def dict_changes(old: dict, new: dict, ignore=None):
     # ignore = {"filled_date"}
-    if ignore is None:
-        ignore = {"filled_date"}
-
+    # if ignore is None:
+    #     ignore = {"filled_date"}
+    ignore = {}
     changes = {}
 
     keys = old.keys() | new.keys()

@@ -2,8 +2,8 @@ from pathlib import Path
 import  logging.config
 import json
 import logging
-from datetime import datetime
-from logs_db import logs_initialize, get_logs_connection, get_q_connection, q_initialize
+from datetime import datetime, timezone
+from logs_db import logs_initialize, get_logs_connection, get_q_connection, q_initialize, summary_initialize, get_summary_connection
 from utils import RunContext
 
 NEW_LEVEL = 25
@@ -42,6 +42,8 @@ def set_logger(args):
 
     logs_initialize()
     q_initialize()
+    summary_initialize()
+
     context = RunContext()
 
     logging.config.dictConfig(config=logging_config)
@@ -73,17 +75,40 @@ class CustomLoggerAdapter(logging.LoggerAdapter):
         self.log(TIMER_LEVEL, msg, *args, **kwargs)
 
     def finish(self, msg, *args, **kwargs):
+        self.context.finished_at = datetime.now(timezone.utc)
+
+        self.context.runtime = (
+                self.context.finished_at - self.context.started_at
+        ).total_seconds()
+
         self.log(FINISHED_LEVEL, msg, *args, **kwargs)
 
     def process(self, msg, kwargs):
         # get extra passed in log call
         extra = kwargs.get("extra", {})
 
-        # merge with adapter-level extra
+        if extra.get("summary_flag"):
+            self.context.summary = {
+                "new": extra.get("new_jobs", 0),
+                "filled": extra.get("filled_jobs", 0),
+                "updated": extra.get("updated_jobs", 0),
+            }
+
         kwargs["extra"] = {
             **self.extra,
             "uuid": self.context.uuid,
-            **extra}
+            "started_at": self.context.started_at.isoformat(),
+            "finished_at": (
+                self.context.finished_at.isoformat()
+                if self.context.finished_at
+                else None
+            ),
+            "runtime": getattr(self.context, "runtime", None),
+            **extra
+        }
+
+        if self.context.summary:
+            kwargs["extra"]["summary"] = self.context.summary
 
         return msg, kwargs
 
@@ -179,7 +204,7 @@ class TimerSQLHandler(logging.Handler):
                     """,
                     [
                         (
-                            datetime.utcfromtimestamp(record.created).isoformat(),
+                            datetime.fromtimestamp(record.created, tz=timezone.utc).isoformat(),
                             getattr(record, "source", None),
                             getattr(record, "jobBoard", None),
                             getattr(record, "executor", None),
@@ -254,8 +279,8 @@ class HistorySQLHandler(logging.Handler):
                             getattr(record, "field", None),
                             getattr(record, "old_val", None),
                             getattr(record, "new_val", None),
-                            datetime.utcfromtimestamp(
-                                record.created
+                            datetime.fromtimestamp(
+                                record.created,tz=timezone.utc
                             ).isoformat(),
                             getattr(record, "uuid", None)
                         )
@@ -323,8 +348,8 @@ class QSQLHandler(logging.Handler):
                                 if record.levelno == NEW_LEVEL
                                 else "update_jd"
                             ),
-                            datetime.utcfromtimestamp(
-                                record.created
+                            datetime.fromtimestamp(
+                                record.created, tz=timezone.utc
                             ).isoformat(),
                             getattr(record, "uuid", None)
                         )
@@ -334,6 +359,45 @@ class QSQLHandler(logging.Handler):
 
         except Exception:
             self.handleError(events[-1])
+
+class SummarySQLHandler(logging.Handler):
+
+    def emit(self, record):
+        try:
+            summary = getattr(record, "summary", None)
+
+            if not summary:
+                return
+
+            with get_summary_connection() as conn:
+                conn.execute(
+                    """
+                    INSERT INTO run_summary (
+                        uuid,
+                        executor,
+                        new,
+                        filled,
+                        updated,
+                        started_at,
+                        finished_at,
+                        runtime
+                    )
+                    VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+                    """,
+                    (
+                        record.uuid,
+                        record.executor,
+                        summary["new"],
+                        summary["filled"],
+                        summary["updated"],
+                        record.started_at,
+                        record.finished_at,
+                        record.runtime
+                    )
+                )
+
+        except Exception:
+            self.handleError(record)
 
 class EventOnlyFilter(logging.Filter):
     def filter(self, record):
@@ -358,3 +422,7 @@ class QFilter(logging.Filter):
 class EmailFilter(logging.Filter):
     def filter(self, record):
         return record.levelno in {NEW_LEVEL, FILLED_LEVEL, FINISHED_LEVEL}
+
+class SummaryFilter(logging.Filter):
+    def filter(self, record):
+        return record.levelno == FINISHED_LEVEL

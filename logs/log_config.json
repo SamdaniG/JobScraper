@@ -31,6 +31,9 @@
         },
         "email_filter": {
           "()": "log_starter.EmailFilter"
+        },
+        "summary_filter": {
+            "()": "log_starter.SummaryFilter"
         }
     },
     "handlers": {
@@ -87,12 +90,19 @@
             "()": "notifications.email_handler.EmailHandler",
             "level": "DEBUG",
             "filters": ["email_filter"]
+        },
+        "summary_sql": {
+            "()": "log_starter.SummarySQLHandler",
+            "level": "DEBUG",
+            "filters": ["summary_filter"]
         }
     },
     "loggers": {
         "scraper": {
             "level": "DEBUG",
-            "handlers": ["stdout", "file","json_file", "timer_file","timer_sql","history_sql","q_sql","email"],
+            "handlers": ["stdout", "file","json_file", "timer_file",
+              "timer_sql","history_sql","q_sql","summary_sql",
+              "email"],
             "propagate": false
         }
     }
